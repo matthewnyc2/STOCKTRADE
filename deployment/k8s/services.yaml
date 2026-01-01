@@ -1,0 +1,101 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: crypto-quant-lab
+  labels:
+    app: backend
+    component: api
+spec:
+  type: ClusterIP
+  selector:
+    app: backend
+    component: api
+  ports:
+  - name: http
+    port: 8000
+    targetPort: 8000
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-service
+  namespace: crypto-quant-lab
+  labels:
+    app: database
+    component: timescaledb
+spec:
+  type: ClusterIP
+  selector:
+    app: database
+    component: timescaledb
+  ports:
+  - name: postgres
+    port: 5432
+    targetPort: 5432
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  namespace: crypto-quant-lab
+  labels:
+    app: redis
+    component: cache
+spec:
+  type: ClusterIP
+  selector:
+    app: redis
+    component: cache
+  ports:
+  - name: redis
+    port: 6379
+    targetPort: 6379
+    protocol: TCP
+---
+# External Service (LoadBalancer for production)
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-external
+  namespace: crypto-quant-lab
+  labels:
+    app: backend
+    component: api
+spec:
+  type: LoadBalancer
+  selector:
+    app: backend
+    component: api
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+    protocol: TCP
+  # For production with SSL
+  # - name: https
+  #   port: 443
+  #   targetPort: 8443
+  #   protocol: TCP
+---
+# Headless Service for Redis (if using Redis cluster)
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-headless
+  namespace: crypto-quant-lab
+  labels:
+    app: redis
+    component: cache
+spec:
+  clusterIP: None
+  selector:
+    app: redis
+    component: cache
+  ports:
+  - name: redis
+    port: 6379
+    targetPort: 6379
+    protocol: TCP

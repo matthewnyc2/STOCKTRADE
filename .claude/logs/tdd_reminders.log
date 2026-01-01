@@ -1,0 +1,756 @@
+
+2025-12-31T15:11:32.545577
+File: /c/Users/matt/Dropbox/projects/STOCKTRADE/tests/__init__.py
+Reminder shown
+
+2025-12-31T15:11:39.837678
+File: /c/Users/matt/Dropbox/projects/STOCKTRADE/tests/conftest.py
+Reminder shown
+
+2025-12-31T15:11:56.047549
+File: /c/Users/matt/Dropbox/projects/STOCKTRADE/api/__init__.py
+Reminder shown
+
+2025-12-31T15:12:02.969153
+File: /c/Users/matt/Dropbox/projects/STOCKTRADE/api/main.py
+Reminder shown
+
+2025-12-31T15:12:13.951872
+File: /c/Users/matt/Dropbox/projects/STOCKTRADE/core/__init__.py
+Reminder shown
+
+2025-12-31T15:12:19.855027
+File: /c/Users/matt/Dropbox/projects/STOCKTRADE/models/__init__.py
+Reminder shown
+
+2025-12-31T15:12:26.137027
+File: /c/Users/matt/Dropbox/projects/STOCKTRADE/services/__init__.py
+Reminder shown
+
+2025-12-31T15:14:12.924645
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/lib/utils.ts
+Reminder shown
+
+2025-12-31T15:21:59.331916
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/models/strategy.py
+Reminder shown
+
+2025-12-31T15:22:01.750213
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/models/signal.py
+Reminder shown
+
+2025-12-31T15:22:04.235609
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/models/backtest.py
+Reminder shown
+
+2025-12-31T15:22:06.526659
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/models/portfolio.py
+Reminder shown
+
+2025-12-31T15:22:08.368185
+File: C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/api.ts
+Reminder shown
+
+2025-12-31T15:22:10.649953
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/models/whale.py
+Reminder shown
+
+2025-12-31T15:22:13.343177
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/models/ml.py
+Reminder shown
+
+2025-12-31T15:22:18.097795
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/models/settings.py
+Reminder shown
+
+2025-12-31T15:26:54.980094
+File: C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/lib/api-client.ts
+Reminder shown
+
+2025-12-31T15:29:47.351312
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\__init__.py
+Reminder shown
+
+2025-12-31T15:29:49.557235
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\connection.py
+Reminder shown
+
+2025-12-31T15:29:51.716440
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\base.py
+Reminder shown
+
+2025-12-31T15:29:56.932552
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\lib\errors.ts
+Reminder shown
+
+2025-12-31T15:30:17.283460
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\lib\loading-states.ts
+Reminder shown
+
+2025-12-31T15:30:24.531798
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\__init__.py
+Reminder shown
+
+2025-12-31T15:30:27.252988
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\strategy.py
+Reminder shown
+
+2025-12-31T15:30:29.609198
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\signal.py
+Reminder shown
+
+2025-12-31T15:30:34.066597
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\backtest.py
+Reminder shown
+
+2025-12-31T15:30:36.704755
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\portfolio.py
+Reminder shown
+
+2025-12-31T15:30:39.141615
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\whale.py
+Reminder shown
+
+2025-12-31T15:30:42.045786
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\ml.py
+Reminder shown
+
+2025-12-31T15:30:45.926644
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\settings.py
+Reminder shown
+
+2025-12-31T15:30:48.422549
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\ai_reasoning.py
+Reminder shown
+
+2025-12-31T15:31:07.713737
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\migrations\__init__.py
+Reminder shown
+
+2025-12-31T15:31:10.220542
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\migrations\base.py
+Reminder shown
+
+2025-12-31T15:31:12.543867
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\migrations\runner.py
+Reminder shown
+
+2025-12-31T15:31:14.885714
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\migrations\__init__.py
+Reminder shown
+
+2025-12-31T15:31:36.514508
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\migrations\versions\__init__.py
+Reminder shown
+
+2025-12-31T15:31:40.610526
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\migrations\versions\m_20241231120000_initial_schema.py
+Reminder shown
+
+2025-12-31T15:32:22.585606
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\repositories\__init__.py
+Reminder shown
+
+2025-12-31T15:32:25.061324
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\repositories\strategy.py
+Reminder shown
+
+2025-12-31T15:32:27.233002
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\repositories\signal.py
+Reminder shown
+
+2025-12-31T15:32:29.401283
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\repositories\backtest.py
+Reminder shown
+
+2025-12-31T15:32:31.884682
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\repositories\portfolio.py
+Reminder shown
+
+2025-12-31T15:32:34.144513
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\repositories\whale.py
+Reminder shown
+
+2025-12-31T15:32:36.298432
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\repositories\ml.py
+Reminder shown
+
+2025-12-31T15:32:38.455870
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\repositories\settings.py
+Reminder shown
+
+2025-12-31T15:32:42.076005
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\repositories\ai_reasoning.py
+Reminder shown
+
+2025-12-31T15:35:09.154635
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\settings.py
+Reminder shown
+
+2025-12-31T15:37:27.047323
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\migrations\versions\m_20241231120000_initial_schema.py
+Reminder shown
+
+2025-12-31T15:38:05.096232
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\strategy.py
+Reminder shown
+
+2025-12-31T15:38:08.561879
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\backtest.py
+Reminder shown
+
+2025-12-31T15:38:11.016156
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\portfolio.py
+Reminder shown
+
+2025-12-31T15:41:54.121804
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/lib/websocket-client.ts
+Reminder shown
+
+2025-12-31T15:42:05.327230
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\core\websocket.py
+Reminder shown
+
+2025-12-31T15:42:17.133785
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\core\middleware.py
+Reminder shown
+
+2025-12-31T15:42:19.883186
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/hooks/useWebSocket.ts
+Reminder shown
+
+2025-12-31T15:42:38.132732
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/hooks/useStrategies.ts
+Reminder shown
+
+2025-12-31T15:42:49.808604
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\api\strategies.py
+Reminder shown
+
+2025-12-31T15:42:52.898497
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/hooks/useSignals.ts
+Reminder shown
+
+2025-12-31T15:43:03.233562
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\api\signals.py
+Reminder shown
+
+2025-12-31T15:43:08.498966
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/hooks/usePortfolio.ts
+Reminder shown
+
+2025-12-31T15:43:26.291325
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/hooks/useWhales.ts
+Reminder shown
+
+2025-12-31T15:44:01.129463
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\api\portfolio.py
+Reminder shown
+
+2025-12-31T15:44:21.838795
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\api\whales.py
+Reminder shown
+
+2025-12-31T15:45:34.758061
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/hooks/index.ts
+Reminder shown
+
+2025-12-31T15:45:38.301506
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\api\main.py
+Reminder shown
+
+2025-12-31T15:45:51.833216
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\seed.py
+Reminder shown
+
+2025-12-31T16:12:07.759488
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/laboratory.ts
+Reminder shown
+
+2025-12-31T16:12:23.279571
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\migrations\versions\m_20241231150000_add_template_metadata.py
+Reminder shown
+
+2025-12-31T16:12:41.526553
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\seed.py
+Reminder shown
+
+2025-12-31T16:13:07.760982
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\api\strategies.py
+Reminder shown
+
+2025-12-31T16:13:34.403036
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/ui/Button.tsx
+Reminder shown
+
+2025-12-31T16:13:36.787633
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/ui/Card.tsx
+Reminder shown
+
+2025-12-31T16:13:40.261692
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/ui/Modal.tsx
+Reminder shown
+
+2025-12-31T16:13:44.036236
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/ui/LoadingSpinner.tsx
+Reminder shown
+
+2025-12-31T16:13:47.969228
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/ui/ErrorMessage.tsx
+Reminder shown
+
+2025-12-31T16:13:57.124048
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/ui/index.ts
+Reminder shown
+
+2025-12-31T16:14:16.579957
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/TemplateCard.tsx
+Reminder shown
+
+2025-12-31T16:14:49.832934
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/StrategyDetailModal.tsx
+Reminder shown
+
+2025-12-31T16:15:06.010928
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/UILayout.tsx
+Reminder shown
+
+2025-12-31T16:15:13.040756
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/index.ts
+Reminder shown
+
+2025-12-31T16:15:35.180534
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/laboratory/page.tsx
+Reminder shown
+
+2025-12-31T16:15:38.412687
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\migrations\versions\__init__.py
+Reminder shown
+
+2025-12-31T16:40:09.557018
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\laboratory\StrategyForm.tsx
+Reminder shown
+
+2025-12-31T16:42:38.383582
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\laboratory\MyStrategiesList.tsx
+Reminder shown
+
+2025-12-31T16:43:17.181460
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\laboratory\page.tsx
+Reminder shown
+
+2025-12-31T16:43:25.494312
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\laboratory\index.ts
+Reminder shown
+
+2025-12-31T16:44:44.994691
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\data\seed_strategies.py
+Reminder shown
+
+2025-12-31T16:59:26.390497
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\services\signal_aggregator.py
+Reminder shown
+
+2025-12-31T17:01:11.654340
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/LogicGateSelector.tsx
+Reminder shown
+
+2025-12-31T17:01:43.184249
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/LayerManager.tsx
+Reminder shown
+
+2025-12-31T17:02:10.903260
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\migrations\versions\m_20241231160000_add_logic_gate.py
+Reminder shown
+
+2025-12-31T17:02:22.512519
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/LayerBreakdown.tsx
+Reminder shown
+
+2025-12-31T17:21:58.520392
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/market.ts
+Reminder shown
+
+2025-12-31T17:23:26.170547
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\services\indicators.py
+Reminder shown
+
+2025-12-31T17:24:10.172169
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\price.py
+Reminder shown
+
+2025-12-31T17:25:39.625998
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/hooks/useMarketData.ts
+Reminder shown
+
+2025-12-31T17:26:12.657684
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/charts/PriceChart.tsx
+Reminder shown
+
+2025-12-31T17:26:17.953359
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\migrations\versions\m_20241231170000_add_prices_table.py
+Reminder shown
+
+2025-12-31T17:26:53.752435
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/charts/IndicatorOverlay.tsx
+Reminder shown
+
+2025-12-31T17:26:59.824745
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/charts/index.ts
+Reminder shown
+
+2025-12-31T17:35:59.289880
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\signals\index.ts
+Reminder shown
+
+2025-12-31T17:36:44.162542
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\signals\SignalMonitor.tsx
+Reminder shown
+
+2025-12-31T17:37:29.701665
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\signals\SignalFeed.tsx
+Reminder shown
+
+2025-12-31T17:38:09.231298
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\signals\SignalDetailModal.tsx
+Reminder shown
+
+2025-12-31T17:38:46.988432
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\dashboard\page.tsx
+Reminder shown
+
+2025-12-31T17:49:03.882863
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/backtest/BacktestConfig.tsx
+Reminder shown
+
+2025-12-31T17:49:24.322139
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/backtest/EquityCurveChart.tsx
+Reminder shown
+
+2025-12-31T17:49:58.333987
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/backtest/TradeList.tsx
+Reminder shown
+
+2025-12-31T17:50:24.904304
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/backtest/BacktestResults.tsx
+Reminder shown
+
+2025-12-31T17:50:31.204262
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/backtest/index.ts
+Reminder shown
+
+2025-12-31T17:50:55.686215
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/backtest/page.tsx
+Reminder shown
+
+2025-12-31T18:24:41.833593
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/services/monte_carlo.py
+Reminder shown
+
+2025-12-31T18:26:22.830170
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\services\ai_reasoning.py
+Reminder shown
+
+2025-12-31T18:27:04.140002
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\services\walk_forward.py
+Reminder shown
+
+2025-12-31T18:27:17.603525
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\services\paper_trading.py
+Reminder shown
+
+2025-12-31T18:27:23.741319
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\api\ai.py
+Reminder shown
+
+2025-12-31T18:27:30.564074
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\services\whale_tracker.py
+Reminder shown
+
+2025-12-31T18:28:06.490603
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\alpha\index.ts
+Reminder shown
+
+2025-12-31T18:29:41.842432
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\alpha\WhaleCard.tsx
+Reminder shown
+
+2025-12-31T18:31:11.616018
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\alpha\WhaleRadar.tsx
+Reminder shown
+
+2025-12-31T18:31:44.104614
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\hooks\useAIReasoning.ts
+Reminder shown
+
+2025-12-31T18:32:46.960701
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\alpha-lab\page.tsx
+Reminder shown
+
+2025-12-31T18:32:51.256878
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\ai\AIThinkingPanel.tsx
+Reminder shown
+
+2025-12-31T18:33:59.170776
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\hooks\useUIMode.ts
+Reminder shown
+
+2025-12-31T18:47:23.895455
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\backtest\QuickBacktestTemplates.tsx
+Reminder shown
+
+2025-12-31T18:47:31.512913
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\models\arbitrage.py
+Reminder shown
+
+2025-12-31T18:47:45.516750
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/nodeEditor.ts
+Reminder shown
+
+2025-12-31T18:47:49.505155
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\laboratory\UIModeToggle.tsx
+Reminder shown
+
+2025-12-31T18:47:59.347698
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\models\liquidation.py
+Reminder shown
+
+2025-12-31T18:48:33.746797
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\shadow\ConstellationDetector.tsx
+Reminder shown
+
+2025-12-31T18:48:35.635242
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\dashboard\page.tsx
+Reminder shown
+
+2025-12-31T18:48:37.529327
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\backtest\BacktestResults.tsx
+Reminder shown
+
+2025-12-31T18:48:37.530867
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\laboratory\GameModeProfile.tsx
+Reminder shown
+
+2025-12-31T18:48:40.301796
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\services\genetic_optimizer.py
+Reminder shown
+
+2025-12-31T18:48:43.152692
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\services\liquidity_hunter.py
+Reminder shown
+
+2025-12-31T18:48:46.034351
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/lib/nodeDefinitions.ts
+Reminder shown
+
+2025-12-31T18:49:14.121439
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\services\dark_arbitrage.py
+Reminder shown
+
+2025-12-31T18:49:21.852356
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\services\ml_factory.py
+Reminder shown
+
+2025-12-31T18:49:39.747912
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/lib/nodeValidation.ts
+Reminder shown
+
+2025-12-31T18:49:41.461601
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\shadow\LiquidationFeed.tsx
+Reminder shown
+
+2025-12-31T18:49:47.708681
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\services\liquidation_monitor.py
+Reminder shown
+
+2025-12-31T18:49:52.825767
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\laboratory\ProModeDashboard.tsx
+Reminder shown
+
+2025-12-31T18:50:01.097714
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\backtest\EquityCurveChart.tsx
+Reminder shown
+
+2025-12-31T18:50:04.920425
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\api\genetic.py
+Reminder shown
+
+2025-12-31T18:50:11.295819
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\api\shadow.py
+Reminder shown
+
+2025-12-31T18:50:13.734998
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/lib/nodeGraphExporter.ts
+Reminder shown
+
+2025-12-31T18:50:15.504320
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\dashboard\PortfolioSummary.tsx
+Reminder shown
+
+2025-12-31T18:50:31.803083
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\shadow\ExecutionConsole.tsx
+Reminder shown
+
+2025-12-31T18:51:13.885668
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\liquidation.py
+Reminder shown
+
+2025-12-31T18:51:33.036222
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\repositories\liquidation.py
+Reminder shown
+
+2025-12-31T18:51:39.755440
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/nodes/BaseNode.tsx
+Reminder shown
+
+2025-12-31T18:51:51.602165
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\shadow\ShieldStatus.tsx
+Reminder shown
+
+2025-12-31T18:52:06.929978
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\laboratory\GameLoadingScreen.tsx
+Reminder shown
+
+2025-12-31T18:52:18.037570
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/nodes/index.ts
+Reminder shown
+
+2025-12-31T18:52:23.883227
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\backtest\page.tsx
+Reminder shown
+
+2025-12-31T18:52:42.361639
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\dashboard\PlayerStatsPanel.tsx
+Reminder shown
+
+2025-12-31T18:52:47.572487
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\backtest\index.ts
+Reminder shown
+
+2025-12-31T18:52:55.408661
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\shadow\DarkPoolScanner.tsx
+Reminder shown
+
+2025-12-31T18:53:39.731140
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\api\ml.py
+Reminder shown
+
+2025-12-31T18:53:54.788869
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\shadow\VolatilityTrap.tsx
+Reminder shown
+
+2025-12-31T18:53:59.095518
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\api\liquidations.py
+Reminder shown
+
+2025-12-31T18:54:06.761952
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\dashboard\index.ts
+Reminder shown
+
+2025-12-31T18:54:12.882696
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\shadow\index.ts
+Reminder shown
+
+2025-12-31T18:54:12.883288
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/NodeEditor.tsx
+Reminder shown
+
+2025-12-31T18:54:59.334977
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\hooks\useShadow.ts
+Reminder shown
+
+2025-12-31T18:57:02.224416
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\shadow\page.tsx
+Reminder shown
+
+2025-12-31T18:57:27.426731
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\hooks\useMLFactory.ts
+Reminder shown
+
+2025-12-31T18:59:03.639806
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/laboratory/composer/page.tsx
+Reminder shown
+
+2025-12-31T19:00:40.548073
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\laboratory\ml-factory\page.tsx
+Reminder shown
+
+2025-12-31T19:01:03.101819
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\shadow\LiquidationFeed.tsx
+Reminder shown
+
+2025-12-31T20:29:05.448876
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\services\constellation_detector.py
+Reminder shown
+
+2025-12-31T20:48:16.988864
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\lib\error-logging.ts
+Reminder shown
+
+2025-12-31T20:48:37.151830
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\ErrorBoundary.tsx
+Reminder shown
+
+2025-12-31T20:50:42.056950
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\ErrorBoundary.tsx
+Reminder shown
+
+2025-12-31T20:54:28.172232
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\LoadingStateWithErrorHandling.tsx
+Reminder shown
+
+2025-12-31T20:55:55.725122
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\hooks\useWebSocketSafe.ts
+Reminder shown
+
+2025-12-31T21:09:58.332930
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\database\migrate.py
+Reminder shown
+
+2025-12-31T21:10:06.571029
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/__tests__/utils/test-utils.ts
+Reminder shown
+
+2025-12-31T21:10:47.814739
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/__tests__/utils/setup.ts
+Reminder shown
+
+2025-12-31T21:28:04.231057
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\jest.env.js
+Reminder shown
+
+2025-12-31T21:29:26.902173
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\jest.config.integration.js
+Reminder shown
+
+2025-12-31T21:45:54.855910
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/playwright.config.ts
+Reminder shown
+
+2025-12-31T21:46:39.942934
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/ui/Toast.tsx
+Reminder shown
+
+2025-12-31T21:47:23.704382
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/navigation/Navigation.tsx
+Reminder shown
+
+2025-12-31T21:47:31.393458
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/navigation/index.ts
+Reminder shown
+
+2025-12-31T21:48:14.698888
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/paper-trading/page.tsx
+Reminder shown
+
+2025-12-31T21:48:36.458810
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/ai/page.tsx
+Reminder shown
+
+2025-12-31T21:48:50.291056
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/laboratory/page-updated.tsx
+Reminder shown
+
+2025-12-31T21:49:03.054345
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/settings/page.tsx
+Reminder shown

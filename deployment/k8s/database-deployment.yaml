@@ -1,0 +1,179 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  namespace: crypto-quant-lab
+  labels:
+    app: database
+    component: timescaledb
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: database
+      component: timescaledb
+  template:
+    metadata:
+      labels:
+        app: database
+        component: timescaledb
+    spec:
+      # Service Account
+      serviceAccountName: crypto-quant-lab-sa
+
+      # Node Selector for dedicated database nodes
+      nodeSelector:
+        database: "true"
+
+      # Tolerations for database nodes
+      tolerations:
+      - key: "dedicated"
+        operator: "Equal"
+        value: "database"
+        effect: "NoSchedule"
+
+      # Pod Affinity for co-location
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - database
+            topologyKey: "kubernetes.io/hostname"
+
+      containers:
+      - name: timescaledb
+        image: timescale/timescaledb:latest-pg15
+        ports:
+        - containerPort: 5432
+          name: postgres
+          protocol: TCP
+
+        # Environment Variables
+        envFrom:
+        - secretRef:
+            name: app-secrets
+
+        # Custom PostgreSQL Configuration
+        env:
+        - name: POSTGRES_INITDB_ARGS
+          value: "--auth-host=scram-sha-256"
+        - name: TIMESCALEDB_TELEMETRY
+          value: "off"
+        - name: PGDATA
+          value: "/var/lib/postgresql/data/pgdata"
+
+        # Resource Requirements (High for production)
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+
+        # Volume Mounts
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+          subPath: timescaledb
+        - name: init-sql
+          mountPath: /docker-entrypoint-initdb.d
+          readOnly: true
+
+        # Health Check
+        livenessProbe:
+          exec:
+            command:
+            - pg_isready
+            - "-U"
+            - $(DB_USER)
+            - "-d"
+            - $(DB_NAME)
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+            - pg_isready
+            - "-U"
+            - $(DB_USER)
+            - "-d"
+            - $(DB_NAME)
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+
+        # Security Context
+        securityContext:
+          runAsUser: 999
+          runAsGroup: 999
+          fsGroup: 999
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: false
+
+        # Lifecycle
+        lifecycle:
+          preStop:
+            exec:
+              command: ["pg_ctl", "stop", "-D", "/var/lib/postgresql/data", "-m", "fast"]
+
+      # Volumes
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: timescaledb-storage
+      - name: init-sql
+        configMap:
+          name: database-init
+
+      # Priority Class
+      priorityClassName: database-priority
+
+---
+# Init Container for database initialization
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-init
+  namespace: crypto-quant-lab
+  labels:
+    app: database
+    component: timescaledb-init
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database
+      component: timescaledb-init
+  template:
+    metadata:
+      labels:
+        app: database
+        component: timescaledb-init
+    spec:
+      containers:
+      - name: migrate
+        image: crypto-quant-lab:latest
+        command: ["python", "database/migrate.py"]
+        envFrom:
+        - secretRef:
+            name: app-secrets
+        volumeMounts:
+        - name: migration-data
+          mountPath: /app/database
+      volumes:
+      - name: migration-data
+        configMap:
+          name: database-init
+      restartPolicy: Never

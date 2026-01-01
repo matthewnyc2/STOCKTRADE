@@ -1,0 +1,1478 @@
+
+2025-12-31T15:11:04.072583
+Tool: Bash
+Input: {'command': 'ls -la /cygdrive/c/Users/matt/Dropbox/projects/STOCKTRADE', 'description': 'List current directory contents'}
+Error: Exit code 2
+ls: cannot access '/cygdrive/c/Users/matt/Dropbox/projects/STOCKTRADE': No such file or directory
+------------------------------------------------------------
+
+2025-12-31T15:14:02.386494
+Tool: Bash
+Input: {'command': './venv/Scripts/pip install -r requirements.txt', 'timeout': 180000, 'description': 'Install project dependencies'}
+Error: Exit code 1
+  error: subprocess-exited-with-error
+  
+  Preparing metadata (pyproject.toml) did not run successfully.
+  exit code: 1
+  
+  [43 lines of output]
+  Python reports SOABI: cp314-win_amd64
+  Computed rustc target triple: x86_64-pc-windows-msvc
+  Installation directory: C:\Users\matt\AppData\Local\puccinialin\puccinialin\Cache
+  Rustup already downloaded
+  Installing rust to C:\Users\matt\AppData\Local\puccinialin\puccinialin\Cache\rustup
+  warn: It looks like you have an exis
+------------------------------------------------------------
+
+2025-12-31T15:14:42.609553
+Tool: Bash
+Input: {'command': './venv/Scripts/pip install --upgrade pip && ./venv/Scripts/pip install -r requirements.txt', 'timeout': 300000, 'description': 'Upgrade pip and install dependencies'}
+Error: Exit code 1
+
+[notice] A new release of pip is available: 25.2 -> 25.3
+[notice] To update, run: c:\Users\matt\Dropbox\projects\STOCKTRADE\venv\Scripts\python.exe -m pip install --upgrade pip
+ERROR: To modify pip, please run the following command:
+c:\Users\matt\Dropbox\projects\STOCKTRADE\venv\Scripts\python.exe -m pip install --upgrade pip
+
+Requirement already satisfied: pip in c:\users\matt\dropbox\projects\stocktrade\venv\lib\site-packages (25.2)
+Collecting pip
+  Using cached pip-25.3-py
+------------------------------------------------------------
+
+2025-12-31T15:15:26.237861
+Tool: Bash
+Input: {'command': './venv/Scripts/pytest tests/ -v', 'description': 'Run pytest tests'}
+Error: Exit code 1
+========================================================================== test session starts ===========================================================================
+platform win32 -- Python 3.14.0, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\matt\Dropbox\projects\STOCKTRADE\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: c:\Users\matt\Dropbox\projects\STOCKTRADE
+configfile: pyproject.toml
+plugins: anyio-4.12.0, asyncio-1.3.0
+asyncio: mode=Mode.AUTO, debug=False, async
+------------------------------------------------------------
+
+2025-12-31T15:15:55.533675
+Tool: Bash
+Input: {'command': './venv/Scripts/black . --check && echo "Black check passed!"', 'description': 'Run black format check'}
+Error: Exit code 1
+would reformat C:\Users\matt\Dropbox\projects\STOCKTRADE\tests\test_health.py
+
+Oh no! \U0001f4a5 \U0001f494 \U0001f4a5
+1 file would be reformatted, 7 files would be left unchanged.
+------------------------------------------------------------
+
+2025-12-31T15:16:41.735067
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm run test 2>&1', 'timeout': 120000, 'description': 'Run tests to verify setup'}
+
+2025-12-31T15:17:31.946270
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm run build 2>&1', 'timeout': 180000, 'description': 'Build the Next.js application'}
+Error: Exit code 1
+
+> frontend@0.1.0 build
+> next build
+
+(node:14988) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node --trace-warnings ...` to show where
+------------------------------------------------------------
+
+2025-12-31T15:17:54.036967
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm run build 2>&1', 'timeout': 180000, 'description': 'Build the application again'}
+Error: Exit code 1
+
+> frontend@0.1.0 build
+> next build
+
+(node:1432) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node --trace-warnings ...` to show where 
+------------------------------------------------------------
+
+2025-12-31T15:19:19.617158
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm run format:check 2>&1', 'description': 'Check code formatting'}
+Error: Exit code 1
+
+> frontend@0.1.0 format:check
+> prettier --check "**/*.{ts,tsx,js,jsx,json,css,md}"
+
+Checking formatting...
+[[33mwarn[39m] next.config.js
+[[33mwarn[39m] postcss.config.js
+[[33mwarn[39m] src/__tests__/page.test.tsx
+[[33mwarn[39m] src/__tests__/setup.test.ts
+[[33mwarn[39m] src/app/layout.tsx
+[[33mwarn[39m] src/app/page.tsx
+[[33mwarn[39m] src/lib/utils.ts
+[[33mwarn[39m] src/types/index.ts
+[[33mwarn[39m] tailwind.config.ts
+[[33mwarn[39m] Code style issues found in 9 
+------------------------------------------------------------
+
+2025-12-31T15:22:22.969071
+Tool: Edit
+Input: {'file_path': 'C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/index.ts', 'old_string': '/**\n * Shared TypeScript type definitions\n *\n * This file contains common types used across the
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T15:22:41.148048
+Tool: Edit
+Input: {'file_path': 'C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/index.ts', 'old_string': '/**\n * Shared TypeScript type definitions\n *\n * This file contains common types used across the
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T15:22:57.944436
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/models/__init__.py', 'old_string': '"""Models package for Crypto Quant Laboratory - database models, schemas."""', 'new_string': '"""\nCrypto Q
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T15:23:10.601062
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm test -- --testPathPattern=api.test.ts --no-coverage 2>&1', 'timeout': 120000, 'description': 'Run the API types tests'}
+Error: Exit code 1
+
+> frontend@0.1.0 test
+> jest --testPathPattern=api.test.ts --no-coverage
+
+testPathPattern:
+
+  Option "testPathPattern" was replaced by "--testPathPatterns". "--testPathPatterns" is only available as a command-line option.
+  
+  Please update your configuration.
+
+  CLI Options Documentation:
+  https://jestjs.io/docs/cli
+------------------------------------------------------------
+
+2025-12-31T15:23:16.677082
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/models/__init__.py', 'old_string': '"""Models package for Crypto Quant Laboratory - database models, schemas."""', 'new_string': '"""\nCrypto Q
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T15:23:23.826668
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm test -- --testPathPatterns=api.test --no-coverage 2>&1', 'timeout': 120000, 'description': 'Run the API types tests with corre
+Error: Exit code 1
+
+> frontend@0.1.0 test
+> jest --testPathPatterns=api.test --no-coverage
+
+(node:12884) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node 
+------------------------------------------------------------
+
+2025-12-31T15:24:05.084956
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm test -- --testPathPatterns=api.test --no-coverage 2>&1', 'timeout': 120000, 'description': 'Run the API types tests again'}
+Error: Exit code 1
+
+> frontend@0.1.0 test
+> jest --testPathPatterns=api.test --no-coverage
+
+(node:7980) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node -
+------------------------------------------------------------
+
+2025-12-31T15:24:11.778865
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && node -e "\nconst api = require(\'./src/types/api.ts\');\nconsole.log(\'Exports:\', Object.keys(api));\n" 2>&1', 'description': 'De
+Error: Exit code 1
+C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\types\api.ts:15
+     */
+  > export enum StrategyType {
+      COMPOSED = 'COMPOSED',
+      GENETIC = 'GENETIC',
+      ML = 'ML',
+      TEMPLATE = 'TEMPLATE',
+  > }
+
+SyntaxError [ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX]: TypeScript enum is not supported in strip-only mode
+    at parseTypeScript (node:internal/modules/typescript:63:40)
+    at processTypeScriptCode (node:internal/modules/typescript:133:42)
+    at stripTypeScrip
+------------------------------------------------------------
+
+2025-12-31T15:24:45.174011
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/api/main.py', 'old_string': '"""\nMain FastAPI application for Crypto Quant Laboratory.\n"""\n\nfrom fastapi import FastAPI\n\napp = FastAPI(\n
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T15:25:09.849597
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npx tsc --noEmit 2>&1', 'timeout': 60000, 'description': 'Verify TypeScript compilation'}
+Error: Exit code 2
+src/__tests__/page.test.tsx(11,1): error TS2582: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+src/__tests__/page.test.tsx(12,3): error TS2582: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+src/__tests__/page.test.tsx(15,5): error TS2304: Cannot find name 'expect'.
+------------------------------------------------------------
+
+2025-12-31T15:27:21.839568
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm test -- --testPathPatterns="api-client|api\\.test" --no-coverage 2>&1', 'timeout': 120000, 'description': 'Run both API types 
+Error: Exit code 1
+
+> frontend@0.1.0 test
+> jest --testPathPatterns=api-client|api\.test --no-coverage
+
+(node:7980) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+
+------------------------------------------------------------
+
+2025-12-31T15:28:09.897559
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npx tsc --noEmit src/lib/api-client.ts 2>&1', 'timeout': 60000, 'description': 'Verify TypeScript compilation for api-client.ts'}
+Error: Exit code 2
+src/lib/api-client.ts(14,41): error TS2307: Cannot find module '@/types/api' or its corresponding type declarations.
+src/lib/api-client.ts(212,51): error TS2307: Cannot find module '@/types/api' or its corresponding type declarations.
+------------------------------------------------------------
+
+2025-12-31T15:32:49.618776
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm test -- --testPathPattern="errors|loading-states" 2>&1', 'timeout': 120000, 'description': 'Run error and loading state tests'
+Error: Exit code 1
+
+> frontend@0.1.0 test
+> jest --testPathPattern=errors|loading-states
+
+testPathPattern:
+
+  Option "testPathPattern" was replaced by "--testPathPatterns". "--testPathPatterns" is only available as a command-line option.
+  
+  Please update your configuration.
+
+  CLI Options Documentation:
+  https://jestjs.io/docs/cli
+------------------------------------------------------------
+
+2025-12-31T15:33:24.689575
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm test -- --testPathPatterns="errors|loading-states" 2>&1', 'timeout': 120000, 'description': 'Run tests with correct flag'}
+Error: Exit code 1
+
+> frontend@0.1.0 test
+> jest --testPathPatterns=errors|loading-states
+
+(node:18388) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node -
+------------------------------------------------------------
+
+2025-12-31T15:33:50.969109
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_database.py -v 2>&1', 'timeout': 120000, 'description': 'Run database tests'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T15:34:29.801358
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm test -- --testPathPatterns="errors|loading-states" 2>&1', 'timeout': 120000, 'description': 'Run tests again after fixes'}
+Error: Exit code 1
+
+> frontend@0.1.0 test
+> jest --testPathPatterns=errors|loading-states
+
+(node:14948) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node -
+------------------------------------------------------------
+
+2025-12-31T15:35:02.770958
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_database.py -v 2>&1', 'timeout': 120000, 'description': 'Run database tests'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T15:35:24.955233
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_database.py -v 2>&1', 'timeout': 120000, 'description': 'Run database tests'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T15:35:40.059997
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm test 2>&1', 'timeout': 120000, 'description': 'Run all tests'}
+Error: Exit code 1
+
+> frontend@0.1.0 test
+> jest
+
+(node:14800) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node --trace-warnings ...` to show where the wa
+------------------------------------------------------------
+
+2025-12-31T15:35:51.926987
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_database.py tests/test_migrations.py tests/test_repositories.py -v 2>&1', 'timeout': 180000, 'description': 'Ru
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T15:37:01.258271
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_database.py tests/test_migrations.py tests/test_repositories.py -v 2>&1', 'timeout': 180000, 'description': 'Ru
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T15:37:16.252780
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm test 2>&1', 'timeout': 120000, 'description': 'Run all tests'}
+Error: Exit code 1
+
+> frontend@0.1.0 test
+> jest
+
+(node:22556) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node --trace-warnings ...` to show where the wa
+------------------------------------------------------------
+
+2025-12-31T15:37:47.796429
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_database.py tests/test_migrations.py tests/test_repositories.py -v 2>&1', 'timeout': 180000, 'description': 'Ru
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T15:37:55.484969
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm test 2>&1', 'timeout': 120000, 'description': 'Run all tests'}
+Error: Exit code 1
+
+> frontend@0.1.0 test
+> jest
+
+(node:20856) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node --trace-warnings ...` to show where the wa
+------------------------------------------------------------
+
+2025-12-31T15:38:29.515656
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_database.py tests/test_migrations.py tests/test_repositories.py -v 2>&1', 'timeout': 180000, 'description': 'Ru
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T15:51:01.410867
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_api.py::TestHealthCheck -v 2>&1', 'description': 'Run just health check test'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T15:51:39.434286
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_api.py::TestHealthCheck::test_health_check -v 2>&1', 'description': 'Run health check test'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T16:08:52.332594
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -c "\nfrom database.seed import seed_all\nseed_all()\n"', 'description': 'Run seed script to add template strategies'}
+Error: Exit code 1
+C:\Users\matt\Dropbox\projects\STOCKTRADE\database\base.py:53: SAWarning: Column 'strategies.id' is marked as a member of the primary key for table 'strategies', but has no Python-side or server-side default generator indicated, nor does it indicate 'autoincrement=True' or 'nullable=True', and no explicit value is passed.  Primary key columns typically may not store NULL.
+  self.session.flush()
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+    seed_all
+------------------------------------------------------------
+
+2025-12-31T16:12:16.104512
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/index.ts', 'old_string': "// Re-export API types\nexport * from './api'\n\n// Common UI/app types", 'new_string': "// Re-exp
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T16:12:27.737906
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/index.ts', 'old_string': "// Re-export API types\nexport * from './api'\n\n// Common UI/app types", 'new_string': "// Re-exp
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T16:13:07.199361
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/index.ts', 'old_string': "// Re-export API types\nexport * from './api'\n\n// Common UI/app types", 'new_string': "// Re-exp
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T16:15:01.207446
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -c "from database.migrations.runner import MigrationRunner; runner = MigrationRunner(); runner.migrate()" 2>&1', 'description': 'Run
+Error: Exit code 1
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from database.migrations.runner import MigrationRunner; runner = MigrationRunner(); runner.migrate()
+                                                                                        ^^^^^^^^^^^^^^
+AttributeError: 'MigrationRunner' object has no attribute 'migrate'
+------------------------------------------------------------
+
+2025-12-31T16:16:02.631784
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_strategy_templates.py -v 2>&1', 'description': 'Run template strategy tests'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T16:17:07.898529
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_strategy_templates.py -v 2>&1', 'description': 'Run template strategy tests'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T16:20:41.650093
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/UILayout.tsx', 'old_string': "import { Button } from '../ui/ui'\n\n// ======================================
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T16:25:32.249695
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/TemplateCard.tsx', 'old_string': '              {gameMode.difficulty}\n            </span>', 'new_string': '
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T16:41:33.471568
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_strategy_crud.py -v 2>&1', 'description': 'Run strategy CRUD tests to check current state'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T16:42:36.189203
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_strategy_crud.py -v 2>&1', 'description': 'Run strategy CRUD tests after fixes'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T16:43:36.076694
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_strategy_crud.py -v 2>&1', 'description': 'Run strategy CRUD tests after session fix'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T16:58:11.891261
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/laboratory.ts', 'old_string': "import { Strategy, BacktestResult, StrategyType, UIMode } from './api'", 'new_string': "impor
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T16:58:24.187012
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/laboratory.ts', 'old_string': "import { Strategy, BacktestResult, StrategyType, UIMode } from './api'", 'new_string': "impor
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T17:00:42.960314
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_signal_aggregator.py -v 2>&1', 'description': 'Run signal aggregator tests'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T17:02:20.316305
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -c "from database.migrations.runner import run_migrations; run_migrations()" 2>&1', 'description': 'Run database migrations'}
+Error: Exit code 1
+Traceback (most recent call last):
+  File "C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\sqlalchemy\engine\default.py", line 951, in do_execu
+------------------------------------------------------------
+
+2025-12-31T17:02:28.654385
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -c "\nfrom database.connection import get_db_connection\nfrom sqlalchemy import text\n\nconn = get_db_connection().connect()\nconn.e
+Error: Exit code 1
+Traceback (most recent call last):
+  File "<string>", line 5, in <module>
+    conn = get_db_connection().connect()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DatabaseConnection' object has no attribute 'connect'
+------------------------------------------------------------
+
+2025-12-31T17:02:47.123841
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/index.ts', 'old_string': "export { MyStrategiesList } from './MyStrategiesList'\nexport type { MyStrategiesL
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T17:05:57.368191
+Tool: Bash
+Input: {'command': 'cat > /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/__tests__/components/laboratory/LayerBreakdown.test.tsx << \'ENDOFFILE\'\n/**\n * LayerBreakdown Component Tests\n *\n * Tests
+Error: Exit code 2
+/usr/bin/bash: -c: line 281: unexpected EOF while looking for matching `''
+------------------------------------------------------------
+
+2025-12-31T17:21:33.849078
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/api.ts', 'old_string': "/**\n * UI Mode setting\n */\nexport enum UIMode {\n  GAME = 'GAME',\n  PRO = 'PRO',\n}", 'new_strin
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T17:21:49.169982
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/api.ts', 'old_string': "/**\n * UI Mode setting\n */\nexport enum UIMode {\n  GAME = 'GAME',\n  PRO = 'PRO',\n}\n\n// ======
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T17:22:06.761738
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/index.ts', 'old_string': "// Re-export API types\nexport * from './api'\n\n// Re-export Laboratory types\nexport * from './l
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T17:22:21.133657
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/index.ts', 'old_string': "/**\n * Shared TypeScript type definitions\n *\n * This file exports all common types used across 
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T17:23:02.755237
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/types/index.ts', 'old_string': "// Re-export Laboratory types\nexport * from './laboratory'\n\n// Common UI/app types", 'new_strin
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T17:27:40.314207
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/hooks/index.ts', 'old_string': "// Whale hooks\nexport { useWhales } from './useWhales'\n\nexport type {\n  WhaleFilters,\n  Whale
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T17:30:23.268159
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -c "\nfrom database.migrations.runner import run_migrations\nrun_migrations()\n"', 'timeout': 60000, 'description': 'Run database mi
+Error: Exit code 1
+Traceback (most recent call last):
+  File "C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\sqlalchemy\engine\default.py", line 951, in do_execu
+------------------------------------------------------------
+
+2025-12-31T17:46:31.431192
+Tool: Bash
+Input: {'command': 'ls -la /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend/app/', 'description': 'List app directory'}
+Error: Exit code 2
+ls: cannot access '/c/Users/matt/Dropbox/projects/STOCKTRADE/frontend/app/': No such file or directory
+------------------------------------------------------------
+
+2025-12-31T17:53:52.223179
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/jest.config.js', 'old_string': "// Add any custom config to be passed to Jest\nconst customJestConfig = {\n  setupFilesAfterEnv: ['<ro
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:01:50.526896
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && sed -i \\\n-e "s/expect(screen.getByText(\'\\$12,500.00\')).toBeInTheDocument()/expect(screen.getAllByText(\'\\$12,500.00\').lengt
+Error: Exit code 1
+sed: -e expression #1, char 127: Invalid back reference
+------------------------------------------------------------
+
+2025-12-31T18:02:09.461387
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/__tests__/components/backtest/BacktestResults.test.tsx', 'old_string': "    it('should display initial capital', () => {\n      re
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:03:32.756359
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/__tests__/components/backtest/BacktestResults.test.tsx', 'old_string': "    it('should render trade list section', () => {\n      
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:05:11.672285
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && sed -i \\\n-e "191s/getByText(\'Trade List\')/getAllByText(\'Trade List\')/" \\\n-e "218s/getByText(\'Max Damage\')/getAllByText(\
+Error: Exit code 1
+sed: -e expression #3, char 54: Invalid back reference
+------------------------------------------------------------
+
+2025-12-31T18:24:59.788712
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/api/backtests.py', 'old_string': 'from models import BacktestResult, Trade\n\n\nrouter = APIRouter(prefix="/backtests", tags=["backtests"])', '
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:25:27.621564
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/api/backtests.py', 'old_string': 'class BacktestCreate(BaseModel):\n    """Schema for creating a new backtest."""\n\n    strategy_id: str\n    
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:26:00.913116
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/api/backtests.py', 'old_string': 'class BacktestCreate(BaseModel):\n    """Schema for creating a new backtest."""\n\n    strategy_id: str\n    
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:27:34.718783
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/api/backtests.py', 'old_string': 'class BacktestCreate(BaseModel):\n    """Schema for creating a new backtest."""\n\n    strategy_id: str\n    
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:28:32.351051
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/api/backtests.py', 'old_string': '        backtest_model.session = session\n        return model_to_backtest(backtest_model)\n\n\n@router.get("
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:29:03.075437
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/requirements.txt', 'old_string': '# HTTP client for API requests\nhttpx>=0.26.0', 'new_string': '# HTTP client for API requests\nhttpx>=0.26.0\
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:29:28.370747
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/api/backtests.py', 'old_string': '        backtest_model.session = session\n        return model_to_backtest(backtest_model)\n\n\n@router.get("
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:29:45.470014
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/requirements.txt', 'old_string': '# HTTP client for API requests\nhttpx>=0.26.0', 'new_string': '# HTTP client for API requests\nhttpx>=0.26.0\
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:31:32.212641
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/requirements.txt', 'old_string': '# HTTP client for API requests\nhttpx>=0.26.0', 'new_string': '# HTTP client for API requests\nhttpx>=0.26.0\
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:35:08.517940
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_walk_forward.py::TestEdgeCases::test_window_too_small_raises_error -v 2>&1', 'description': 'Run specific test 
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T18:43:07.845004
+Tool: Bash
+Input: {'command': 'ls -la /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend/app/', 'description': 'List app directory contents'}
+Error: Exit code 2
+ls: cannot access '/c/Users/matt/Dropbox/projects/STOCKTRADE/frontend/app/': No such file or directory
+------------------------------------------------------------
+
+2025-12-31T18:46:40.872392
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npm install reactflow@xyflow/react @xyflow/react', 'timeout': 120000, 'description': 'Install React Flow library'}
+Error: Exit code 128
+npm error code 128
+npm error An unknown git error occurred
+npm error command git --no-replace-objects ls-remote ssh://git@github.com/xyflow/react.git
+npm error git@github.com: Permission denied (publickey).
+npm error fatal: Could not read from remote repository.
+npm error
+npm error Please make sure you have the correct access rights
+npm error and the repository exists.
+npm error A complete log of this run can be found in: C:\Users\matt\AppData\Local\npm-cache\_logs\2026-01-01T02_46
+------------------------------------------------------------
+
+2025-12-31T18:53:54.384551
+Tool: Edit
+Input: {'file_path': 'c:\\Users\\matt\\Dropbox\\projects\\STOCKTRADE\\api\\shadow.py', 'old_string': 'from fastapi import APIRouter, HTTPException, Query, status, BackgroundTasks\nfrom pydantic import BaseMo
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:54:34.453438
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -c "from services.genetic_optimizer import GeneticOptimizer, ParameterRange, calculate_fitness; print(\'Import successful\')" 2>&1',
+Error: Exit code 1
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from services.genetic_optimizer import GeneticOptimizer, ParameterRange, calculate_fitness; print('Import successful')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\matt\Dropbox\projects\STOCKTRADE\services\__init__.py", line 23, in <module>
+    from services.paper_trading import (
+    ...<4 lines>...
+    )
+  File "C:\Users\matt\Dropb
+------------------------------------------------------------
+
+2025-12-31T18:54:49.917662
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/index.ts', 'old_string': "export { GameLoadingScreen, GameLoadingCompact } from './GameLoadingScreen'\nexpor
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:55:36.161678
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/index.ts', 'old_string': "export { GameLoadingScreen, GameLoadingCompact } from './GameLoadingScreen'\nexpor
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T18:58:30.981073
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -c "\nfrom api.shadow import (\n    router,\n    get_liquidity_map_endpoint,\n    get_sweep_probability_endpoint,\n)\nprint(\'API sh
+Error: Exit code 1
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+    from api.shadow import (
+    ...<3 lines>...
+    )
+  File "C:\Users\matt\Dropbox\projects\STOCKTRADE\api\shadow.py", line 46, in <module>
+    class ArbitrageOpportunityResponse(BaseModel):
+    ...<3 lines>...
+        recommendations: list[str] = Field(default_factory=list)
+  File "C:\Users\matt\Dropbox\projects\STOCKTRADE\api\shadow.py", line 50, in ArbitrageOpportunityResponse
+    recommendations
+------------------------------------------------------------
+
+2025-12-31T19:01:56.922491
+Tool: Bash
+Input: {'command': 'ls -la /c/Users/matt/Dropbox/projects/STOCKTRADE/tests/services/', 'description': 'List services test directory'}
+Error: Exit code 2
+ls: cannot access '/c/Users/matt/Dropbox/projects/STOCKTRADE/tests/services/': No such file or directory
+------------------------------------------------------------
+
+2025-12-31T19:01:58.349562
+Tool: Bash
+Input: {'command': 'cat > /c/Users/matt/Dropbox/projects/STOCKTRADE/docs/LIQUIDITY_HUNTING_API.md << \'EOF\'\n# Liquidity Hunting & Stop Detection API\n\n## Overview\n\nThe Liquidity Hunting API detects stop
+Error: Exit code 1
+/usr/bin/bash: line 276: /c/Users/matt/Dropbox/projects/STOCKTRADE/docs/LIQUIDITY_HUNTING_API.md: No such file or directory
+cat: /c/Users/matt/Dropbox/projects/STOCKTRADE/docs/LIQUIDITY_HUNTING_API.md: No such file or directory
+------------------------------------------------------------
+
+2025-12-31T19:03:07.511392
+Tool: Bash
+Input: {'command': 'ls -la /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/__tests__/components/shadow/', 'description': 'List shadow component tests'}
+Error: Exit code 2
+ls: cannot access '/c/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/__tests__/components/shadow/': No such file or directory
+------------------------------------------------------------
+
+2025-12-31T19:04:14.009736
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npx eslint src/components/dashboard/*.tsx 2>&1', 'timeout': 60000, 'description': 'Check ESLint errors in dashboard components'}
+Error: Exit code 1
+
+C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\dashboard\PlayerStatsPanel.tsx
+  116:3  error  'totalXP' is defined but never used                      @typescript-eslint/no-unused-vars
+  469:9  error  'lockedAchievements' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\dashboard\PortfolioSummary.tsx
+   20:3   error  'DollarSign' is defined but never used                  @type
+------------------------------------------------------------
+
+2025-12-31T19:05:53.889754
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npx tsc --noEmit src/components/laboratory/NodeEditor.tsx src/lib/nodeDefinitions.ts src/lib/nodeValidation.ts src/lib/nodeGraphEx
+Error: Exit code 2
+node_modules/@reactflow/background/dist/esm/Background.d.ts(1,8): error TS1259: Module '"C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/node_modules/@types/react/index"' can only be default-imported using the 'esModuleInterop' flag
+node_modules/@reactflow/controls/dist/esm/Controls.d.ts(1,8): error TS1259: Module '"C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/node_modules/@types/react/index"' can only be default-imported using the 'esModuleInterop' flag
+node_modules/@reac
+------------------------------------------------------------
+
+2025-12-31T19:06:49.137665
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npx eslint src/components/dashboard/*.tsx 2>&1', 'timeout': 60000, 'description': 'Check ESLint after fixes'}
+Error: Exit code 1
+
+C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\dashboard\PortfolioSummary.tsx
+  12:17  error  'useMemo' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 1 problem (1 error, 0 warnings)
+------------------------------------------------------------
+
+2025-12-31T19:07:18.381872
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npx eslint src/components/dashboard/*.tsx src/app/dashboard/page.tsx 2>&1', 'timeout': 60000, 'description': 'Check ESLint for das
+Error: Exit code 1
+
+C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\dashboard\page.tsx
+   45:3   error  'Settings' is defined but never used               @typescript-eslint/no-unused-vars
+  275:58  error  'stats' is defined but never used                  @typescript-eslint/no-unused-vars
+  366:56  error  'stats' is defined but never used                  @typescript-eslint/no-unused-vars
+  406:25  error  'index' is defined but never used                  @typescript-eslint/no-unused-vars
+ 
+------------------------------------------------------------
+
+2025-12-31T19:43:05.715203
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && grep -n "uiMode === UIMode.GAME && \'text-purple-300\'" src/components/signals/SignalCard.tsx', 'description': 'Find the error loc
+Error: Exit code 2
+grep: src/components/signals/SignalCard.tsx: No such file or directory
+------------------------------------------------------------
+
+2025-12-31T20:26:31.890770
+Tool: Bash
+Input: {'command': 'ls -la c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/app/', 'description': 'List app directory structure'}
+Error: Exit code 2
+ls: cannot access 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/app/': No such file or directory
+------------------------------------------------------------
+
+2025-12-31T20:30:07.144300
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/jest.setup.js', 'old_string': "import '@testing-library/jest-dom'\n\n// Mock lightweight-charts\nconst mockSeries = {\n  setData: jest
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T20:30:07.152205
+Tool: Bash
+Input: {'command': 'python -m pytest tests/test_shadow.py -v', 'description': 'Run shadow protocol tests'}
+Error: Exit code 2
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:30:26.567205
+Tool: Bash
+Input: {'command': 'python -m pytest tests/test_shadow.py::TestConstellationDetection -v', 'description': 'Run constellation detection tests only'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:30:50.027233
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/shadow/ConstellationDetector.tsx', 'old_string': 'interface ConstellationDetectorProps {\n  className?: string\n  onCon
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T20:31:07.380022
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/shadow/ConstellationDetector.tsx', 'old_string': 'interface ConstellationDetectorProps {\n  className?: string\n  onCon
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T20:31:43.261661
+Tool: Bash
+Input: {'command': 'python -m pytest tests/test_shadow.py::TestConstellationDetection -v', 'description': 'Run constellation detection tests again'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:32:27.973056
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/shadow/page.tsx', 'old_string': '                <div>\n                  <div className="text-xs text-red-400/60 font-mono">S
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T20:32:42.713875
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/shadow/page.tsx', 'old_string': '                <div>\n                  <div className="text-xs text-red-400/60 font-mono">S
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T20:33:18.936138
+Tool: Bash
+Input: {'command': 'python -m pytest tests/test_shadow.py::TestWebSocketBroadcasting -v', 'description': 'Run WebSocket broadcasting tests'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:33:46.347688
+Tool: Bash
+Input: {'command': 'python -m pytest tests/test_shadow.py::TestWebSocketBroadcasting -v', 'description': 'Run WebSocket broadcasting tests again'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:34:49.427244
+Tool: Bash
+Input: {'command': 'python -m pytest tests/test_shadow.py::TestShadowProtocolIntegration -v', 'description': 'Run shadow protocol integration test'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:35:53.309537
+Tool: Bash
+Input: {'command': 'python -m pytest tests/test_shadow.py::TestShadowProtocolIntegration::test_full_shadow_workflow -v', 'description': 'Run shadow protocol integration test'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:36:31.723042
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/__tests__/pages/shadow.test.tsx', 'old_string': "    test('executes trade when button is clicked', async () => {\n      const onEx
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T20:36:38.964209
+Tool: Bash
+Input: {'command': 'python -m pytest tests/test_shadow.py::TestShadowProtocolIntegration::test_full_shadow_workflow -v', 'description': 'Run shadow protocol integration test again'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:36:48.542038
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/__tests__/pages/shadow.test.tsx', 'old_string': "      expect(panel).toHaveTextContent('CONNECTED')\n    })\n\n    test('executes 
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T20:37:09.585229
+Tool: Bash
+Input: {'command': 'python -m pytest tests/test_shadow.py::TestShadowProtocolIntegration::test_full_shadow_workflow -v', 'description': 'Run shadow protocol integration test with correct URLs'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:37:29.841416
+Tool: Bash
+Input: {'command': 'python -m pytest tests/test_shadow.py::TestShadowProtocolIntegration::test_full_shadow_workflow -v', 'description': 'Run shadow protocol integration test with JSON body'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:37:54.257563
+Tool: Bash
+Input: {'command': 'python -c "from services.liquidity_hunter import get_liquidity_map_service; print(\'Liquidity hunter service imported successfully\')"', 'description': 'Test if liquidity hunter service c
+Error: Exit code 1
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from services.liquidity_hunter import get_liquidity_map_service; print('Liquidity hunter service imported successfully')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: cannot import name 'get_liquidity_map_service' from 'services.liquidity_hunter' (c:\Users\matt\Dropbox\projects\STOCKTRADE\services\liquidity_hunter.py)
+------------------------------------------------------------
+
+2025-12-31T20:38:20.238867
+Tool: Bash
+Input: {'command': 'cat > /tmp/fix_test.txt << \'EOF\'\n    test(\'executes trade when button is clicked\', async () => {\n      const consoleSpy = jest.spyOn(console, \'log\').mockImplementation()\n      mo
+Error: Exit code 126
+/usr/bin/bash: line 73: /c/cygwin64/bin/python3: cannot execute binary file: Exec format error
+------------------------------------------------------------
+
+2025-12-31T20:38:56.821491
+Tool: Bash
+Input: {'command': 'python -m pytest tests/test_shadow.py -v --tb=short', 'description': 'Run all shadow tests together'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:39:08.117739
+Tool: Bash
+Input: {'command': 'python -m pytest tests/test_shadow.py::TestShadowAPIEndpoints::test_get_shadow_constellations -v --tb=short', 'description': 'Check specific API endpoint test error'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:46:38.741543
+Tool: Read
+Input: {'file_path': 'c:\\Users\\matt\\Dropbox\\projects\\STOCKTRADE\\tests'}
+Error: EISDIR: illegal operation on a directory, read
+------------------------------------------------------------
+
+2025-12-31T20:47:27.399364
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_security.py -v', 'description': 'Run security tests to see what needs to be implemented'}
+Error: Exit code 2
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:49:22.899360
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_security.py -v', 'description': 'Run security tests to check our implementation'}
+Error: Exit code 2
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:49:25.042112
+Tool: Bash
+Input: {'command': 'cd frontend && npm test ErrorBoundary.test.tsx', 'description': 'Run Error Boundary tests'}
+Error: Exit code 1
+(node:19636) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+FAIL src/__t
+------------------------------------------------------------
+
+2025-12-31T20:49:48.774933
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_security.py -v', 'description': 'Run security tests again'}
+Error: Exit code 2
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:50:07.378301
+Tool: Bash
+Input: {'command': 'cd frontend && npm test ErrorBoundary.test.tsx', 'description': 'Run Error Boundary tests again'}
+Error: Exit code 1
+(node:5116) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+FAIL src/__te
+------------------------------------------------------------
+
+2025-12-31T20:50:14.474694
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_security.py -v', 'description': 'Run security tests again after fixing imports'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:50:54.574425
+Tool: Bash
+Input: {'command': 'cd frontend && npm test ErrorBoundary.test.tsx', 'description': 'Run Error Boundary tests'}
+Error: Exit code 1
+(node:16080) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+FAIL src/__t
+------------------------------------------------------------
+
+2025-12-31T20:51:32.580384
+Tool: Bash
+Input: {'command': 'cd frontend && npm test ErrorBoundary.test.tsx', 'description': 'Run Error Boundary tests'}
+Error: Exit code 1
+(node:15840) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+FAIL src/__t
+------------------------------------------------------------
+
+2025-12-31T20:51:55.610747
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_security.py -v', 'description': 'Run security tests again after fixes'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:54:09.630675
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_security.py -v', 'description': 'Run security tests after fixes'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:56:04.716324
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python test_security_simple.py', 'description': 'Run simple security test'}
+Error: Exit code 1
+Traceback (most recent call last):
+  File "C:\Users\matt\Dropbox\projects\STOCKTRADE\test_security_simple.py", line 77, in <module>
+    test_response_error_format()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\matt\Dropbox\projects\STOCKTRADE\test_security_simple.py", line 51, in test_response_error_format
+    assert b'"success": false' in data
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+------------------------------------------------------------
+
+2025-12-31T20:56:33.626621
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python test_security_simple.py', 'description': 'Run simple security test again'}
+Error: Exit code 1
+Traceback (most recent call last):
+  File "C:\Users\matt\Dropbox\projects\STOCKTRADE\test_security_simple.py", line 77, in <module>
+    test_response_error_format()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\matt\Dropbox\projects\STOCKTRADE\test_security_simple.py", line 51, in test_response_error_format
+    assert '"success": false' in data
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+------------------------------------------------------------
+
+2025-12-31T20:56:43.115526
+Tool: Bash
+Input: {'command': 'cd frontend && npm test', 'description': 'Run all tests'}
+Error: Exit code 1
+(node:17996) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+FAIL src/__t
+------------------------------------------------------------
+
+2025-12-31T20:57:36.121657
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_security.py::TestAuthenticationMiddleware::test_missing_api_key_header -v --tb=short', 'description': 'Run a si
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:58:37.880811
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_security.py::TestAuthenticationMiddleware -v', 'description': 'Run authentication tests only'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:59:00.431957
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_security.py::TestAuthenticationMiddleware -v', 'description': 'Run authentication tests again'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T20:59:29.232406
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE && python -m pytest tests/test_security.py -v', 'description': 'Run all security tests'}
+Error: Exit code 1
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T21:02:33.493988
+Tool: Bash
+Input: {'command': 'ls -la __tests__/', 'description': 'Check tests directory structure'}
+Error: Exit code 2
+ls: cannot access '__tests__/': No such file or directory
+------------------------------------------------------------
+
+2025-12-31T21:06:32.416166
+Tool: Bash
+Input: {'command': 'cd c:\\Users\\matt\\Dropbox\\projects\\STOCKTRADE\\frontend && npm test -- --testPathPattern="deployment" --verbose', 'description': 'Run deployment tests'}
+Error: Exit code 1
+/usr/bin/bash: line 1: cd: c:UsersmattDropboxprojectsSTOCKTRADEfrontend: No such file or directory
+------------------------------------------------------------
+
+2025-12-31T21:06:37.048711
+Tool: Bash
+Input: {'command': 'npm test -- --testPathPattern="deployment" --verbose', 'description': 'Run deployment tests from frontend directory'}
+Error: Exit code 1
+npm error Missing script: "test"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+npm error A complete log of this run can be found in: C:\Users\matt\AppData\Local\npm-cache\_logs\2026-01-01T05_06_36_787Z-debug-0.log
+------------------------------------------------------------
+
+2025-12-31T21:07:18.859333
+Tool: Bash
+Input: {'command': 'cd frontend && npm test', 'description': 'Run tests from frontend directory'}
+Error: Exit code 1
+(node:22324) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+FAIL src/__t
+------------------------------------------------------------
+
+2025-12-31T21:10:20.456526
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/jest.config.js', 'old_string': "// Add any custom config to be passed to Jest\nconst customJestConfig = {\n  setupFilesAfterEnv: ['<ro
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:10:35.136879
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/jest.config.js', 'old_string': "// Add any custom config to be passed to Jest\nconst customJestConfig = {\n  setupFilesAfterEnv: ['<ro
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:11:10.966143
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/package.json', 'old_string': '"test": "jest",\n    "test:watch": "jest --watch",\n    "test:coverage": "jest --coverage",\n    "test:e
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:11:31.199087
+Tool: Bash
+Input: {'command': 'cd frontend && npm run test:integration -- --passWithNoTests', 'description': 'Run integration tests to check structure'}
+Error: Exit code 1
+npm error Missing script: "test:integration"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+npm error A complete log of this run can be found in: C:\Users\matt\AppData\Local\npm-cache\_logs\2026-01-01T05_11_30_930Z-debug-0.log
+------------------------------------------------------------
+
+2025-12-31T21:12:27.077394
+Tool: Bash
+Input: {'command': 'cd "c:\\Users\\matt\\Dropbox\\projects\\STOCKTRADE" && docker build -t crypto-quant-lab:test .', 'timeout': 300000, 'description': 'Test Docker build'}
+Error: Exit code 127
+/usr/bin/bash: line 1: docker: command not found
+------------------------------------------------------------
+
+2025-12-31T21:12:44.507057
+Tool: Bash
+Input: {'command': 'cd "c:\\Users\\matt\\Dropbox\\projects\\STOCKTRADE" && python -m pytest tests/deployment/test_docker_build.py::test_dockerfile_exists -v', 'description': 'Run Docker file existence test'}
+Error: Exit code 4
+C:\Users\matt\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Va
+------------------------------------------------------------
+
+2025-12-31T21:12:56.500140
+Tool: Bash
+Input: {'command': 'cd "c:\\Users\\matt\\Dropbox\\projects\\STOCKTRADE" && python -c "\nimport os\nfrom pathlib import Path\n\n# Test file existence\nfiles_to_check = [\n    \'Dockerfile\',\n    \'docker-com
+Error: Exit code 1
+Traceback (most recent call last):
+  File "<string>", line 19, in <module>
+    print(f'\u2713 {file} exists')
+    ~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 0: character maps to <undefined>
+
+Checking deployment fil
+------------------------------------------------------------
+
+2025-12-31T21:13:56.165115
+Tool: Bash
+Input: {'command': 'cd frontend && npx jest ../__tests__/integration/ --verbose', 'description': 'Run integration tests from frontend directory'}
+Error: Exit code 1
+(node:9376) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+No tests fou
+------------------------------------------------------------
+
+2025-12-31T21:14:10.616399
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/jest.config.js', 'old_string': "// Add any custom config to be passed to Jest\nconst customJestConfig = {\n  setupFilesAfterEnv: ['<ro
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:22:39.306111
+Tool: Bash
+Input: {'command': 'chmod +x syntax-check.sh && ./syntax-check.sh', 'description': 'Run syntax check on test files'}
+Error: Exit code 1
+Checking TypeScript syntax of integration tests...
+Checking: __tests__/integration/strategy-workflow.test.tsx
+__tests__/integration/strategy-workflow.test.tsx(4,60): error TS2307: Cannot find module '@testing-library/react' or its corresponding type declarations.
+__tests__/integration/strategy-workflow.test.tsx(5,52): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+__tests__/integration/strategy-workflow.test.tsx(6,50): error TS2307: Cann
+------------------------------------------------------------
+
+2025-12-31T21:42:38.826024
+Tool: Bash
+Input: {'command': 'ls -la /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend/app/', 'description': 'List app directory structure'}
+Error: Exit code 2
+ls: cannot access '/c/Users/matt/Dropbox/projects/STOCKTRADE/frontend/app/': No such file or directory
+------------------------------------------------------------
+
+2025-12-31T21:46:11.630486
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/UIModeToggle.tsx', 'old_string': "export const UIModeToggle: React.FC<UIModeToggleProps> = ({\n  currentMode
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:46:39.663365
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/UIModeToggle.tsx', 'old_string': 'export const UIModeToggleCompact: React.FC<UIModeToggleCompactProps> = ({\
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:46:56.636353
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/ui/index.ts', 'old_string': "export { ErrorMessage } from './ErrorMessage'\nexport type { ErrorMessageProps } from './E
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:47:01.570909
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/UIModeToggle.tsx', 'old_string': 'export const UIModeToggleCompact: React.FC<UIModeToggleCompactProps> = ({\
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:47:14.202355
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/ui/index.ts', 'old_string': "export { ErrorMessage } from './ErrorMessage'\nexport type { ErrorMessageProps } from './E
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:47:39.284464
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/ui/index.ts', 'old_string': "export { ErrorMessage } from './ErrorMessage'\nexport type { ErrorMessageProps } from './E
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:48:21.283022
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/UIModeToggle.tsx', 'old_string': "export const UIModeToggle: React.FC<UIModeToggleProps> = ({\n  currentMode
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:48:40.159524
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory && cp UIModeToggle.tsx UIModeToggle.tsx.bak && cat > UIModeToggle.tsx << \'EOF\'\n/**\n * UIModeToggle Comp
+Error: Failed to parse command: Bad substitution: isGame
+------------------------------------------------------------
+
+2025-12-31T21:49:40.954623
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/StrategyForm.tsx', 'old_string': '      {/* Input based on type */}\n      {paramDef.type === \'select\' && 
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:49:46.342852
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/layout.tsx', 'old_string': "import type { Metadata } from 'next'\nimport localFont from 'next/font/local'\nimport './globals.c
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:50:07.755961
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/layout.tsx', 'old_string': 'import type { Metadata } from \'next\'\nimport localFont from \'next/font/local\'\nimport \'./glob
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:50:57.977917
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/BodyWrapper.tsx', 'old_string': "'use client'\n\nimport { useEffect } from 'react'\nimport { useUIMode } from '@/hooks/
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:51:23.120217
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/BodyWrapper.tsx', 'old_string': "'use client'\n\nimport { useEffect } from 'react'\nimport { useUIMode } from '@/hooks/
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:52:00.691260
+Tool: Bash
+Input: {'command': "cat > /tmp/backtest-results.patch << 'PATCH'\n--- a/src/components/backtest/BacktestResults.tsx\n+++ b/src/components/backtest/BacktestResults.tsx\n@@ -218,6 +218,7 @@ interface MetricCar
+Error: Failed to parse command: Bad substitution: metric.key.replace
+------------------------------------------------------------
+
+2025-12-31T21:52:42.941683
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/GameModeProfile.tsx', 'old_string': "  return (\n    <div\n      className={cn(\n        'rounded-2xl border
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:52:48.053591
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npx tsc --noEmit src/app/page.tsx src/app/settings/page.tsx src/components/BodyWrapper.tsx src/components/laboratory/UIModeToggle.
+Error: Exit code 2
+node_modules/next/dist/client/link.d.ts(2,8): error TS1259: Module '"C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/node_modules/@types/react/index"' can only be default-imported using the 'esModuleInterop' flag
+src/app/page.tsx(8,5): error TS17004: Cannot use JSX unless the '--jsx' flag is provided.
+src/app/page.tsx(9,7): error TS17004: Cannot use JSX unless the '--jsx' flag is provided.
+src/app/page.tsx(10,9): error TS17004: Cannot use JSX unless the '--jsx' flag is provided
+------------------------------------------------------------
+
+2025-12-31T21:52:53.967894
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && sed -i \'s/key={metric.key}\\n          name={metric.name}/key={metric.key}\\n          testId={"metric-" + metric.key.replace(/_/
+Error: Exit code 1
+sed: -e expression #1, char 118: unknown option to `s'
+------------------------------------------------------------
+
+2025-12-31T21:54:13.951994
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && sed -i \'s/leftIcon={<Play className="h-5 w-5" />}/leftIcon={<Play className="h-5 w-5" />}\\n          data-testid="start-backtest
+Error: Exit code 1
+sed: -e expression #1, char 43: unknown option to `s'
+------------------------------------------------------------
+
+2025-12-31T21:54:15.641119
+Tool: Bash
+Input: {'command': 'cat > /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/TemplateCard.tsx << \'ENDOFFILE\'\n/**\n * TemplateCard Component\n *\n * Displays a template strategy c
+Error: Exit code 2
+/usr/bin/bash: -c: line 205: unexpected EOF while looking for matching `''
+------------------------------------------------------------
+
+2025-12-31T21:55:03.116096
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/TemplateCard.tsx', 'old_string': '  if (uiMode === UIMode.GAME && strategy.gameMode) {\n    return (\n      
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:55:26.145904
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/TemplateCard.tsx', 'old_string': "  if (uiMode === UIMode.GAME && strategy.gameMode) {\n    return (\n      
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:57:04.138168
+Tool: Edit
+Input: {'file_path': 'c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/ui/Modal.tsx', 'old_string': "export interface ModalProps {\n  isOpen: boolean\n  onClose: () => void\n  title?: string
+Error: File has been unexpectedly modified. Read it again before attempting to write it.
+------------------------------------------------------------
+
+2025-12-31T21:58:08.054173
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && npx playwright install chromium 2>&1', 'timeout': 180000, 'description': 'Install Playwright Chromium browser'}
+Error: Exit code 1
+Downloading Chromium Headless Shell 143.0.7499.4 (playwright build v1200)[2m from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1200/chromium-headless-shell-win64.zip[22m
+|                                                                                |   0% of 107.2 MiB
+|■■■■■■■■                                                                        |  10% of 107.2 MiB
+|■■■■■■■■■■■■■■■■                       
+------------------------------------------------------------
+
+2025-12-31T22:04:28.099354
+Tool: Bash
+Input: {'command': 'cd /c/Users/matt/Dropbox/projects/STOCKTRADE/frontend && sed -i \'s/History, //\' src/app/paper-trading/page.tsx && sed -i "62s/hasResponded/  // hasResponded/" src/app/ai/page.tsx', 'des
+Error: Exit code 1
+sed: -e expression #1, char 21: unknown option to `s'
+------------------------------------------------------------
+
+2025-12-31T22:05:20.913260
+Tool: KillShell
+Input: {'shell_id': 'bd46cba'}
+Error: Shell bd46cba is not running, so cannot be killed (status: completed)
+------------------------------------------------------------

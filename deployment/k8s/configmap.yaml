@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: crypto-quant-lab
+data:
+  # Application Configuration
+  LOG_LEVEL: "WARNING"
+  DEBUG: "false"
+  HOST: "0.0.0.0"
+  PORT: "8000"
+
+  # WebSocket Configuration
+  WEBSOCKET_MAX_CONNECTIONS: "1000"
+  WEBSOCKET_PING_INTERVAL: "30"
+
+  # Cache Configuration
+  CACHE_TTL: "3600"
+  CACHE_MAX_SIZE: "10000"
+
+  # Feature Flags
+  ENABLE_WHALES_ALERTS: "true"
+  ENABLE_ARBITRAGE_ALERTS: "true"
+  ENABLE_GENETIC_ALGORITHM: "true"
+  ENABLE_ML_PREDICTIONS: "false"
+  ENABLE_REALTIME_DATA: "true"
+  ENABLE_DARK_POOL_MONITORING: "true"
+
+  # Timezone
+  TZ: "UTC"
+
+---
+# Prometheus Metrics ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: crypto-quant-lab
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+      evaluation_interval: 15s
+
+    scrape_configs:
+      - job_name: 'crypto-quant-lab'
+        static_configs:
+          - targets: ['backend:8000']
+        metrics_path: /metrics
+        scrape_interval: 15s
