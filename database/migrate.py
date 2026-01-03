@@ -16,7 +16,7 @@ sys.path.append(str(Path(__file__).parent.parent))
 
 from database.connection import init_db, get_db_context
 from sqlalchemy import text
-from models.base import Base
+
 
 # Configure logging
 logging.basicConfig(
@@ -60,13 +60,7 @@ class DatabaseMigrator:
         with get_db_context() as session:
             # Check if table exists
             result = session.execute(
-                text("""
-                SELECT EXISTS (
-                    SELECT FROM information_schema.tables
-                    WHERE table_schema = 'public'
-                    AND table_name = '{}'
-                )
-                """.format(self.migrations_table))
+                text(f"SELECT name FROM sqlite_master WHERE type='table' AND name='{self.migrations_table}'")
             ).scalar()
 
             if not result:
@@ -105,11 +99,10 @@ class DatabaseMigrator:
             # Record migration
             with get_db_context() as session:
                 session.execute(text(f"""
-                    INSERT INTO {self.migrations_table} (version, description)
-                    VALUES (:version, :description)
+                    INSERT INTO {self.migrations_table} (version)
+                    VALUES (:version)
                 """), {
-                    'version': migration['version'],
-                    'description': migration['description']
+                    'version': migration['version']
                 })
 
             logger.info(f"Migration {migration['version']} applied successfully")
@@ -128,25 +121,7 @@ class DatabaseMigrator:
         # Create additional indexes and constraints
         with get_db_context() as session:
             # Add foreign key constraints that might be missing
-            session.execute(text("""
-                ALTER TABLE IF EXISTS signals
-                ADD CONSTRAINT fk_signals_strategy
-                FOREIGN KEY (strategy_id) REFERENCES strategies(id) ON DELETE CASCADE
-            """))
-
-            session.execute(text("""
-                ALTER TABLE IF EXISTS backtests
-                ADD CONSTRAINT fk_backtests_strategy
-                FOREIGN KEY (strategy_id) REFERENCES strategies(id) ON DELETE CASCADE
-            """))
-
-            session.execute(text("""
-                ALTER TABLE IF EXISTS portfolio
-                ADD CONSTRAINT fk_portfolio_strategy
-                FOREIGN KEY (strategy_id) REFERENCES strategies(id) ON DELETE SET NULL
-            """))
-
-            session.commit()
+            pass
 
     def _add_indexes(self):
         """Add performance indexes for common query patterns."""
@@ -166,7 +141,7 @@ class DatabaseMigrator:
 
             session.execute(text("""
                 CREATE INDEX IF NOT EXISTS idx_signals_type
-                ON signals(type)
+                ON signals(signal_type)
             """))
 
             # Index on strategies table
@@ -180,79 +155,21 @@ class DatabaseMigrator:
                 ON strategies(status)
             """))
 
-            # Index on market_data table (if it exists)
+            # Index on prices table
             session.execute(text("""
-                CREATE INDEX IF NOT EXISTS idx_market_data_symbol_timestamp
-                ON market_data(symbol, timestamp)
+                CREATE INDEX IF NOT EXISTS idx_prices_symbol_timestamp
+                ON prices(symbol, timestamp)
             """))
 
             session.commit()
 
     def _add_hypertables(self):
         """Convert time-series tables to TimescaleDB hypertables."""
-        logger.info("Setting up TimescaleDB hypertables...")
-
-        with get_db_context() as session:
-            # Create extension if not exists
-            session.execute(text("CREATE EXTENSION IF NOT EXISTS timescaledb"))
-
-            # Convert signals table to hypertable
-            session.execute(text("""
-                SELECT create_hypertable('signals', 'timestamp',
-                    if_not_exists => true,
-                    migrate_data => true
-                )
-            """))
-
-            # Convert market_data table to hypertable
-            session.execute(text("""
-                SELECT create_hypertable('market_data', 'timestamp',
-                    if_not_exists => true,
-                    migrate_data => true
-                )
-            """))
-
-            session.commit()
+        logger.info("Skipping TimescaleDB hypertables for SQLite...")
 
     def _optimize_schema(self):
         """Apply production schema optimizations."""
-        logger.info("Applying schema optimizations...")
-
-        with get_db_context() as session:
-            # Add compression to time-series data
-            session.execute(text("""
-                ALTER TABLE signals SET (timescaledb.compress);
-                SELECT add_compression_policy('signals', 'interval 7');
-            """))
-
-            # Add retention policies
-            session.execute(text("""
-                SELECT add_retention_policy('signals', INTERVAL '90 days', true);
-                SELECT add_retention_policy('market_data', INTERVAL '30 days', true);
-            """))
-
-            # Create materialized views for common aggregations
-            session.execute(text("""
-                CREATE MATERIALIZED VIEW IF NOT EXISTS signals_daily_stats AS
-                SELECT
-                    DATE_TRUNC('day', timestamp) AS day,
-                    symbol,
-                    type,
-                    COUNT(*) as signal_count,
-                    AVG(price) as avg_price,
-                    MIN(price) as min_price,
-                    MAX(price) as max_price
-                FROM signals
-                GROUP BY DATE_TRUNC('day', timestamp), symbol, type;
-            """))
-
-            # Create refresh index
-            session.execute(text("""
-                CREATE INDEX IF NOT EXISTS idx_signals_daily_stats
-                ON signals_daily_stats(day, symbol)
-            """))
-
-            session.commit()
+        logger.info("Skipping schema optimizations for SQLite...")
 
     def run_migrations(self):
         """Run all pending migrations."""

@@ -24,6 +24,7 @@ from database.repositories.liquidation import (
     LiquidationRepository,
     CascadeRepository,
 )
+from database.repositories.historical_price import HistoricalPriceRepository
 
 __all__ = [
     "StrategyRepository",
@@ -43,4 +44,5 @@ __all__ = [
     "AIReasoningSessionRepository",
     "LiquidationRepository",
     "CascadeRepository",
+    "HistoricalPriceRepository",
 ]
