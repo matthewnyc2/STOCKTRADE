@@ -50,6 +50,9 @@ from models.ml import (
 # Settings models
 from models.settings import Settings, UIMode
 
+# Historical price model
+from models.historical_price import HistoricalPrice
+
 # Market data models
 from models.market_data import (
     PriceData,
@@ -62,6 +65,9 @@ from models.market_data import (
     SeedPriceDataResponse,
     PriceDataSummary,
 )
+
+# Historical price models
+from models.historical_price import HistoricalPrice
 
 # Liquidation models
 from models.liquidation import (
@@ -140,6 +146,8 @@ __all__ = [
     "IndicatorsRequest",
     "SeedPriceDataResponse",
     "PriceDataSummary",
+    # Historical Price
+    "HistoricalPrice",
     # Liquidation
     "Liquidation",
     "CascadeEvent",

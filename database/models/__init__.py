@@ -45,6 +45,7 @@ from database.models.settings import SettingsModel
 from database.models.ai_reasoning import AIReasoningSessionModel
 from database.models.price import PriceModel
 from database.models.liquidation import LiquidationModel, CascadeModel
+from database.models.historical_price import HistoricalPriceModel
 
 __all__ = [
     "BaseModel",
@@ -66,4 +67,5 @@ __all__ = [
     "PriceModel",
     "LiquidationModel",
     "CascadeModel",
+    "HistoricalPriceModel",
 ]
