@@ -154,77 +154,18 @@ async def websocket_endpoint(websocket: WebSocket):
         raise
 
 
-@app.get("/ws/test")
-async def websocket_test_page():
+@app.websocket("/ws/test")
+async def websocket_test_endpoint(websocket: WebSocket):
     """
-    Returns a simple HTML test page for WebSocket testing.
+    Test WebSocket endpoint that responds to ping with pong.
     """
-    return HTMLResponse("""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>WebSocket Test</title>
-        <style>
-            body { font-family: monospace; padding: 20px; }
-            #messages { border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px; }
-            .message { margin: 5px 0; padding: 5px; background: #f0f0f0; }
-        </style>
-    </head>
-    <body>
-        <h1>WebSocket Test</h1>
-        <div>
-            <button onclick="connect()">Connect</button>
-            <button onclick="disconnect()">Disconnect</button>
-            <button onclick="sendPing()">Send Ping</button>
-        </div>
-        <div id="messages"></div>
-        <script>
-            let ws = null;
-
-            function connect() {
-                const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-                const wsUrl = `${protocol}//${window.location.host}/ws?channels=signals,portfolio,whales`;
-
-                ws = new WebSocket(wsUrl);
-
-                ws.onopen = function() {
-                    addMessage('Connected to WebSocket');
-                };
-
-                ws.onmessage = function(event) {
-                    const data = JSON.parse(event.data);
-                    addMessage(`Received: ${JSON.stringify(data, null, 2)}`);
-                };
-
-                ws.onclose = function() {
-                    addMessage('Disconnected from WebSocket');
-                };
-
-                ws.onerror = function(error) {
-                    addMessage(`Error: ${error}`);
-                };
-            }
-
-            function disconnect() {
-                if (ws) {
-                    ws.close();
-                }
-            }
-
-            function sendPing() {
-                if (ws && ws.readyState === WebSocket.OPEN) {
-                    ws.send(JSON.stringify({action: 'ping'}));
-                    addMessage('Sent: ping');
-                }
-            }
-
-            function addMessage(text) {
-                const div = document.createElement('div');
-                div.className = 'message';
-                div.textContent = text;
-                document.getElementById('messages').appendChild(div);
-            }
-        </script>
-    </body>
-    </html>
-    """)
+    await websocket.accept()
+    try:
+        while True:
+            data = await websocket.receive_text()
+            if data == "ping":
+                await websocket.send_text("pong")
+    except WebSocketDisconnect:
+        print("Client disconnected")
+    except Exception as e:
+        print(f"An error occurred: {e}")
