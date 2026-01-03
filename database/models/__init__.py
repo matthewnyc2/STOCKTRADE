@@ -45,9 +45,13 @@ from database.models.settings import SettingsModel
 from database.models.ai_reasoning import AIReasoningSessionModel
 from database.models.price import PriceModel
 from database.models.liquidation import LiquidationModel, CascadeModel
+from database.models.trader import Trader, TraderActivity, TraderProfile
 
 __all__ = [
     "BaseModel",
+    "Trader",
+    "TraderActivity",
+    "TraderProfile",
     "StrategyModel",
     "StrategyLayerModel",
     "SignalModel",

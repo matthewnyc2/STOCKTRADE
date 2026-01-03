@@ -24,8 +24,10 @@ from database.repositories.liquidation import (
     LiquidationRepository,
     CascadeRepository,
 )
+from database.repositories.trader_repository import TraderRepository
 
 __all__ = [
+    "TraderRepository",
     "StrategyRepository",
     "StrategyLayerRepository",
     "SignalRepository",
