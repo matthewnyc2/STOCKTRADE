@@ -18,6 +18,7 @@ from api.settings import router as settings_router
 from api.shadow import router as shadow_router
 from api.signals import router as signals_router
 from api.strategies import router as strategies_router
+from api.traders import router as traders_router
 from api.whales import router as whales_router
 from api.ai import router as ai_router
 from core.middleware import setup_middleware
@@ -52,6 +53,7 @@ setup_middleware(app)
 
 # Include all API routers
 app.include_router(strategies_router, prefix="/api")
+app.include_router(traders_router, prefix="/api")
 app.include_router(signals_router, prefix="/api")
 app.include_router(backtests_router, prefix="/api")
 app.include_router(portfolio_router, prefix="/api")
