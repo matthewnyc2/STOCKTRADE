@@ -138,6 +138,8 @@ def run_monte_carlo(
             if capital > peak:
                 peak = capital
             drawdown = (capital - peak) / peak if peak > 0 else 0
+            # Ensure drawdown is always negative (or 0)
+            drawdown = drawdown if drawdown <= 0 else 0
             max_drawdown = min(max_drawdown, drawdown)
 
         all_equity_curves.append(equity_curve)

@@ -1,0 +1,232 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [master, main, develop]
+  pull_request:
+    branches: [master, main]
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  backend-tests:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+      redis:
+        image: redis:7
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio pytest-cov pytest-mock
+
+      - name: Create test database
+        run: |
+          python -c "from core.database import init_database; import asyncio; asyncio.run(init_database())"
+        env:
+          DATABASE_URL: sqlite:///./test_data.db
+
+      - name: Run unit tests
+        run: |
+          pytest tests/ -v --tb=short --cov=. --cov-report=xml --cov-report=html
+
+      - name: Run API tests
+        run: pytest tests/test_api*.py -v
+
+      - name: Run integration tests
+        run: pytest tests/test_*_integration.py -v
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          flags: backend
+          fail_ci_if_error: false
+
+  lint-and-format:
+    name: Lint and Format Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install linting tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff black isort mypy pylint
+
+      - name: Run Ruff
+        run: ruff check api/ core/ services/ models/
+
+      - name: Check Black formatting
+        run: black --check api/ core/ services/ models/
+
+      - name: Check isort
+        run: isort --check-only api/ core/ services/ models/
+
+      - name: Run mypy
+        run: mypy api/main.py
+
+  security-scan:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run TruffleHog secret scan
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+
+      - name: Run Bandit
+        run: |
+          pip install bandit[toml]
+          bandit -r api/ -f json -o bandit-report.json || true
+
+      - name: Run Safety check
+        run: |
+          pip install safety
+          safety check --json > safety-report.json || true
+
+      - name: Upload security reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: |
+            bandit-report.json
+            safety-report.json
+
+  frontend-tests:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run TypeScript check
+        run: npm run type-check || npx tsc --noEmit
+
+      - name: Run ESLint
+        run: npm run lint || npx eslint . --ext .ts,.tsx
+
+      - name: Build frontend
+        run: npm run build
+        continue-on-error: true
+
+  docker-build:
+    name: Docker Build Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build API image
+        run: |
+          docker build -f docker/Dockerfile.api -t stocktrade-api:test .
+
+      - name: Build Frontend image
+        run: |
+          docker build -f docker/Dockerfile.frontend -t stocktrade-frontend:test .
+        continue-on-error: true
+
+  notify-status:
+    name: Notify CI Status
+    runs-on: ubuntu-latest
+    needs: [backend-tests, lint-and-format, security-scan, frontend-tests, docker-build]
+    if: always()
+
+    steps:
+      - name: Check all jobs
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const jobs = {
+              'Backend Tests': '${{ needs.backend-tests.result }}',
+              'Lint and Format': '${{ needs.lint-and-format.result }}',
+              'Security Scan': '${{ needs.security-scan.result }}',
+              'Frontend Tests': '${{ needs.frontend-tests.result }}',
+              'Docker Build': '${{ needs.docker-build.result }}',
+            };
+
+            let summary = '## CI Pipeline Results\\n\\n';
+            let allPassed = true;
+
+            for (const [name, result] of Object.entries(jobs)) {
+              const emoji = result === 'success' ? '✅' : result === 'failure' ? '❌' : '⚠️';
+              summary += `${emoji} **${name}**: ${result}\\n`;
+              if (result !== 'success') allPassed = false;
+            }
+
+            if (context.eventName === 'pull_request') {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: summary + '\\n---\\n*Automated CI results*'
+              });
+            }

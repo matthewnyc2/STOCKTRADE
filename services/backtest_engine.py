@@ -124,7 +124,7 @@ def calculate_sortino_ratio(
         # No downside risk, infinite Sortino
         return float("inf")
 
-    downside_variance = sum(r ** 2 for r in negative_returns) / len(returns)
+    downside_variance = sum(r**2 for r in negative_returns) / len(returns)
     downside_deviation = math.sqrt(downside_variance)
 
     if downside_deviation == 0:
@@ -152,7 +152,7 @@ def calculate_max_drawdown(equity_curve: list[float]) -> float:
     if not equity_curve:
         return 0.0
 
-    max_dd = 0.0
+    max_dd = float("inf")
     peak = equity_curve[0]
 
     for value in equity_curve:
@@ -160,6 +160,8 @@ def calculate_max_drawdown(equity_curve: list[float]) -> float:
             peak = value
 
         drawdown = (value - peak) / peak if peak > 0 else 0
+        # Ensure drawdown is always negative (or 0)
+        drawdown = drawdown if drawdown <= 0 else 0
         max_dd = min(max_dd, drawdown)
 
     return max_dd
@@ -200,7 +202,9 @@ def calculate_profit_factor(trades: list[dict[str, Any]]) -> Decimal:
         return Decimal("0")
 
     gross_profit = sum(t.get("pnl", Decimal("0")) for t in trades if t.get("pnl", Decimal("0")) > 0)
-    gross_loss = abs(sum(t.get("pnl", Decimal("0")) for t in trades if t.get("pnl", Decimal("0")) < 0))
+    gross_loss = abs(
+        sum(t.get("pnl", Decimal("0")) for t in trades if t.get("pnl", Decimal("0")) < 0)
+    )
 
     if gross_loss == 0:
         return Decimal(str(float("inf")))
@@ -335,7 +339,11 @@ class BacktestEngine:
             # Check if we have an open position
             if open_position:
                 # Get the signal type as value string for comparison
-                signal_value = signal.signal_type.value.upper() if isinstance(signal.signal_type, SignalType) else str(signal.signal_type).upper()
+                signal_value = (
+                    signal.signal_type.value.upper()
+                    if isinstance(signal.signal_type, SignalType)
+                    else str(signal.signal_type).upper()
+                )
                 position_side = str(open_position.side).upper()
 
                 # Check for exit signal
@@ -376,7 +384,10 @@ class BacktestEngine:
                     position_value = close_price * open_position.quantity
                 else:  # SHORT
                     # For short, value is cash + (entry - current) * quantity
-                    position_value = open_position.entry_price * open_position.quantity + (open_position.entry_price - close_price) * open_position.quantity
+                    position_value = (
+                        open_position.entry_price * open_position.quantity
+                        + (open_position.entry_price - close_price) * open_position.quantity
+                    )
                 current_equity += position_value
 
             # Calculate return for this period
@@ -388,7 +399,9 @@ class BacktestEngine:
             # Calculate drawdown (only negative values, 0 if at peak)
             peak_equity = max(ep.equity for ep in equity_curve)
             if peak_equity > 0:
-                drawdown = min(Decimal("0"), Decimal(str((current_equity - peak_equity) / peak_equity)))
+                drawdown = min(
+                    Decimal("0"), Decimal(str((current_equity - peak_equity) / peak_equity))
+                )
             else:
                 drawdown = Decimal("0")
 
@@ -404,7 +417,9 @@ class BacktestEngine:
         # Close any remaining position at end
         if open_position:
             final_price = Decimal(str(price_data[-1]["close"]))
-            trade = self._close_position(open_position, final_price, price_data[-1]["timestamp"], "END_OF_PERIOD")
+            trade = self._close_position(
+                open_position, final_price, price_data[-1]["timestamp"], "END_OF_PERIOD"
+            )
             trades.append(trade)
             cash += trade.pnl + (trade.entry_price * trade.quantity)
 
@@ -433,7 +448,9 @@ class BacktestEngine:
             final_capital=final_capital,
             total_return=Decimal(str(total_return)).quantize(Decimal("0.0001")),
             sharpe_ratio=Decimal(str(sharpe)) if sharpe is not None else None,
-            sortino_ratio=Decimal(str(sortino)) if sortino is not None and not math.isinf(sortino) else None,
+            sortino_ratio=Decimal(str(sortino))
+            if sortino is not None and not math.isinf(sortino)
+            else None,
             max_drawdown=Decimal(str(max_dd)).quantize(Decimal("0.0001")),
             win_rate=win_rate,
             profit_factor=profit_factor if not math.isinf(float(profit_factor)) else None,
