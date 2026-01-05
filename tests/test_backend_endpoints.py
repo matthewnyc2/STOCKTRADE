@@ -84,7 +84,7 @@ class TestAuthEndpoints:
 
     def test_demo_login_success(self):
         """Test demo login endpoint returns tokens"""
-        response = client.get("/api/v1/auth/demo")
+        response = client.get("/api/auth/demo")
         assert response.status_code in [200, 401]  # May work or need auth
         if response.status_code == 200:
             data = response.json()
@@ -94,7 +94,7 @@ class TestAuthEndpoints:
     def test_login_with_credentials(self):
         """Test login with email and password"""
         response = client.post(
-            "/api/v1/auth/login",
+            "/api/auth/login",
             json={"email": "test@example.com", "password": "testpass"}
         )
         # May fail without user setup - just check endpoint exists
