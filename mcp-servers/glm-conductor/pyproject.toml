@@ -1,0 +1,11 @@
+[project]
+name = "glm-conductor-mcp"
+version = "1.0.0"
+description = "MCP server for GLM 4.7 Max conductor orchestration"
+dependencies = [
+    "mcp>=0.1.0",
+    "httpx>=0.27.0"
+]
+
+[project.scripts]
+glm-conductor = "server:main"

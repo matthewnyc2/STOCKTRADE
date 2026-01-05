@@ -1,0 +1,102 @@
+{
+  "currentIndex": -1,
+  "currentView": null,
+  "modalSettings": {
+    "assistant": false,
+    "assistantId": "",
+    "model": "gpt-3.5-turbo",
+    "modelName": "ChatGPT-3.5 turbo",
+    "modelType": "openAI",
+    "modelEndpoint": "chat",
+    "endpointURL": "/chat/completions",
+    "historyIndex": -1,
+    "imageSettings": {
+      "numberOfImages": 1,
+      "response_format": "url",
+      "size": "1024x1024",
+      "style": "vivid",
+      "quality": "standard"
+    },
+    "chatSettings": {
+      "maxTokens": 300,
+      "temperature": 0.65,
+      "GPT4All": {},
+      "openAI": {
+        "frequencyPenalty": 0,
+        "logProbs": false,
+        "topLogProbs": null,
+        "presencePenalty": 0,
+        "responseFormat": "",
+        "topP": 1
+      }
+    }
+  },
+  "widgetSettings": {
+    "assistant": false,
+    "assistantId": "",
+    "model": "gpt-3.5-turbo",
+    "modelName": "ChatGPT-3.5 turbo",
+    "modelType": "openAI",
+    "modelEndpoint": "chat",
+    "endpointURL": "/chat/completions",
+    "historyIndex": -1,
+    "imageSettings": {
+      "numberOfImages": 1,
+      "response_format": "url",
+      "size": "1024x1024",
+      "style": "vivid",
+      "quality": "standard"
+    },
+    "chatSettings": {
+      "maxTokens": 300,
+      "temperature": 0.65,
+      "GPT4All": {},
+      "openAI": {
+        "frequencyPenalty": 0,
+        "logProbs": false,
+        "topLogProbs": null,
+        "presencePenalty": 0,
+        "responseFormat": "",
+        "topP": 1
+      }
+    }
+  },
+  "fabSettings": {
+    "assistant": false,
+    "assistantId": "",
+    "model": "gpt-3.5-turbo",
+    "modelName": "ChatGPT-3.5 turbo",
+    "modelType": "openAI",
+    "modelEndpoint": "chat",
+    "endpointURL": "/chat/completions",
+    "historyIndex": -1,
+    "imageSettings": {
+      "numberOfImages": 1,
+      "response_format": "url",
+      "size": "1024x1024",
+      "style": "vivid",
+      "quality": "standard"
+    },
+    "chatSettings": {
+      "maxTokens": 300,
+      "temperature": 0.65,
+      "GPT4All": {},
+      "openAI": {
+        "frequencyPenalty": 0,
+        "logProbs": false,
+        "topLogProbs": null,
+        "presencePenalty": 0,
+        "responseFormat": "",
+        "topP": 1
+      }
+    }
+  },
+  "promptHistory": [],
+  "assistants": [],
+  "openAIAPIKey": "",
+  "claudeAPIKey": "",
+  "geminiAPIKey": "",
+  "GPT4AllStreaming": false,
+  "showFAB": false,
+  "defaultModel": ""
+}

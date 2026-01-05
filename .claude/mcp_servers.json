@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "phoenix-conductor": {
+      "command": "python",
+      "args": [
+        "C:\\Users\\matt\\Dropbox\\projects\\STOCKTRADE\\mcp-servers\\phoenix-conductor\\server.py"
+      ],
+      "env": {
+        "PYTHONPATH": "C:\\Users\\matt\\Dropbox\\projects\\STOCKTRADE\\mcp-servers\\phoenix-conductor"
+      }
+    }
+  }
+}

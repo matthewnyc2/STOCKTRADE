@@ -52,14 +52,14 @@ class EquityPointModel(BaseModel):
     drawdown: Mapped[float] = mapped_column(Numeric(precision=10, scale=4))
 
 
-class TradeModel(BaseModel):
+class BacktestTradeModel(BaseModel):
     """
-    SQLAlchemy model for individual trades.
+    SQLAlchemy model for individual backtest trades.
 
     Represents a single completed trade from backtesting.
     """
 
-    __tablename__ = "trades"
+    __tablename__ = "backtest_trades"
 
     id: Mapped[str] = mapped_column(String(50), primary_key=True)
     symbol: Mapped[str] = mapped_column(String(50))

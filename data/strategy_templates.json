@@ -1,0 +1,513 @@
+{
+  "templates": [
+    {
+      "id": "sma_crossover",
+      "name": "SMA Crossover",
+      "category": "trend_following",
+      "description": "Simple moving average crossover strategy. Generates LONG signals when fast SMA crosses above slow SMA, and SHORT signals when crossing below.",
+      "difficulty": "beginner",
+      "parameters": {
+        "indicator_type": "ma_crossover",
+        "fast_period": 20,
+        "slow_period": 50
+      },
+      "layers": [
+        {
+          "id": "sma_layer",
+          "layer_order": 0,
+          "weight": 1.0,
+          "config": {
+            "indicator_type": "ma_crossover",
+            "fast_period": 20,
+            "slow_period": 50
+          }
+        }
+      ],
+      "default_config": {
+        "name": "SMA Crossover (20/50)",
+        "symbol": "BTC/USDT",
+        "status": "draft"
+      },
+      "game_mode_metadata": {
+        "display_name": "Golden Cross",
+        "stars": 2,
+        "flavor_text": "The classic trend follower - catch the big waves!",
+        "emoji": "🌊"
+      },
+      "pro_mode_metadata": {
+        "technical_name": "Simple Moving Average Crossover",
+        "category": "Trend Following",
+        "complexity": "Basic"
+      },
+      "backtest_metrics": {
+        "total_return": 0.245,
+        "sharpe_ratio": 1.2,
+        "max_drawdown": -0.18,
+        "win_rate": 0.52,
+        "profit_factor": 1.8,
+        "total_trades": 124
+      }
+    },
+    {
+      "id": "rsi_overbought_oversold",
+      "name": "RSI Overbought/Oversold",
+      "category": "mean_reversion",
+      "description": "RSI mean reversion strategy. Generates LONG signals when RSI is oversold (<30) and SHORT signals when overbought (>70).",
+      "difficulty": "beginner",
+      "parameters": {
+        "indicator_type": "rsi",
+        "oversold_threshold": 30.0,
+        "overbought_threshold": 70.0
+      },
+      "layers": [
+        {
+          "id": "rsi_layer",
+          "layer_order": 0,
+          "weight": 1.0,
+          "config": {
+            "indicator_type": "rsi",
+            "oversold_threshold": 30.0,
+            "overbought_threshold": 70.0
+          }
+        }
+      ],
+      "default_config": {
+        "name": "RSI Mean Reversion (30/70)",
+        "symbol": "ETH/USDT",
+        "status": "draft"
+      },
+      "game_mode_metadata": {
+        "display_name": "Rubber Band",
+        "stars": 1,
+        "flavor_text": "What goes down must come up - bounce back from extremes!",
+        "emoji": "🎯"
+      },
+      "pro_mode_metadata": {
+        "technical_name": "RSI Mean Reversion",
+        "category": "Mean Reversion",
+        "complexity": "Basic"
+      },
+      "backtest_metrics": {
+        "total_return": 0.156,
+        "sharpe_ratio": 0.9,
+        "max_drawdown": -0.22,
+        "win_rate": 0.58,
+        "profit_factor": 1.4,
+        "total_trades": 89
+      }
+    },
+    {
+      "id": "breakout",
+      "name": "Breakout",
+      "category": "momentum",
+      "description": "Price breakout strategy using Bollinger Bands. Generates LONG signals when price breaks above upper band, SHORT when below lower band.",
+      "difficulty": "beginner",
+      "parameters": {
+        "indicator_type": "bollinger_breakout",
+        "period": 20,
+        "std_multiplier": 2.0
+      },
+      "layers": [
+        {
+          "id": "breakout_layer",
+          "layer_order": 0,
+          "weight": 1.0,
+          "config": {
+            "indicator_type": "bollinger_breakout",
+            "period": 20,
+            "std_multiplier": 2.0
+          }
+        }
+      ],
+      "default_config": {
+        "name": "Bollinger Breakout (20, 2std)",
+        "symbol": "SOL/USDT",
+        "status": "draft"
+      },
+      "game_mode_metadata": {
+        "display_name": "Breakout King",
+        "stars": 2,
+        "flavor_text": "Ride the momentum when price breaks free!",
+        "emoji": "🚀"
+      },
+      "pro_mode_metadata": {
+        "technical_name": "Bollinger Band Breakout",
+        "category": "Momentum",
+        "complexity": "Basic"
+      },
+      "backtest_metrics": {
+        "total_return": 0.312,
+        "sharpe_ratio": 1.4,
+        "max_drawdown": -0.25,
+        "win_rate": 0.48,
+        "profit_factor": 2.1,
+        "total_trades": 67
+      }
+    },
+    {
+      "id": "macd_signal",
+      "name": "MACD Signal",
+      "category": "trend_following",
+      "description": "MACD crossover strategy with histogram confirmation. Generates signals based on MACD line crossing the signal line.",
+      "difficulty": "intermediate",
+      "parameters": {
+        "indicator_type": "macd",
+        "fast_period": 12,
+        "slow_period": 26,
+        "signal_period": 9
+      },
+      "layers": [
+        {
+          "id": "macd_layer",
+          "layer_order": 0,
+          "weight": 1.0,
+          "config": {
+            "indicator_type": "macd",
+            "fast_period": 12,
+            "slow_period": 26,
+            "signal_period": 9
+          }
+        }
+      ],
+      "default_config": {
+        "name": "MACD Signal (12/26/9)",
+        "symbol": "BTC/USDT",
+        "status": "draft"
+      },
+      "game_mode_metadata": {
+        "display_name": "Momentum Master",
+        "stars": 3,
+        "flavor_text": "Follow the momentum with MACD precision!",
+        "emoji": "📈"
+      },
+      "pro_mode_metadata": {
+        "technical_name": "MACD Crossover",
+        "category": "Trend Following",
+        "complexity": "Intermediate"
+      },
+      "backtest_metrics": {
+        "total_return": 0.287,
+        "sharpe_ratio": 1.5,
+        "max_drawdown": -0.15,
+        "win_rate": 0.55,
+        "profit_factor": 2.0,
+        "total_trades": 98
+      }
+    },
+    {
+      "id": "bollinger_mean_reversion",
+      "name": "Bollinger Band Mean Reversion",
+      "category": "mean_reversion",
+      "description": "Mean reversion strategy using Bollinger Bands. Generates LONG signals at lower band, SHORT at upper band.",
+      "difficulty": "intermediate",
+      "parameters": {
+        "indicator_type": "bollinger_mean_reversion",
+        "period": 20,
+        "std_multiplier": 2.0
+      },
+      "layers": [
+        {
+          "id": "bb_reversion_layer",
+          "layer_order": 0,
+          "weight": 1.0,
+          "config": {
+            "indicator_type": "bollinger_mean_reversion",
+            "period": 20,
+            "std_multiplier": 2.0
+          }
+        }
+      ],
+      "default_config": {
+        "name": "BB Mean Reversion (20, 2std)",
+        "symbol": "ETH/USDT",
+        "status": "draft"
+      },
+      "game_mode_metadata": {
+        "display_name": "Band Bounce",
+        "stars": 3,
+        "flavor_text": "Buy low, sell high - the classic reversion play!",
+        "emoji": "🔄"
+      },
+      "pro_mode_metadata": {
+        "technical_name": "Bollinger Band Mean Reversion",
+        "category": "Mean Reversion",
+        "complexity": "Intermediate"
+      },
+      "backtest_metrics": {
+        "total_return": 0.198,
+        "sharpe_ratio": 1.3,
+        "max_drawdown": -0.12,
+        "win_rate": 0.62,
+        "profit_factor": 1.9,
+        "total_trades": 145
+      }
+    },
+    {
+      "id": "volume_price_trend",
+      "name": "Volume Price Trend",
+      "category": "momentum",
+      "description": "Combines price momentum with volume confirmation using OBV and EMAs. Requires volume confirmation for signal validity.",
+      "difficulty": "intermediate",
+      "parameters": {
+        "indicator_type": "vpt",
+        "fast_ema": 12,
+        "slow_ema": 26
+      },
+      "layers": [
+        {
+          "id": "ema_layer",
+          "layer_order": 0,
+          "weight": 0.6,
+          "config": {
+            "indicator_type": "ma_crossover",
+            "fast_period": 12,
+            "slow_period": 26
+          }
+        },
+        {
+          "id": "volume_layer",
+          "layer_order": 1,
+          "weight": 0.4,
+          "config": {
+            "indicator_type": "volume_confirmation",
+            "threshold": 1.5
+          }
+        }
+      ],
+      "default_config": {
+        "name": "Volume Price Trend",
+        "symbol": "BNB/USDT",
+        "status": "draft",
+        "logic_gate": "and"
+      },
+      "game_mode_metadata": {
+        "display_name": "Volume Rider",
+        "stars": 3,
+        "flavor_text": "Follow the smart money - volume doesn't lie!",
+        "emoji": "💰"
+      },
+      "pro_mode_metadata": {
+        "technical_name": "Volume-Confirmed Price Trend",
+        "category": "Momentum",
+        "complexity": "Intermediate"
+      },
+      "backtest_metrics": {
+        "total_return": 0.267,
+        "sharpe_ratio": 1.6,
+        "max_drawdown": -0.14,
+        "win_rate": 0.57,
+        "profit_factor": 2.2,
+        "total_trades": 76
+      }
+    },
+    {
+      "id": "multi_timeframe_momentum",
+      "name": "Multi-Timeframe Momentum",
+      "category": "trend_following",
+      "description": "Combines signals from multiple timeframes for higher confidence. Requires alignment across 15m, 1h, and 4h timeframes.",
+      "difficulty": "advanced",
+      "parameters": {
+        "indicator_type": "multi_timeframe",
+        "timeframes": ["15m", "1h", "4h"],
+        "min_alignment": 2
+      },
+      "layers": [
+        {
+          "id": "m15_layer",
+          "layer_order": 0,
+          "weight": 0.25,
+          "config": {
+            "indicator_type": "ma_crossover",
+            "fast_period": 9,
+            "slow_period": 21,
+            "timeframe": "15m"
+          }
+        },
+        {
+          "id": "h1_layer",
+          "layer_order": 1,
+          "weight": 0.35,
+          "config": {
+            "indicator_type": "ma_crossover",
+            "fast_period": 12,
+            "slow_period": 26,
+            "timeframe": "1h"
+          }
+        },
+        {
+          "id": "h4_layer",
+          "layer_order": 2,
+          "weight": 0.40,
+          "config": {
+            "indicator_type": "ma_crossover",
+            "fast_period": 20,
+            "slow_period": 50,
+            "timeframe": "4h"
+          }
+        }
+      ],
+      "default_config": {
+        "name": "Multi-TF Momentum",
+        "symbol": "BTC/USDT",
+        "status": "draft",
+        "logic_gate": "weighted"
+      },
+      "game_mode_metadata": {
+        "display_name": "Time Lord",
+        "stars": 4,
+        "flavor_text": "Master of time and space - trade across dimensions!",
+        "emoji": "⏰"
+      },
+      "pro_mode_metadata": {
+        "technical_name": "Multi-Timeframe Alignment",
+        "category": "Trend Following",
+        "complexity": "Advanced"
+      },
+      "backtest_metrics": {
+        "total_return": 0.389,
+        "sharpe_ratio": 1.9,
+        "max_drawdown": -0.11,
+        "win_rate": 0.63,
+        "profit_factor": 2.8,
+        "total_trades": 54
+      }
+    },
+    {
+      "id": "whale_following",
+      "name": "Whale Following Strategy",
+      "category": "sentiment",
+      "description": "Follow large whale transactions for momentum signals. Combines whale activity detection with trend confirmation.",
+      "difficulty": "advanced",
+      "parameters": {
+        "indicator_type": "whale_following",
+        "whale_threshold": 1000000,
+        "trend_confirmation": true
+      },
+      "layers": [
+        {
+          "id": "whale_layer",
+          "layer_order": 0,
+          "weight": 0.5,
+          "config": {
+            "indicator_type": "whale_detection",
+            "threshold_usd": 1000000
+          }
+        },
+        {
+          "id": "trend_layer",
+          "layer_order": 1,
+          "weight": 0.3,
+          "config": {
+            "indicator_type": "ma_crossover",
+            "fast_period": 12,
+            "slow_period": 26
+          }
+        },
+        {
+          "id": "momentum_layer",
+          "layer_order": 2,
+          "weight": 0.2,
+          "config": {
+            "indicator_type": "rsi",
+            "oversold_threshold": 40,
+            "overbought_threshold": 60
+          }
+        }
+      ],
+      "default_config": {
+        "name": "Whale Follower",
+        "symbol": "BTC/USDT",
+        "status": "draft",
+        "logic_gate": "and"
+      },
+      "game_mode_metadata": {
+        "display_name": "Whale Hunter",
+        "stars": 5,
+        "flavor_text": "Follow the whales - ride their waves to profit!",
+        "emoji": "🐋"
+      },
+      "pro_mode_metadata": {
+        "technical_name": "Whale Activity Following",
+        "category": "Sentiment",
+        "complexity": "Advanced"
+      },
+      "backtest_metrics": {
+        "total_return": 0.421,
+        "sharpe_ratio": 2.1,
+        "max_drawdown": -0.09,
+        "win_rate": 0.67,
+        "profit_factor": 3.2,
+        "total_trades": 41
+      }
+    },
+    {
+      "id": "liquidation_cascade",
+      "name": "Liquidation Cascade Trading",
+      "category": "event_driven",
+      "description": "Capitalize on liquidation cascade events. Detects cascading liquidations and trades the resulting price dislocations.",
+      "difficulty": "advanced",
+      "parameters": {
+        "indicator_type": "liquidation_cascade",
+        "cascade_threshold": 5000000,
+        "lookback_minutes": 15,
+        "exit_after_minutes": 30
+      },
+      "layers": [
+        {
+          "id": "cascade_detection_layer",
+          "layer_order": 0,
+          "weight": 0.5,
+          "config": {
+            "indicator_type": "cascade_detection",
+            "threshold_usd": 5000000,
+            "window_minutes": 5
+          }
+        },
+        {
+          "id": "price_dislocation_layer",
+          "layer_order": 1,
+          "weight": 0.3,
+          "config": {
+            "indicator_type": "price_dislocation",
+            "atr_multiplier": 2.0
+          }
+        },
+        {
+          "id": "momentum_layer",
+          "layer_order": 2,
+          "weight": 0.2,
+          "config": {
+            "indicator_type": "macd",
+            "fast_period": 12,
+            "slow_period": 26
+          }
+        }
+      ],
+      "default_config": {
+        "name": "Cascade Trader",
+        "symbol": "BTC/USDT",
+        "status": "draft",
+        "logic_gate": "and"
+      },
+      "game_mode_metadata": {
+        "display_name": "Cascade Rider",
+        "stars": 5,
+        "flavor_text": "Surf the liquidation waves - extreme profits!",
+        "emoji": "🌊"
+      },
+      "pro_mode_metadata": {
+        "technical_name": "Liquidation Cascade Trading",
+        "category": "Event-Driven",
+        "complexity": "Advanced"
+      },
+      "backtest_metrics": {
+        "total_return": 0.523,
+        "sharpe_ratio": 2.4,
+        "max_drawdown": -0.07,
+        "win_rate": 0.72,
+        "profit_factor": 4.1,
+        "total_trades": 28
+      }
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+name: Merge Queue
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [master, main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  queue-check:
+    name: Validate Merge Readiness
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check PR status
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+
+            const { data: checks } = await github.rest.checks.listForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: pr.head.sha,
+            });
+
+            // Check requirements
+            const hasApprovals = reviews.filter(r => r.state === 'APPROVED').length >= 1;
+            const checksPassing = checks.check_runs.filter(c => c.conclusion === 'failure').length === 0;
+            const hasCopilotReview = reviews.some(r => r.user.login.includes('copilot') || r.body.includes('copilot'));
+            const hasQReview = reviews.some(r => r.user.login.includes('amazon-q') || r.body.includes('Amazon Q'));
+
+            let summary = '## Merge Readiness Check\\n\\n';
+            summary += `| Requirement | Status |\\n`;
+            summary += `|-------------|--------|\\n`;
+            summary += `| ✅ Approval | ${hasApprovals ? 'Pass' : 'Fail'} |\\n`;
+            summary += `| ✅ CI Checks | ${checksPassing ? 'Pass' : 'Fail'} |\\n`;
+            summary += `| 🤖 Copilot Review | ${hasCopilotReview ? 'Complete' : 'Pending'} |\\n`;
+            summary += `| 🔍 Amazon Q Review | ${hasQReview ? 'Complete' : 'Pending'} |\\n`;
+
+            const readyToMerge = hasApprovals && checksPassing;
+            summary += `\\n**Status:** ${readyToMerge ? '✅ Ready to Merge' : '⚠️ Not Ready'}\\n`;
+
+            if (!hasCopilotReview && !hasQReview) {
+              summary += `\\n⚠️ **Missing AI Reviews** - Comment @copilot or /q to trigger reviews\\n`;
+            }
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: summary
+            });

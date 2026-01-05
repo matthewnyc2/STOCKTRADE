@@ -284,7 +284,11 @@ class Migration(BaseMigration):
         ]
 
         for table in tables:
-            conn.execute(text(f"DROP TABLE IF EXISTS {table}"))
-            conn.execute(text(f"DROP INDEX IF EXISTS idx_{table}"))
+            # Validate table name before using in SQL (prevent SQL injection)
+            if not table.replace("_", "").isalnum():
+                raise ValueError(f"Invalid table name: {table}")
+            # Use validated table names (safe because we validated)
+            conn.execute(text(f'DROP TABLE IF EXISTS "{table}"'))
+            conn.execute(text(f'DROP INDEX IF EXISTS "idx_{table}"'))
 
         conn.commit()

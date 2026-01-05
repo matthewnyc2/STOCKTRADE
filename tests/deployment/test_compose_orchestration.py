@@ -72,7 +72,8 @@ class TestComposeOrchestration:
         assert 'build' in backend, "Backend service missing build context"
         assert 'ports' in backend, "Backend service missing port mapping"
         assert 'environment' in backend, "Backend service missing environment variables"
-        assert depends_on := backend.get('depends_on', {}), "Backend service missing dependencies"
+        depends_on = backend.get('depends_on', {})
+        assert depends_on, "Backend service missing dependencies"
 
         # Check database service configuration
         database = compose_config['database']

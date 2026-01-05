@@ -27,12 +27,19 @@ class BaseModel(DeclarativeBase):
 
 
 # Import all models for easy access
-from database.models.strategy import StrategyModel, StrategyLayerModel
+from database.models.strategy import (
+    StrategyModel,
+    StrategyLayerModel,
+    StrategyFavoriteModel,
+    StrategyShareModel,
+    StrategyVersionModel,
+    RiskLevel,
+)
 from database.models.signal import SignalModel, LayerSignalModel
 from database.models.backtest import (
     BacktestResultModel,
     EquityPointModel,
-    TradeModel,
+    BacktestTradeModel,
 )
 from database.models.portfolio import PortfolioModel, PositionModel
 from database.models.whale import (
@@ -45,16 +52,28 @@ from database.models.settings import SettingsModel
 from database.models.ai_reasoning import AIReasoningSessionModel
 from database.models.price import PriceModel
 from database.models.liquidation import LiquidationModel, CascadeModel
+from database.models.market import (
+    CoinModel,
+    ExchangeModel,
+    MarketPairModel,
+    StoredPriceDataModel,
+    TradeModel,
+)
+from database.models.user import UserModel
 
 __all__ = [
     "BaseModel",
     "StrategyModel",
     "StrategyLayerModel",
+    "StrategyFavoriteModel",
+    "StrategyShareModel",
+    "StrategyVersionModel",
+    "RiskLevel",
     "SignalModel",
     "LayerSignalModel",
     "BacktestResultModel",
     "EquityPointModel",
-    "TradeModel",
+    "BacktestTradeModel",
     "PortfolioModel",
     "PositionModel",
     "WhaleModel",
@@ -66,4 +85,10 @@ __all__ = [
     "PriceModel",
     "LiquidationModel",
     "CascadeModel",
+    "CoinModel",
+    "ExchangeModel",
+    "MarketPairModel",
+    "StoredPriceDataModel",
+    "TradeModel",
+    "UserModel",
 ]

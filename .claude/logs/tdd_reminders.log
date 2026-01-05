@@ -754,3 +754,363 @@ Reminder shown
 2025-12-31T21:49:03.054345
 File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/settings/page.tsx
 Reminder shown
+
+2026-01-01T14:43:05.236051
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\api\onboarding.py
+Reminder shown
+
+2026-01-01T14:46:47.761566
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\setup\page.tsx
+Reminder shown
+
+2026-01-01T14:49:53.966145
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\hooks\use-api.ts
+Reminder shown
+
+2026-01-01T14:50:36.473909
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\hooks\use-websocket.ts
+Reminder shown
+
+2026-01-01T14:53:27.209194
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\core\response.py
+Reminder shown
+
+2026-01-01T14:53:46.501895
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\core\error_handlers.py
+Reminder shown
+
+2026-01-01T14:55:29.834095
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\api\auth.py
+Reminder shown
+
+2026-01-01T14:59:58.292378
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\lib\persistence\storage.ts
+Reminder shown
+
+2026-01-01T15:00:18.815270
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\contexts\AppContext.tsx
+Reminder shown
+
+2026-01-01T15:00:21.309454
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\laboratory\ModernLayout.tsx
+Reminder shown
+
+2026-01-01T15:00:50.823204
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\laboratory\ModernStrategyCard.tsx
+Reminder shown
+
+2026-01-01T15:01:59.992697
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\laboratory\modern-page.tsx
+Reminder shown
+
+2026-01-01T15:04:47.940012
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\laboratory\ModernStates.tsx
+Reminder shown
+
+2026-01-01T15:05:17.642288
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\laboratory\ModernStrategyDetailModal.tsx
+Reminder shown
+
+2026-01-01T15:05:50.905048
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\settings\api\page.tsx
+Reminder shown
+
+2026-01-01T15:05:55.068330
+File: C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/auth/login/page.tsx
+Reminder shown
+
+2026-01-01T15:06:51.607620
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/ModernFilters.tsx
+Reminder shown
+
+2026-01-01T15:06:55.925231
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\laboratory\ModernMyStrategiesList.tsx
+Reminder shown
+
+2026-01-01T15:06:57.089675
+File: C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/auth/register/page.tsx
+Reminder shown
+
+2026-01-01T15:07:03.070088
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/ModernActions.tsx
+Reminder shown
+
+2026-01-01T15:08:49.695010
+File: C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/app/alpha-lab/whales/[symbol]/page.tsx
+Reminder shown
+
+2026-01-01T15:09:33.817515
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/ModernActions.example.tsx
+Reminder shown
+
+2026-01-01T15:09:58.320974
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/ModernFilters.example.tsx
+Reminder shown
+
+2026-01-01T15:11:11.500273
+File: C:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/lib/auth.ts
+Reminder shown
+
+2026-01-01T15:12:35.934829
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/laboratory/ModernActionsShowcase.tsx
+Reminder shown
+
+2026-01-01T15:16:38.193758
+File: c:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\AuthInitializer.tsx
+Reminder shown
+
+2026-01-01T15:17:24.206177
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/dashboard/DashboardLayout.tsx
+Reminder shown
+
+2026-01-01T15:17:28.674755
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/dashboard/ModernCharts.tsx
+Reminder shown
+
+2026-01-01T15:18:25.513734
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/dashboard/ModernWidgets.tsx
+Reminder shown
+
+2026-01-01T15:19:33.258750
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\services\data_initializer.py
+Reminder shown
+
+2026-01-01T15:20:17.652909
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/dashboard/DashboardLayout.example.tsx
+Reminder shown
+
+2026-01-01T15:20:55.075024
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\services\exchange_sync.py
+Reminder shown
+
+2026-01-01T15:20:57.263500
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/dashboard/ModernCharts.demo.tsx
+Reminder shown
+
+2026-01-01T15:21:06.704693
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\models\market.py
+Reminder shown
+
+2026-01-01T15:21:14.945278
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\services\template_loader.py
+Reminder shown
+
+2026-01-01T15:21:49.962666
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\database\models\market.py
+Reminder shown
+
+2026-01-01T15:21:52.978565
+File: c:/Users/matt/Dropbox/projects/STOCKTRADE/frontend/src/components/dashboard/ModernWidgets.demo.tsx
+Reminder shown
+
+2026-01-01T15:21:58.540840
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\services\background_tasks.py
+Reminder shown
+
+2026-01-01T15:22:11.716967
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\api\templates.py
+Reminder shown
+
+2026-01-01T15:22:56.839560
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\database\repositories\market.py
+Reminder shown
+
+2026-01-01T15:22:57.676332
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\api\admin\data.py
+Reminder shown
+
+2026-01-01T15:23:11.137589
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\api\admin\__init__.py
+Reminder shown
+
+2026-01-01T15:23:22.071874
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\scripts\seed_templates.py
+Reminder shown
+
+2026-01-01T15:23:30.428809
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\scripts\__init__.py
+Reminder shown
+
+2026-01-01T15:23:49.740073
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\services\market_data_manager.py
+Reminder shown
+
+2026-01-01T15:24:29.316807
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\admin\markets\page.tsx
+Reminder shown
+
+2026-01-01T15:24:40.246792
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\api\markets.py
+Reminder shown
+
+2026-01-01T15:25:46.043213
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\services\strategy_manager.py
+Reminder shown
+
+2026-01-01T15:25:47.364516
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\admin\exchanges\page.tsx
+Reminder shown
+
+2026-01-01T15:26:08.380641
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\admin\data\page.tsx
+Reminder shown
+
+2026-01-01T15:27:33.716526
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\admin\strategies\page.tsx
+Reminder shown
+
+2026-01-01T15:28:33.700085
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\scripts\migrate_strategy_templates.py
+Reminder shown
+
+2026-01-01T15:30:41.561538
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\database\migrations\versions\add_market_tables.py
+Reminder shown
+
+2026-01-01T15:30:50.535427
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\data\seed_strategy_templates.py
+Reminder shown
+
+2026-01-01T15:31:27.474561
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\admin\layout.tsx
+Reminder shown
+
+2026-01-01T15:31:35.882589
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\database\seed_market_data.py
+Reminder shown
+
+2026-01-01T15:41:39.790822
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\hooks\use-gestures.ts
+Reminder shown
+
+2026-01-01T15:41:44.582414
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\public\sw.js
+Reminder shown
+
+2026-01-01T15:42:20.287053
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\next.config.js
+Reminder shown
+
+2026-01-01T15:42:37.610130
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\mobile\SwipeableCard.tsx
+Reminder shown
+
+2026-01-01T15:42:44.852235
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\services\exchange_adapters.py
+Reminder shown
+
+2026-01-01T15:43:30.771841
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\mobile\BottomSheet.tsx
+Reminder shown
+
+2026-01-01T15:43:48.593347
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\pwa\PWAInstaller.tsx
+Reminder shown
+
+2026-01-01T15:43:56.374300
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\pwa\OfflineIndicator.tsx
+Reminder shown
+
+2026-01-01T15:44:00.661789
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\services\data_quality.py
+Reminder shown
+
+2026-01-01T15:44:05.138797
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\mobile\PullToRefresh.tsx
+Reminder shown
+
+2026-01-01T15:44:05.309434
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\pwa\index.ts
+Reminder shown
+
+2026-01-01T15:44:45.867220
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\mobile\MobileDrawer.tsx
+Reminder shown
+
+2026-01-01T15:45:20.986746
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\app\offline\page.tsx
+Reminder shown
+
+2026-01-01T15:45:24.542291
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\pwa\PWAProvider.tsx
+Reminder shown
+
+2026-01-01T15:45:35.827321
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\mobile\TouchDropdown.tsx
+Reminder shown
+
+2026-01-01T15:45:44.838248
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\pwa\UpdateBanner.tsx
+Reminder shown
+
+2026-01-01T15:45:48.252641
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\components\mobile\index.ts
+Reminder shown
+
+2026-01-01T16:02:00.681565
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\public\icons\generate-icons.js
+Reminder shown
+
+2026-01-03T05:19:07.110567
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\claude_researcher.py
+Reminder shown
+
+2026-01-03T06:08:47.636102
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\mcp-servers\glm-conductor\server.py
+Reminder shown
+
+2026-01-03T06:09:11.682286
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\mcp-servers\codex-builder\server.py
+Reminder shown
+
+2026-01-03T08:10:19.156720
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\mcp-servers\phoenix-conductor\server.py
+Reminder shown
+
+2026-01-03T09:12:04.121737
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\orval.config.ts
+Reminder shown
+
+2026-01-03T09:12:16.935526
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\api\admin\routes.py
+Reminder shown
+
+2026-01-03T09:13:07.838200
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\services\data_pipeline.py
+Reminder shown
+
+2026-01-03T09:13:47.306522
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\services\multi_source_manager.py
+Reminder shown
+
+2026-01-03T09:14:40.188994
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\orval.config.ts
+Reminder shown
+
+2026-01-03T09:15:42.679948
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\scripts\export_openapi.py
+Reminder shown
+
+2026-01-03T09:15:53.086940
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\services\historical_data_manager.py
+Reminder shown
+
+2026-01-03T09:17:39.611434
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\orval.config.ts
+Reminder shown
+
+2026-01-03T09:18:02.747939
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\core\config.py
+Reminder shown
+
+2026-01-03T09:18:37.509174
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\scripts\create_openapi_spec.py
+Reminder shown
+
+2026-01-03T09:20:56.889378
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\api\generated\client.ts
+Reminder shown
+
+2026-01-03T09:21:20.816727
+File: C:\Users\matt\Dropbox\projects\STOCKTRADE\frontend\src\api\generated\index.ts
+Reminder shown

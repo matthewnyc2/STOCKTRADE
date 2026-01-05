@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(test:*)",
+      "Bash(pip install:*)",
+      "Bash(node public/icons/generate-icons.js:*)",
+      "Bash(npm install:*)",
+      "Bash(mkdir -p .phoenix:*)",
+      "Bash(mkdir -p .phoenix/architects_handoff:*)",
+      "Bash(mkdir -p .phoenix/architects:*)",
+      "Bash(mkdir -p .phoenix/conductors:*)",
+      "Bash(ls .phoenix:*)",
+      "Bash(pytest:*)",
+      "Bash(pytest -v:*)",
+      "Bash(python mcp-servers/phoenix-conductor/server.py:*)"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "ref",
+    "zen",
+    "vision",
+    "phoenix-conductor"
+  ]
+}

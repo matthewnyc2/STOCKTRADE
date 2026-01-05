@@ -1,0 +1,29 @@
+# Code Owners for STOCKTRADE Project
+# Format: <pattern> <github-username>
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default - all files require approval from
+* @matthewnyc2
+
+# Backend API
+/api/ @matthewnyc2
+
+# Core services and business logic
+/core/ @matthewnyc2
+/services/ @matthewnyc2
+
+# Data models
+/models/ @matthewnyc2
+
+# Frontend application
+/frontend/ @matthewnyc2
+
+# Database migrations
+/migrations/ @matthewnyc2
+
+# Deployment and infrastructure
+/docker/ @matthewnyc2
+.github/ @matthewnyc2
+
+# Tests - optional review
+/tests/ @matthewnyc2

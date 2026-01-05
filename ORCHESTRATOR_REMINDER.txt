@@ -1,0 +1,40 @@
+
+================================================================================
+TIMESTAMP: 2026-01-01 02:47:32
+
+ORCHESTRATOR CONTEXT REMINDER:
+
+PROJECT: Crypto Quant Laboratory
+GOAL: All tests passing through TDD execution
+
+YOUR JULES SESSIONS (10 total):
+1. Task 1: Fix WebSocket /ws/test endpoint
+2. Task 2: Create Binance API client
+3. Task 3: Create CoinGecko API client
+4. Task 4: Create HistoricalPrice model
+5. Task 5: Create trader tracking system
+6. Task 6: Create DataSourceManager
+7. Task 7: Verify foundation tests pass
+8. Task 8: Verify dashboard tests pass
+9. Task 9: Verify data acquisition tests pass
+10. Task 10: Fix deprecation warnings
+
+YOUR TASKS:
+1. Check Jules session status (use curl API)
+2. Run tests: ./venv/Scripts/python.exe -m pytest tests/ -v
+3. Report progress: X/Y tests passing
+4. If all sessions COMPLETED and all tests pass: REPORT MISSION COMPLETE
+
+CHECK JULES SESSIONS NOW!
+
+
+CURRENT STATUS:
+- Jules Sessions Active: 0
+- Check session states at: https://jules.google.com
+
+ACTION REQUIRED:
+1. Check Jules session progress
+2. Run tests
+3. Report status
+
+================================================================================

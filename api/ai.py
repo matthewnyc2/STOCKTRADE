@@ -5,6 +5,7 @@ Endpoints for AI-powered market analysis, signal reasoning, and risk assessment
 with GLM-4.7 integration and preserved thinking.
 """
 
+import logging
 from typing import Any, AsyncGenerator, Dict, List, Optional
 
 from fastapi import APIRouter, HTTPException, Query, status
@@ -13,6 +14,8 @@ from pydantic import BaseModel
 
 from core.websocket import get_websocket_manager
 from services.ai_reasoning import get_ai_reasoning_engine
+
+logger = logging.getLogger(__name__)
 
 
 router = APIRouter(prefix="/ai", tags=["ai"])

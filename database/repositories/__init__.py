@@ -4,7 +4,13 @@ Repository implementations for database operations.
 Each domain has its own repository inheriting from BaseRepository.
 """
 
-from database.repositories.strategy import StrategyRepository, StrategyLayerRepository
+from database.repositories.strategy import (
+    StrategyRepository,
+    StrategyLayerRepository,
+    StrategyFavoriteRepository,
+    StrategyShareRepository,
+    StrategyVersionRepository,
+)
 from database.repositories.signal import SignalRepository, LayerSignalRepository
 from database.repositories.backtest import (
     BacktestResultRepository,
@@ -24,10 +30,20 @@ from database.repositories.liquidation import (
     LiquidationRepository,
     CascadeRepository,
 )
+from database.repositories.market import (
+    CoinRepository,
+    ExchangeRepository,
+    MarketPairRepository,
+    StoredPriceDataRepository,
+)
+from database.repositories.user import UserRepository
 
 __all__ = [
     "StrategyRepository",
     "StrategyLayerRepository",
+    "StrategyFavoriteRepository",
+    "StrategyShareRepository",
+    "StrategyVersionRepository",
     "SignalRepository",
     "LayerSignalRepository",
     "BacktestResultRepository",
@@ -43,4 +59,9 @@ __all__ = [
     "AIReasoningSessionRepository",
     "LiquidationRepository",
     "CascadeRepository",
+    "CoinRepository",
+    "ExchangeRepository",
+    "MarketPairRepository",
+    "StoredPriceDataRepository",
+    "UserRepository",
 ]
