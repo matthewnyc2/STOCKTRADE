@@ -20,10 +20,11 @@ from models import (
     TrainingProgressResponse,
     TrainingRequest,
 )
-from services.ml_factory import (
+from services.ml import (
     FeatureEngine,
     MLFactory,
     PredictionResult,
+    PredictionType,
     TrainingConfig,
     get_ml_factory,
 )
@@ -78,9 +79,7 @@ async def get_ml_model(model_id: str) -> MLModel:
         HTTPException: If model not found.
     """
     with get_db_context() as session:
-        model = session.query(MLModelModel).filter(
-            MLModelModel.id == model_id
-        ).first()
+        model = session.query(MLModelModel).filter(MLModelModel.id == model_id).first()
 
         if model is None:
             raise HTTPException(
@@ -192,9 +191,15 @@ async def generate_prediction(model_id: str, request: PredictionRequest) -> dict
         with get_db_context() as session:
             from database.models import PriceModel
 
-            prices = session.query(PriceModel).filter(
-                PriceModel.symbol == request.symbol,
-            ).order_by(PriceModel.timestamp.desc()).limit(request.lookback_periods).all()
+            prices = (
+                session.query(PriceModel)
+                .filter(
+                    PriceModel.symbol == request.symbol,
+                )
+                .order_by(PriceModel.timestamp.desc())
+                .limit(request.lookback_periods)
+                .all()
+            )
 
             if not prices:
                 raise HTTPException(
@@ -253,9 +258,7 @@ async def deploy_model(model_id: str) -> MLModel:
         HTTPException: If model not found or not ready.
     """
     with get_db_context() as session:
-        model = session.query(MLModelModel).filter(
-            MLModelModel.id == model_id
-        ).first()
+        model = session.query(MLModelModel).filter(MLModelModel.id == model_id).first()
 
         if model is None:
             raise HTTPException(
@@ -294,9 +297,7 @@ async def undeploy_model(model_id: str) -> MLModel:
         HTTPException: If model not found.
     """
     with get_db_context() as session:
-        model = session.query(MLModelModel).filter(
-            MLModelModel.id == model_id
-        ).first()
+        model = session.query(MLModelModel).filter(MLModelModel.id == model_id).first()
 
         if model is None:
             raise HTTPException(
@@ -326,9 +327,7 @@ async def delete_ml_model(model_id: str) -> None:
         HTTPException: If model not found.
     """
     with get_db_context() as session:
-        model = session.query(MLModelModel).filter(
-            MLModelModel.id == model_id
-        ).first()
+        model = session.query(MLModelModel).filter(MLModelModel.id == model_id).first()
 
         if model is None:
             raise HTTPException(

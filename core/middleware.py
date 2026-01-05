@@ -1,13 +1,14 @@
 """
 Middleware for Crypto Quant Laboratory.
 
-Provides CORS, error handling, and request logging middleware.
+Provides CORS, error handling, request logging, and response wrapping middleware.
 """
 
 import logging
 import os
 import time
 import traceback
+from datetime import datetime, timezone
 from typing import Any, Callable
 
 from fastapi import Request, Response, status
@@ -17,6 +18,15 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.types import ASGIApp
 
 from core.security import create_rate_limit_middleware
+from core.error_handlers import (
+    setup_error_handlers,
+    NotFoundException,
+    BadRequestException,
+    UnauthorizedException,
+    ForbiddenException,
+    ConflictException,
+    ValidationException,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -24,7 +34,7 @@ logger = logging.getLogger(__name__)
 
 class ErrorResponse(JSONResponse):
     """
-    Standardized error response format.
+    Standardized error response format matching API contract.
 
     Ensures consistent error responses across the API.
     """
@@ -34,7 +44,7 @@ class ErrorResponse(JSONResponse):
         detail: str,
         status_code: int = status.HTTP_500_INTERNAL_SERVER_ERROR,
         error_code: str | None = None,
-        context: dict[str, Any] | None = None,
+        details: Any = None,
     ) -> None:
         """
         Create an error response.
@@ -43,18 +53,17 @@ class ErrorResponse(JSONResponse):
             detail: Human-readable error message
             status_code: HTTP status code
             error_code: Machine-readable error code
-            context: Additional context about the error
+            details: Additional details about the error
         """
         content = {
             "success": False,
             "error": {
-                "message": detail,
                 "code": error_code or "INTERNAL_ERROR",
+                "message": detail,
+                "details": details,
+                "timestamp": datetime.now(timezone.utc).isoformat() + "Z",
             },
         }
-
-        if context:
-            content["error"]["context"] = context
 
         super().__init__(content=content, status_code=status_code)
 
@@ -189,9 +198,7 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
         except Exception as e:
             duration = time.time() - start_time
             logger.error(
-                f"Request failed: {method} {url} - "
-                f"Error: {str(e)} - "
-                f"Duration: {duration:.3f}s"
+                f"Request failed: {method} {url} - Error: {str(e)} - Duration: {duration:.3f}s"
             )
             raise
 
@@ -229,19 +236,28 @@ def setup_middleware(app) -> None:
     Args:
         app: The FastAPI application
     """
+    # Set up exception handlers first
+    setup_error_handlers(app)
+
     # CORS must be added first
     setup_cors(app)
 
     # Security headers (add second to last)
     from core.security import SecurityHeadersMiddleware
+
     app.add_middleware(SecurityHeadersMiddleware)
 
     # Rate limiting (add before security but after CORS)
     rate_limit_middleware = create_rate_limit_middleware(
         max_requests=int(os.getenv("RATE_LIMIT_MAX_REQUESTS", "100")),
-        window_seconds=int(os.getenv("RATE_LIMIT_WINDOW_SECONDS", "60"))
+        window_seconds=int(os.getenv("RATE_LIMIT_WINDOW_SECONDS", "60")),
     )
     app.add_middleware(rate_limit_middleware)
+
+    # Response wrapper middleware (wrap JSON responses)
+    from core.response import ResponseWrapperMiddleware
+
+    app.add_middleware(ResponseWrapperMiddleware)
 
     # Error handler (catches exceptions)
     app.add_middleware(ErrorHandlerMiddleware)

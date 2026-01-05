@@ -88,6 +88,100 @@ async def list_signals(
         return [model_to_signal(s) for s in signals]
 
 
+@router.get("/latest", response_model=list[Signal])
+async def get_latest_signals(
+    strategy_id: str | None = None,
+    symbol: str | None = None,
+    min_confidence: float | None = None,
+    signal_type: SignalType | None = None,
+    limit: int = 20,
+) -> list[Signal]:
+    """
+    Get the latest signals across all strategies.
+
+    Args:
+        strategy_id: Optional filter by strategy ID.
+        symbol: Optional filter by trading symbol.
+        min_confidence: Optional minimum confidence threshold (0-1).
+        signal_type: Optional filter by signal type.
+        limit: Maximum number of results.
+
+    Returns:
+        List[Signal]: List of latest signals.
+    """
+    with get_db_session() as session:
+        repo = SignalRepository(session)
+
+        # Get recent signals
+        signals = repo.get_recent(hours=24, limit=limit * 2)
+
+        # Apply filters
+        if strategy_id:
+            signals = [s for s in signals if s.strategy_id == strategy_id]
+        if symbol:
+            signals = [s for s in signals if s.symbol == symbol.upper()]
+        if signal_type:
+            signals = [s for s in signals if s.signal_type == signal_type.value]
+        if min_confidence is not None:
+            signals = [s for s in signals if s.confidence >= min_confidence]
+
+        # Sort by timestamp descending and limit
+        signals = sorted(signals, key=lambda s: s.timestamp, reverse=True)[:limit]
+
+        return [model_to_signal(s) for s in signals]
+
+
+@router.get("/history")
+async def get_signal_history(
+    symbol: str,
+    start_date: str | None = None,
+    end_date: str | None = None,
+    limit: int = 100,
+) -> list[Signal]:
+    """
+    Get signal history for a specific symbol.
+
+    Args:
+        symbol: The trading symbol.
+        start_date: Optional start date (ISO format).
+        end_date: Optional end date (ISO format).
+        limit: Maximum number of results.
+
+    Returns:
+        List[Signal]: Historical signals for the symbol.
+    """
+    from datetime import datetime
+
+    with get_db_session() as session:
+        repo = SignalRepository(session)
+
+        # Get signals by symbol
+        signals = repo.get_by_symbol(symbol.upper(), limit)
+
+        # Filter by date range if provided
+        if start_date or end_date:
+            try:
+                start_dt = datetime.fromisoformat(start_date) if start_date else None
+                end_dt = datetime.fromisoformat(end_date) if end_date else None
+
+                filtered = []
+                for s in signals:
+                    sig_dt = s.timestamp
+                    if start_dt and sig_dt < start_dt:
+                        continue
+                    if end_dt and sig_dt > end_dt:
+                        continue
+                    filtered.append(s)
+                signals = filtered
+            except ValueError:
+                pass  # Invalid date format, return all signals
+
+        # Sort by timestamp descending
+        signals = sorted(signals, key=lambda s: s.timestamp, reverse=True)
+
+        return [model_to_signal(s) for s in signals]
+
+
 @router.get("/live")
 async def stream_live_signals():
     """

@@ -16,7 +16,7 @@ sys.path.append(str(Path(__file__).parent.parent))
 
 from database.connection import init_db, get_db_context
 from sqlalchemy import text
-from models.base import Base
+from database.base import BaseModel as Base
 
 # Configure logging
 logging.basicConfig(
@@ -57,28 +57,34 @@ class DatabaseMigrator:
         """Create the migrations tracking table if it doesn't exist."""
         logger.info("Creating migrations table...")
 
+        # Validate migrations table name (prevent SQL injection)
+        if not self.migrations_table.replace("_", "").isalnum():
+            raise ValueError(f"Invalid migrations table name: {self.migrations_table}")
+
         with get_db_context() as session:
-            # Check if table exists
+            # Check if table exists - use parameterized query
             result = session.execute(
                 text("""
                 SELECT EXISTS (
                     SELECT FROM information_schema.tables
                     WHERE table_schema = 'public'
-                    AND table_name = '{}'
+                    AND table_name = :table_name
                 )
-                """.format(self.migrations_table))
+                """),
+                {"table_name": self.migrations_table}
             ).scalar()
 
             if not result:
-                # Create migrations table
-                session.execute(text("""
-                    CREATE TABLE {} (
+                # Create migrations table - use validated table name (safe because we validated)
+                # We need to use string formatting for table names but validated above
+                session.execute(text(f"""
+                    CREATE TABLE \"{self.migrations_table}\" (
                         id SERIAL PRIMARY KEY,
                         version VARCHAR(50) NOT NULL UNIQUE,
                         description TEXT,
                         applied_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
                     )
-                """.format(self.migrations_table)))
+                """))
 
                 session.commit()
                 logger.info("Migrations table created")
@@ -87,9 +93,13 @@ class DatabaseMigrator:
 
     def get_applied_migrations(self):
         """Get list of already applied migrations."""
+        # Validate migrations table name (prevent SQL injection)
+        if not self.migrations_table.replace("_", "").isalnum():
+            raise ValueError(f"Invalid migrations table name: {self.migrations_table}")
+
         with get_db_context() as session:
             result = session.execute(
-                text(f"SELECT version FROM {self.migrations_table} ORDER BY applied_at")
+                text(f'SELECT version FROM "{self.migrations_table}" ORDER BY applied_at')
             ).fetchall()
 
             return [row[0] for row in result]
@@ -98,14 +108,18 @@ class DatabaseMigrator:
         """Apply a single migration."""
         logger.info(f"Applying migration {migration['version']}: {migration['description']}")
 
+        # Validate migrations table name (prevent SQL injection)
+        if not self.migrations_table.replace("_", "").isalnum():
+            raise ValueError(f"Invalid migrations table name: {self.migrations_table}")
+
         try:
             # Apply migration
             migration['apply']()
 
-            # Record migration
+            # Record migration - use validated table name (safe because we validated)
             with get_db_context() as session:
                 session.execute(text(f"""
-                    INSERT INTO {self.migrations_table} (version, description)
+                    INSERT INTO \"{self.migrations_table}\" (version, description)
                     VALUES (:version, :description)
                 """), {
                     'version': migration['version'],

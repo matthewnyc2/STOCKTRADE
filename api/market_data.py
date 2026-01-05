@@ -5,6 +5,7 @@ Provides endpoints for fetching price data, calculating indicators,
 and managing historical price data in the database.
 """
 
+import logging
 from datetime import datetime
 from decimal import Decimal
 from typing import List, Optional
@@ -24,6 +25,9 @@ from models.market_data import (
     MarketDataResponse,
     IndicatorsRequest,
     SeedPriceDataResponse,
+    BatchMarketDataRequest,
+    BatchMarketDataResponse,
+    SymbolMarketData,
 )
 
 from services.market_data import (
@@ -35,6 +39,146 @@ from services.market_data import (
 )
 
 router = APIRouter(prefix="/market-data", tags=["market-data"])
+logger = logging.getLogger(__name__)
+
+
+@router.get("/current/{symbol}")
+async def get_current_market_data(symbol: str):
+    """
+    Get current market data for trading.
+
+    Fetches real-time market data from database or external API.
+
+    Args:
+        symbol: Trading symbol (e.g., BTC, ETH)
+
+    Returns:
+        dict: Current market data with price and timestamp
+    """
+    # Try to get from database cache first
+    try:
+        with get_db_context() as session:
+            from database.models.price import PriceModel
+            from sqlalchemy import desc
+
+            latest_price = session.query(PriceModel).filter(
+                PriceModel.symbol == symbol.upper()
+            ).order_by(desc(PriceModel.timestamp)).first()
+
+            if latest_price:
+                # Check if data is recent (within 5 minutes)
+                from datetime import datetime, timedelta
+                if latest_price.timestamp > datetime.utcnow() - timedelta(minutes=5):
+                    return {
+                        "symbol": latest_price.symbol,
+                        "price": float(latest_price.close),
+                        "timestamp": latest_price.timestamp.isoformat(),
+                        "volume": float(latest_price.volume),
+                        "high": float(latest_price.high),
+                        "low": float(latest_price.low),
+                        "open": float(latest_price.open),
+                    }
+    except Exception as e:
+        logger.warning(f"Error fetching from database: {e}")
+
+    # If not in cache or stale, fetch from external API
+    try:
+        price_data = await fetch_current_price(symbol)
+        if price_data:
+            return {
+                "symbol": symbol.upper(),
+                "price": float(price_data.get("price", 0)),
+                "timestamp": price_data.get("timestamp", datetime.utcnow().isoformat()),
+                "volume": float(price_data.get("total_volume", 0)),
+                "high": float(price_data.get("high_24h", price_data.get("price", 0))),
+                "low": float(price_data.get("low_24h", price_data.get("price", 0))),
+                "open": float(price_data.get("price", 0)),  # Using current as fallback
+            }
+    except Exception as e:
+        logger.error(f"Error fetching from external API: {e}")
+
+    # If all else fails, raise error
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Could not fetch market data for symbol: {symbol}"
+    )
+
+
+@router.get("/historical/{symbol}")
+async def get_historical_market_data(symbol: str, days: int = 30):
+    """
+    Get historical market data for backtesting.
+
+    Fetches historical price data from database or external API.
+
+    Args:
+        symbol: Trading symbol (e.g., BTC, ETH)
+        days: Number of days of historical data
+
+    Returns:
+        list: Historical price data points
+    """
+    from datetime import datetime, timedelta
+
+    end_date = datetime.utcnow()
+    start_date = end_date - timedelta(days=days)
+
+    # Try to get from database first
+    try:
+        prices = get_prices_from_db(
+            symbol.upper(),
+            start=start_date,
+            end=end_date,
+            limit=days * 24  # Approx hourly data
+        )
+
+        if prices:
+            return [
+                {
+                    "symbol": p["symbol"],
+                    "timestamp": p["timestamp"].isoformat() if hasattr(p["timestamp"], "isoformat") else p["timestamp"],
+                    "open": float(p["open"]),
+                    "high": float(p["high"]),
+                    "low": float(p["low"]),
+                    "close": float(p["close"]),
+                    "volume": float(p["volume"]),
+                }
+                for p in prices
+            ]
+    except Exception as e:
+        logger.warning(f"Error fetching historical from database: {e}")
+
+    # If not in database, fetch from external API
+    try:
+        prices = await fetch_historical_prices(
+            symbol.upper(),
+            "1d",  # Daily timeframe
+            start=start_date,
+            end=end_date,
+            limit=days
+        )
+
+        if prices:
+            return [
+                {
+                    "symbol": symbol.upper(),
+                    "timestamp": p["timestamp"].isoformat() if hasattr(p["timestamp"], "isoformat") else p["timestamp"],
+                    "open": float(p["open"]),
+                    "high": float(p["high"]),
+                    "low": float(p["low"]),
+                    "close": float(p["close"]),
+                    "volume": float(p["volume"]),
+                }
+                for p in prices
+            ]
+    except Exception as e:
+        logger.error(f"Error fetching historical from external API: {e}")
+
+    # If all else fails, raise error
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Could not fetch historical data for symbol: {symbol}"
+    )
 
 
 @router.get("/price/{symbol}", response_model=CurrentPrice)
@@ -275,3 +419,109 @@ async def get_latest_price(symbol: str):
             "close": float(price.close),
             "volume": float(price.volume),
         }
+
+
+@router.post("/batch", response_model=BatchMarketDataResponse)
+async def get_batch_market_data(request: BatchMarketDataRequest) -> dict:
+    """
+    Get market data for multiple symbols in a single request.
+
+    This endpoint allows fetching current prices, historical price data,
+    and optionally technical indicators for multiple trading symbols
+    in one efficient batch request.
+
+    Args:
+        request: BatchMarketDataRequest containing:
+            - symbols: List of trading symbols to fetch
+            - include_indicators: Whether to include technical indicators
+            - interval: Time frame for price data
+            - limit: Maximum number of candles per symbol
+
+    Returns:
+        BatchMarketDataResponse containing market data for all requested symbols.
+        Includes success/failure counts and any error messages per symbol.
+    """
+    results = []
+    successful = 0
+    failed = 0
+
+    for symbol in request.symbols:
+        symbol_upper = symbol.upper()
+        try:
+            # Fetch current price
+            current_price_data = await fetch_current_price(symbol_upper)
+            current_price = Decimal(str(current_price_data['price'])) if current_price_data else None
+
+            # Fetch historical prices
+            prices = get_prices_from_db(
+                symbol_upper,
+                start=None,
+                end=None,
+                limit=request.limit
+            )
+
+            # If no data in DB, try external API
+            if not prices:
+                prices = await fetch_historical_prices(
+                    symbol_upper,
+                    request.interval,
+                    start=None,
+                    end=None,
+                    limit=request.limit
+                )
+
+            # Convert to PriceData models
+            price_data_list = [PriceData(**p) for p in prices] if prices else []
+
+            # Fetch indicators if requested
+            indicators = None
+            if request.include_indicators and price_data_list:
+                try:
+                    indicator_data = await get_price_with_indicators(
+                        symbol_upper,
+                        request.interval,
+                        min(request.limit, len(price_data_list))
+                    )
+                    if indicator_data and 'indicators' in indicator_data:
+                        indicators = indicator_data['indicators']
+                except Exception as indicator_error:
+                    # Log but don't fail the entire request for indicator errors
+                    indicators = None
+
+            results.append(SymbolMarketData(
+                symbol=symbol_upper,
+                current_price=current_price,
+                prices=price_data_list,
+                indicators=indicators,
+                error=None
+            ))
+            successful += 1
+
+        except HTTPException:
+            # Re-raise HTTP exceptions as individual symbol errors
+            results.append(SymbolMarketData(
+                symbol=symbol_upper,
+                current_price=None,
+                prices=[],
+                indicators=None,
+                error=f"No data available for symbol: {symbol_upper}"
+            ))
+            failed += 1
+        except Exception as e:
+            # Catch any other exceptions and add to results
+            results.append(SymbolMarketData(
+                symbol=symbol_upper,
+                current_price=None,
+                prices=[],
+                indicators=None,
+                error=f"Error fetching data: {str(e)}"
+            ))
+            failed += 1
+
+    return BatchMarketDataResponse(
+        data=results,
+        interval=request.interval,
+        total_symbols=len(request.symbols),
+        successful=successful,
+        failed=failed
+    )

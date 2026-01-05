@@ -90,14 +90,18 @@ class ArbitrageOpportunity(BaseModel):
     # Profitability
     gross_profit_usd: Decimal = Field(description="Gross profit before fees")
     estimated_fees_usd: Decimal = Field(description="Estimated transaction fees")
-    estimated_slippage_usd: Decimal = Field(default=Decimal("0"), description="Estimated slippage cost")
+    estimated_slippage_usd: Decimal = Field(
+        default=Decimal("0"), description="Estimated slippage cost"
+    )
     net_profit_usd: Decimal = Field(description="Net profit after fees and slippage")
     profit_percent: Decimal = Field(description="Profit as percentage of capital")
 
     # Timing
     detected_at: datetime = Field(default_factory=datetime.utcnow)
     expires_at: Optional[datetime] = Field(default=None, description="When opportunity expires")
-    execution_time_seconds: Optional[float] = Field(default=None, description="Estimated execution time")
+    execution_time_seconds: Optional[float] = Field(
+        default=None, description="Estimated execution time"
+    )
 
     # Metadata
     confidence: Decimal = Field(ge=Decimal("0"), le=Decimal("1"), description="Confidence score")
@@ -111,10 +115,16 @@ class ArbitrageConfig(BaseModel):
     Defines thresholds and limits for arbitrage detection.
     """
 
-    min_profit_percent: Decimal = Field(default=Decimal("0.5"), description="Minimum profit percentage")
+    min_profit_percent: Decimal = Field(
+        default=Decimal("0.5"), description="Minimum profit percentage"
+    )
     min_profit_usd: Decimal = Field(default=Decimal("10"), description="Minimum profit in USD")
-    max_slippage_percent: Decimal = Field(default=Decimal("0.1"), description="Maximum acceptable slippage")
-    max_gas_price_gwei: Optional[int] = Field(default=None, description="Maximum gas price for on-chain trades")
+    max_slippage_percent: Decimal = Field(
+        default=Decimal("0.1"), description="Maximum acceptable slippage"
+    )
+    max_gas_price_gwei: Optional[int] = Field(
+        default=None, description="Maximum gas price for on-chain trades"
+    )
 
     # Venues to monitor
     enabled_exchanges: list[ExchangeVenue] = Field(
@@ -138,14 +148,22 @@ class ArbitrageConfig(BaseModel):
     )
 
     # Capital settings
-    max_position_size_usd: Decimal = Field(default=Decimal("10000"), description="Maximum position size")
-    min_position_size_usd: Decimal = Field(default=Decimal("100"), description="Minimum position size")
+    max_position_size_usd: Decimal = Field(
+        default=Decimal("10000"), description="Maximum position size"
+    )
+    min_position_size_usd: Decimal = Field(
+        default=Decimal("100"), description="Minimum position size"
+    )
 
     # Funding rate settings
-    min_funding_rate: Decimal = Field(default=Decimal("0.01"), description="Minimum funding rate for arb")
+    min_funding_rate: Decimal = Field(
+        default=Decimal("0.01"), description="Minimum funding rate for arb"
+    )
 
     # Oracle latency settings
-    max_oracle_lag_seconds: int = Field(default=30, description="Maximum oracle lag for arb opportunity")
+    max_oracle_lag_seconds: int = Field(
+        default=30, description="Maximum oracle lag for arb opportunity"
+    )
 
 
 class ArbitrageExecution(BaseModel):
@@ -221,15 +239,19 @@ class ArbitrageScanRequest(BaseModel):
     """
 
     symbols: list[str] = Field(default_factory=list, description="Symbols to scan (empty = all)")
-    min_profit_percent: Optional[Decimal] = Field(default=None, description="Override minimum profit %")
-    min_profit_usd: Optional[Decimal] = Field(default=None, description="Override minimum profit USD")
+    min_profit_percent: Optional[Decimal] = Field(
+        default=None, description="Override minimum profit %"
+    )
+    min_profit_usd: Optional[Decimal] = Field(
+        default=None, description="Override minimum profit USD"
+    )
     include_types: list[ArbitrageType] = Field(
         default_factory=lambda: [
             ArbitrageType.ORACLE_LATENCY,
             ArbitrageType.FUNDING_RATE,
             ArbitrageType.CROSS_VENUE,
         ],
-        description="Arbitrage types to scan for"
+        description="Arbitrage types to scan for",
     )
 
 
@@ -281,3 +303,92 @@ class OraclePriceData(BaseModel):
     cex_timestamp: datetime
     price_diff_percent: Decimal
     lag_seconds: float = Field(description="Lag in seconds between oracle and CEX")
+
+
+class ArbitrageOpportunityResponse(BaseModel):
+    """Response wrapper for arbitrage opportunity."""
+
+    opportunity: ArbitrageOpportunity
+    recommendations: list[str] = Field(default_factory=list)
+
+
+class ProfitCalculationRequest(BaseModel):
+    """Request for custom profit calculation."""
+
+    opportunity_id: str
+    position_size_usd: Optional[Decimal] = None
+    custom_fees_usd: Optional[Decimal] = None
+    custom_slippage_usd: Optional[Decimal] = None
+
+
+class ConstellationRequest(BaseModel):
+    """Request for constellation detection."""
+
+    symbols: Optional[list[str]] = None
+    time_window_hours: int = Field(default=72, ge=1, le=168, description="Time window in hours")
+    min_whale_usd: Decimal = Field(
+        default=Decimal("1000000"),
+        ge=Decimal("100000"),
+        description="Minimum USD value to consider whale activity",
+    )
+
+
+class LiquidityClusterResponse(BaseModel):
+    """Response model for a liquidity cluster."""
+
+    price_level: float = Field(description="Price level of the cluster")
+    density_score: float = Field(ge=0, le=1, description="Density of stops at this level")
+    type: str = Field(description="Type of cluster (ROUND_NUMBER, PREVIOUS_HIGH, etc.)")
+    distance_pct: float = Field(description="Distance from current price as percentage")
+
+
+class LiquidityVoidResponse(BaseModel):
+    """Response model for a liquidity void."""
+
+    start_price: float = Field(description="Start price of the void")
+    end_price: float = Field(description="End price of the void")
+    size_pct: float = Field(description="Size of the gap as percentage")
+    risk_level: str = Field(description="Risk level (LOW, MEDIUM, HIGH)")
+
+
+class SweepPredictionResponse(BaseModel):
+    """Response model for a sweep prediction."""
+
+    price_level: float = Field(description="Target price level")
+    cluster_type: str = Field(description="Type of cluster")
+    probability: float = Field(ge=0, le=1, description="Probability of sweep")
+    expected_impulse_pct: float = Field(description="Expected price move after sweep")
+    cascade_targets: list[float] = Field(default_factory=list, description="Next levels to trigger")
+    time_horizon: str = Field(description="Expected timing (IMMEDIATE, SHORT_TERM, MEDIUM_TERM)")
+    distance_from_current_pct: float = Field(description="Distance from current price")
+    density_score: float = Field(description="Cluster density score")
+
+
+class CascadeRiskResponse(BaseModel):
+    """Response model for cascade risk assessment."""
+
+    triggered_level: float = Field(description="Price level being triggered")
+    cascade_levels: list[dict] = Field(default_factory=list, description="Levels that may cascade")
+    cascade_count: int = Field(description="Number of cascade levels")
+    total_estimated_volume: float = Field(description="Total volume at risk")
+    average_density_score: float = Field(description="Average density of cascade levels")
+    risk_level: str = Field(description="Overall risk level (LOW, MEDIUM, HIGH, CRITICAL)")
+    max_excursion_pct: float = Field(description="Maximum expected price move")
+    sweep_direction: str = Field(description="Direction of sweep (UP or DOWN)")
+
+
+class LiquidityMapResponse(BaseModel):
+    """Complete liquidity map response."""
+
+    symbol: str = Field(description="Trading symbol")
+    current_price: float = Field(description="Current market price")
+    trend: str = Field(description="Current trend (BULLISH, BEARISH, NEUTRAL)")
+    volatility_pct: float = Field(description="Current volatility as percentage")
+    clusters: list[LiquidityClusterResponse] = Field(
+        default_factory=list, description="Detected stop clusters"
+    )
+    voids: list[LiquidityVoidResponse] = Field(
+        default_factory=list, description="Detected liquidity voids"
+    )
+    sweep_predictions: dict = Field(description="Sweep probability predictions")
+    timestamp: str = Field(description="Analysis timestamp")

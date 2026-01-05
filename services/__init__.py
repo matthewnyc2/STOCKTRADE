@@ -32,6 +32,20 @@ from services.ai_reasoning import (
     get_ai_reasoning_engine,
 )
 
+from services.ml import (
+    LSTMLayer,
+    LSTMModel,
+    TrainingEngine,
+    FeatureEngine,
+    MLFactory,
+    TrainingConfig,
+    TrainingProgress,
+    TrainingTaskStatus,
+    PredictionResult,
+    PredictionType,
+    get_ml_factory,
+)
+
 __all__ = [
     "BacktestEngine",
     "BacktestConfig",
@@ -53,4 +67,15 @@ __all__ = [
     "PositionUpdate",
     "AIReasoningEngine",
     "get_ai_reasoning_engine",
+    "LSTMLayer",
+    "LSTMModel",
+    "TrainingEngine",
+    "FeatureEngine",
+    "MLFactory",
+    "TrainingConfig",
+    "TrainingProgress",
+    "TrainingTaskStatus",
+    "PredictionResult",
+    "PredictionType",
+    "get_ml_factory",
 ]

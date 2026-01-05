@@ -532,3 +532,70 @@ async def get_smart_money_candidates(
     candidates = await scan_smart_money()
 
     return candidates[:limit]
+
+
+@router.get("/ranking/{symbol}", response_model=dict)
+async def get_whale_ranking(symbol: str, limit: int = 100) -> dict:
+    """
+    Get whale ranking for a specific symbol by holdings.
+
+    Args:
+        symbol: Trading symbol
+        limit: Maximum number of whales to return
+
+    Returns:
+        dict: Ranked list of whales with their holdings and activity
+    """
+    from datetime import timedelta
+
+    symbol = symbol.upper()
+
+    with get_db_session() as session:
+        whale_repo = WhaleRepository(session)
+        activity_repo = WhaleActivityRepository(session)
+
+        # Get all whales that have activity with this symbol
+        whales_with_symbol = (
+            session.query(whale_repo.model)
+            .join(activity_repo.model, whale_repo.model.address == activity_repo.model.whale_address)
+            .filter(activity_repo.model.symbol == symbol)
+            .all()
+        )
+
+        # If no whales found for this specific symbol, return general ranking
+        if not whales_with_symbol:
+            whales = whale_repo.get_all(limit=limit)
+        else:
+            # Sort by holdings
+            whales = sorted(whales_with_symbol, key=lambda w: w.holdings_usd, reverse=True)[:limit]
+
+        # Build ranking data
+        ranking_data = []
+        for rank, whale in enumerate(whales, start=1):
+            # Get recent activity for this whale
+            recent_activities = activity_repo.get_by_whale_and_symbol(
+                whale.address, symbol, limit=5
+            )
+
+            # Calculate 24h volume
+            twenty_four_hours_ago = datetime.utcnow() - timedelta(hours=24)
+            activities_24h = [
+                a for a in recent_activities
+                if a.timestamp >= twenty_four_hours_ago
+            ]
+            volume_24h = sum(a.amount_usd for a in activities_24h)
+
+            ranking_data.append({
+                "rank": rank,
+                "whale": model_to_whale(whale),
+                "recent_activity": [model_to_activity(a) for a in recent_activities],
+                "volume_24h_usd": float(volume_24h),
+                "activity_count_24h": len(activities_24h),
+            })
+
+        return {
+            "symbol": symbol,
+            "total_whales": len(ranking_data),
+            "ranking": ranking_data,
+            "timestamp": datetime.utcnow().isoformat(),
+        }

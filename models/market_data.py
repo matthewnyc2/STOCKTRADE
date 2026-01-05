@@ -178,3 +178,48 @@ class PriceDataSummary(BaseModel):
     max_price: Decimal = Field(description="Highest price in range")
     avg_price: Decimal = Field(description="Average price in range")
     total_volume: Decimal = Field(description="Total volume in range")
+
+
+class BatchMarketDataRequest(BaseModel):
+    """
+    Request parameters for batch market data retrieval.
+
+    Allows fetching market data for multiple symbols in a single request.
+    """
+
+    symbols: List[str] = Field(min_length=1, max_length=50, description="List of trading symbols")
+    include_indicators: bool = Field(default=False, description="Whether to include technical indicators")
+    interval: str = Field(default="1h", description="Time frame (1m, 5m, 15m, 30m, 1h, 4h, 1d)")
+    limit: int = Field(default=100, ge=1, le=1000, description="Maximum number of candles per symbol")
+
+
+class SymbolMarketData(BaseModel):
+    """
+    Market data response for a single symbol in a batch request.
+
+    Contains current price, historical prices, and optional indicators.
+    """
+
+    symbol: str = Field(description="Trading symbol")
+    current_price: Optional[Decimal] = Field(default=None, description="Current price")
+    prices: List[PriceData] = Field(default_factory=list, description="Historical OHLCV price data")
+    indicators: Optional[Dict[str, List[Optional[float]]]] = Field(
+        default=None,
+        description="Technical indicators (if requested)"
+    )
+    error: Optional[str] = Field(default=None, description="Error message if data fetch failed")
+
+
+class BatchMarketDataResponse(BaseModel):
+    """
+    Response from batch market data request.
+
+    Contains market data for all requested symbols.
+    """
+
+    data: List[SymbolMarketData] = Field(description="Market data per symbol")
+    interval: str = Field(description="Time frame used")
+    timestamp: datetime = Field(default_factory=datetime.utcnow, description="Response timestamp")
+    total_symbols: int = Field(description="Total number of symbols requested")
+    successful: int = Field(description="Number of symbols with successful data fetch")
+    failed: int = Field(description="Number of symbols with failed data fetch")

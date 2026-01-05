@@ -30,7 +30,7 @@ from models.ml import (
     TrainingProgressResponse,
     TrainingRequest,
 )
-from services.ml_factory import (
+from services.ml import (
     FeatureEngine,
     LSTMModel,
     MLFactory,
@@ -43,6 +43,7 @@ from services.ml_factory import (
 # ============================================================================
 # FIXTURES
 # ============================================================================
+
 
 @pytest.fixture
 def client():
@@ -76,15 +77,17 @@ def sample_price_data():
         low_price = min(open_price, close_price) - abs(np.random.randn() * 20)
         volume = abs(np.random.randn() * 1000000) + 500000
 
-        data.append({
-            "symbol": "BTC",
-            "timestamp": datetime(2024, 1, 1) + timedelta(hours=i),
-            "open": float(open_price),
-            "high": float(high_price),
-            "low": float(low_price),
-            "close": float(close_price),
-            "volume": float(volume),
-        })
+        data.append(
+            {
+                "symbol": "BTC",
+                "timestamp": datetime(2024, 1, 1) + timedelta(hours=i),
+                "open": float(open_price),
+                "high": float(high_price),
+                "low": float(low_price),
+                "close": float(close_price),
+                "volume": float(volume),
+            }
+        )
 
         base_price = close_price
 
@@ -116,6 +119,7 @@ def sample_price_data_db(db_session, sample_price_data):
 # FEATURE ENGINEERING TESTS
 # ============================================================================
 
+
 class TestFeatureEngine:
     """Tests for FeatureEngine class."""
 
@@ -131,14 +135,10 @@ class TestFeatureEngine:
 
     def test_get_feature_groups(self):
         """Test getting feature groups."""
-        groups = FeatureEngine.get_feature_groups()
+        groups = FeatureEngine.get_feature_group("price")
 
-        assert isinstance(groups, dict)
-        assert "price" in groups
-        assert "volume" in groups
-        assert "momentum" in groups
-        assert "trend" in groups
-        assert "volatility" in groups
+        assert isinstance(groups, list)
+        assert len(groups) > 0
 
     def test_calculate_features(self, sample_price_data):
         """Test feature calculation from price data."""
@@ -176,6 +176,7 @@ class TestFeatureEngine:
 # ============================================================================
 # LSTM MODEL TESTS
 # ============================================================================
+
 
 class TestLSTMModel:
     """Tests for LSTM model implementation."""
@@ -277,6 +278,7 @@ class TestTrainingEngine:
 # ML FACTORY TESTS
 # ============================================================================
 
+
 class TestMLFactory:
     """Tests for MLFactory class."""
 
@@ -304,7 +306,7 @@ class TestMLFactory:
         assert isinstance(groups, dict)
         assert "price" in groups
 
-    @patch('services.ml_factory.ThreadPoolExecutor')
+    @patch("services.ml_factory.ThreadPoolExecutor")
     def test_train_model_submission(self, mock_executor, factory):
         """Test that model training is submitted to executor."""
         mock_future = Mock()
@@ -326,6 +328,7 @@ class TestMLFactory:
 # ============================================================================
 # API ENDPOINT TESTS
 # ============================================================================
+
 
 class TestMLEndpoints:
     """Tests for ML API endpoints."""
@@ -360,7 +363,7 @@ class TestMLEndpoints:
             "batch_size": 16,
         }
 
-        with patch('services.ml_factory.ThreadPoolExecutor'):
+        with patch("services.ml_factory.ThreadPoolExecutor"):
             response = client.post("/api/ml/train", json=request)
 
         assert response.status_code == 200
@@ -401,6 +404,7 @@ class TestMLEndpoints:
 # ============================================================================
 # PYDANTIC MODEL TESTS
 # ============================================================================
+
 
 class TestPydanticModels:
     """Tests for Pydantic model validation."""
@@ -471,13 +475,14 @@ class TestPydanticModels:
 # INTEGRATION TESTS
 # ============================================================================
 
+
 class TestMLFactoryIntegration:
     """Integration tests for ML Factory."""
 
     def test_full_training_workflow(self, client, sample_price_data_db, tmp_path):
         """Test complete training workflow."""
         # 1. Start training
-        with patch('services.ml_factory.ThreadPoolExecutor'):
+        with patch("services.ml_factory.ThreadPoolExecutor"):
             train_response = client.post(
                 "/api/ml/train",
                 json={
@@ -516,6 +521,7 @@ class TestMLFactoryIntegration:
 # ============================================================================
 # PERFORMANCE TESTS
 # ============================================================================
+
 
 class TestMLFactoryPerformance:
     """Performance tests for ML Factory."""

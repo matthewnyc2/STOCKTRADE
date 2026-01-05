@@ -27,6 +27,7 @@ logger = logging.getLogger(__name__)
 # DATA MODELS
 # ============================================================================
 
+
 class LiquidityCluster:
     """Represents a cluster of stop-losses at a price level."""
 
@@ -82,6 +83,7 @@ class SweepPrediction:
 # ============================================================================
 # MAIN FUNCTIONS
 # ============================================================================
+
 
 def detect_stop_clusters(
     symbol: str,
@@ -139,9 +141,7 @@ def detect_stop_clusters(
 
     # Calculate density scores based on multiple factors
     for cluster in unique_clusters:
-        cluster.density_score = _calculate_cluster_density(
-            cluster, closes, highs, lows, volumes
-        )
+        cluster.density_score = _calculate_cluster_density(cluster, closes, highs, lows, volumes)
 
     # Sort by density score (highest first)
     unique_clusters.sort(key=lambda c: c.density_score, reverse=True)
@@ -286,10 +286,13 @@ def predict_sweep_probability(
 
         # Calculate final probability
         probability = (
-            distance_score * 0.4 +
-            density_score * 0.3 +
-            0.2  # Base probability
-        ) * trend_multiplier * vol_multiplier * type_multiplier
+            (
+                distance_score * 0.4 + density_score * 0.3 + 0.2  # Base probability
+            )
+            * trend_multiplier
+            * vol_multiplier
+            * type_multiplier
+        )
 
         # Clamp to 0-1
         probability = max(0, min(1, probability))
@@ -303,16 +306,18 @@ def predict_sweep_probability(
         # Determine time horizon
         time_horizon = _determine_time_horizon(distance, volatility)
 
-        predictions.append({
-            "price_level": cluster.price_level,
-            "cluster_type": cluster.cluster_type,
-            "probability": round(probability, 3),
-            "expected_impulse_pct": round(expected_impulse * 100, 2),
-            "cascade_targets": cascade_targets,
-            "time_horizon": time_horizon,
-            "distance_from_current_pct": round(distance * 100, 2),
-            "density_score": round(cluster.density_score, 3),
-        })
+        predictions.append(
+            {
+                "price_level": cluster.price_level,
+                "cluster_type": cluster.cluster_type,
+                "probability": round(probability, 3),
+                "expected_impulse_pct": round(expected_impulse * 100, 2),
+                "cascade_targets": cascade_targets,
+                "time_horizon": time_horizon,
+                "distance_from_current_pct": round(distance * 100, 2),
+                "density_score": round(cluster.density_score, 3),
+            }
+        )
 
     # Sort by probability
     predictions.sort(key=lambda p: p["probability"], reverse=True)
@@ -361,24 +366,28 @@ def calculate_cascade_risk(
         if is_upward_sweep and cluster.price_level > triggered_stop.price_level:
             distance = cluster.price_level - triggered_stop.price_level
             if distance <= current_price * 0.02:  # Within 2%
-                cascade_levels.append({
-                    "price_level": cluster.price_level,
-                    "distance_pct": round((distance / current_price) * 100, 2),
-                    "density_score": cluster.density_score,
-                    "type": cluster.cluster_type,
-                })
+                cascade_levels.append(
+                    {
+                        "price_level": cluster.price_level,
+                        "distance_pct": round((distance / current_price) * 100, 2),
+                        "density_score": cluster.density_score,
+                        "type": cluster.cluster_type,
+                    }
+                )
                 if cluster.estimated_volume:
                     total_cascade_volume += cluster.estimated_volume
 
         elif not is_upward_sweep and cluster.price_level < triggered_stop.price_level:
             distance = triggered_stop.price_level - cluster.price_level
             if distance <= current_price * 0.02:  # Within 2%
-                cascade_levels.append({
-                    "price_level": cluster.price_level,
-                    "distance_pct": round((distance / current_price) * 100, 2),
-                    "density_score": cluster.density_score,
-                    "type": cluster.cluster_type,
-                })
+                cascade_levels.append(
+                    {
+                        "price_level": cluster.price_level,
+                        "distance_pct": round((distance / current_price) * 100, 2),
+                        "density_score": cluster.density_score,
+                        "type": cluster.cluster_type,
+                    }
+                )
                 if cluster.estimated_volume:
                     total_cascade_volume += cluster.estimated_volume
 
@@ -420,6 +429,7 @@ def calculate_cascade_risk(
 # ============================================================================
 # HELPER FUNCTIONS
 # ============================================================================
+
 
 def _detect_round_numbers(current_price: float, price_range: float) -> List[LiquidityCluster]:
     """Detect round number psychological levels."""
@@ -512,8 +522,8 @@ def _detect_support_resistance(
     # Use pivots to find S/R levels
     pivots = []
     for i in range(window, len(closes) - window):
-        pivot_high = max(highs[i - window:i + window])
-        pivot_low = min(lows[i - window:i + window])
+        pivot_high = max(highs[i - window : i + window])
+        pivot_low = min(lows[i - window : i + window])
         pivots.append((pivot_high, pivot_low))
 
     # Cluster similar pivots
@@ -554,8 +564,8 @@ def _detect_consolidation_breakouts(
     i = 0
     while i < len(closes) - min_periods:
         # Check for tight range
-        range_high = max(highs[i:i + min_periods])
-        range_low = min(lows[i:i + min_periods])
+        range_high = max(highs[i : i + min_periods])
+        range_low = min(lows[i : i + min_periods])
         range_pct = (range_high - range_low) / range_low
 
         if range_pct < 0.02:  # Less than 2% range = consolidation
@@ -594,9 +604,9 @@ def _detect_consolidation_voids(
 
     for i in range(window, len(closes) - window):
         # Check for consolidation (low volatility, low volume)
-        period_highs = highs[i - window:i + window]
-        period_lows = lows[i - window:i + window]
-        period_volumes = volumes[i - window:i + window]
+        period_highs = highs[i - window : i + window]
+        period_lows = lows[i - window : i + window]
+        period_volumes = volumes[i - window : i + window]
 
         volatility = (max(period_highs) - min(period_lows)) / np.mean(period_lows)
         avg_volume = np.mean(period_volumes)
@@ -658,18 +668,16 @@ def _calculate_cluster_density(
     score = 0.0
 
     # 1. Price touch frequency (how often price was near this level)
-    touches = sum(
-        1 for h, l in zip(highs, lows)
-        if l <= cluster.price_level <= h
-    )
+    touches = sum(1 for h, l in zip(highs, lows) if l <= cluster.price_level <= h)
     touch_frequency = touches / len(closes) if closes else 0
     score += min(0.4, touch_frequency * 2)
 
     # 2. Volume near level (more volume = more interest)
     near_level_volumes = [
-        v for h, l, v in zip(highs, lows, volumes)
-        if abs(h - cluster.price_level) / cluster.price_level < 0.01 or
-           abs(l - cluster.price_level) / cluster.price_level < 0.01
+        v
+        for h, l, v in zip(highs, lows, volumes)
+        if abs(h - cluster.price_level) / cluster.price_level < 0.01
+        or abs(l - cluster.price_level) / cluster.price_level < 0.01
     ]
     avg_volume_near = np.mean(near_level_volumes) if near_level_volumes else 0
     avg_volume_all = np.mean(volumes) if volumes else 1
@@ -737,7 +745,7 @@ def _estimate_sweep_impulse(
     # Check for next cluster (could amplify or dampen)
     next_clusters = sorted(
         [c for c in all_clusters if c.price_level != cluster.price_level],
-        key=lambda c: abs(c.price_level - cluster.price_level)
+        key=lambda c: abs(c.price_level - cluster.price_level),
     )
 
     if next_clusters:
@@ -793,6 +801,7 @@ def _determine_time_horizon(distance_pct: float, volatility: float) -> str:
 # UTILITY FUNCTIONS
 # ============================================================================
 
+
 def get_liquidity_map(
     symbol: str,
     lookback_periods: int = 100,
@@ -810,7 +819,6 @@ def get_liquidity_map(
     Returns:
         Complete liquidity map with all analysis
     """
-    # Get price data
     price_data = get_prices_from_db(symbol, limit=lookback_periods)
 
     if not price_data:
@@ -823,11 +831,9 @@ def get_liquidity_map(
     closes = [float(p["close"]) for p in price_data]
     current_price = closes[-1]
 
-    # Calculate volatility
     returns = np.diff(closes) / closes[:-1] if len(closes) > 1 else [0]
     volatility = float(np.std(returns)) if returns else 0.02
 
-    # Detect trend
     recent_closes = closes[-20:]
     trend = "NEUTRAL"
     if len(recent_closes) >= 10:
@@ -836,16 +842,9 @@ def get_liquidity_map(
         elif recent_closes[-1] < recent_closes[0] * 0.98:
             trend = "BEARISH"
 
-    # Detect clusters
     clusters = detect_stop_clusters(symbol, price_data, lookback_periods)
-
-    # Detect voids
     voids = detect_liquidity_voids(symbol, price_data)
-
-    # Predict sweeps
-    sweep_predictions = predict_sweep_probability(
-        current_price, clusters, trend, volatility
-    )
+    sweep_predictions = predict_sweep_probability(current_price, clusters, trend, volatility)
 
     return {
         "symbol": symbol,
@@ -873,3 +872,59 @@ def get_liquidity_map(
         "sweep_predictions": sweep_predictions,
         "timestamp": datetime.utcnow().isoformat(),
     }
+
+
+def generate_recommendations(opportunity: Any) -> list[str]:
+    """
+    Generate actionable recommendations for an arbitrage opportunity.
+
+    Args:
+        opportunity: The arbitrage opportunity
+
+    Returns:
+        List of recommendation strings
+    """
+    from models.arbitrage import ArbitrageType
+    from decimal import Decimal
+    from datetime import datetime
+
+    recommendations = []
+
+    if opportunity.profit_percent < Decimal("0.5"):
+        recommendations.append("Profit margin is tight - consider waiting for higher spreads")
+
+    if opportunity.estimated_slippage_usd > opportunity.net_profit_usd * Decimal("0.3"):
+        recommendations.append("Slippage may consume significant profit - use limit orders")
+
+    if opportunity.type == ArbitrageType.ORACLE_LATENCY:
+        recommendations.append("Oracle arb requires fast execution - use flash loans if possible")
+        recommendations.append(
+            f"Oracle lag: {opportunity.metadata.get('oracle_lag_seconds', 0):.1f}s"
+        )
+
+    elif opportunity.type == ArbitrageType.FUNDING_RATE:
+        if opportunity.funding_rate and opportunity.funding_rate < Decimal("-0.01"):
+            recommendations.append("Strong negative funding - consider larger position")
+        recommendations.append("Monitor funding rate changes before next funding period")
+
+    elif opportunity.type == ArbitrageType.CROSS_VENUE:
+        recommendations.append(
+            f"Transfer funds from {opportunity.buy_venue} to {opportunity.sell_venue}"
+        )
+        recommendations.append("Check withdrawal limits and transfer times")
+
+    elif opportunity.type == ArbitrageType.CROSS_CHAIN:
+        recommendations.append(
+            f"Bridge from {opportunity.buy_chain.value} to {opportunity.sell_chain.value}"
+        )
+        recommendations.append("Account for bridge time (typically 10-30 minutes)")
+        recommendations.append("Bridge costs may vary with network congestion")
+
+    if opportunity.expires_at:
+        time_remaining = (opportunity.expires_at - datetime.utcnow()).total_seconds()
+        if time_remaining < 15:
+            recommendations.append("URGENT: Opportunity expires very soon")
+        elif time_remaining < 30:
+            recommendations.append("Execute quickly - opportunity window is short")
+
+    return recommendations

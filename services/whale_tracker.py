@@ -14,7 +14,7 @@ import logging
 from datetime import datetime, timedelta
 from decimal import Decimal
 from typing import List, Dict, Any, Optional
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 import httpx
 
@@ -39,6 +39,7 @@ WHALE_ALERT_API_BASE = "https://api.whale-alert.io/v1"
 # ============================================================================
 # WHALE TRACKING FUNCTIONS
 # ============================================================================
+
 
 def track_whale(
     address: str,
@@ -144,9 +145,11 @@ async def detect_whale_movements(
 
         for activity_data in activities:
             # Check if activity already exists
-            existing = session.query(activity_repo.model).filter_by(
-                transaction_hash=activity_data.get("transaction_hash")
-            ).first()
+            existing = (
+                session.query(activity_repo.model)
+                .filter_by(transaction_hash=activity_data.get("transaction_hash"))
+                .first()
+            )
 
             if not existing:
                 activity_repo.create(
@@ -187,6 +190,10 @@ def classify_whale_pattern(whale_address: str) -> PatternType:
     - SNIPER: Makes large, timely trades before price movements
     - MANIPULATOR: Attempts to influence price through large trades
 
+    Also uses BFS to detect multi-step behavioral sequences like:
+    - Accumulate → Wash → Manipulate
+    - Buy → Transfer → Sell (wallet hopping)
+
     Args:
         whale_address: The whale wallet address
 
@@ -201,9 +208,14 @@ def classify_whale_pattern(whale_address: str) -> PatternType:
         # Not enough data, default to accumulator
         return PatternType.ACCUMULATOR
 
-    # Calculate metrics
+    # Try BFS-based behavioral sequence detection first
+    behavioral_pattern = _detect_behavioral_sequence(activities)
+    if behavioral_pattern != PatternType.ACCUMULATOR:
+        return behavioral_pattern
+
+    # Fallback to ratio-based classification
     buy_count = sum(1 for a in activities if a.action == WhaleAction.BOUGHT.value)
-    sell_count = sum(1 for a in activities if a.sell_count if hasattr(a, 'sell_count') else 0)
+    sell_count = sum(1 for a in activities if a.action == WhaleAction.SOLD.value)
     transfer_count = sum(1 for a in activities if a.action == WhaleAction.TRANSFERRED.value)
 
     total_count = len(activities)
@@ -222,7 +234,9 @@ def classify_whale_pattern(whale_address: str) -> PatternType:
             for i in range(len(timestamps_sorted) - 1)
         ]
         avg_interval = sum(intervals) / len(intervals) if intervals else 0
-        timing_variance = sum((i - avg_interval) ** 2 for i in intervals) / len(intervals) if intervals else 0
+        timing_variance = (
+            sum((i - avg_interval) ** 2 for i in intervals) / len(intervals) if intervals else 0
+        )
     else:
         timing_variance = 0
 
@@ -362,11 +376,13 @@ async def scan_smart_money() -> List[Dict[str, Any]]:
             transactions = data.get("transactions", [])
 
             # Group by wallet
-            wallet_stats = defaultdict(lambda: {
-                "transactions": [],
-                "total_volume": 0,
-                "symbols": set(),
-            })
+            wallet_stats = defaultdict(
+                lambda: {
+                    "transactions": [],
+                    "total_volume": 0,
+                    "symbols": set(),
+                }
+            )
 
             for tx in transactions:
                 if tx.get("to_owner") == "unknown":
@@ -384,13 +400,15 @@ async def scan_smart_money() -> List[Dict[str, Any]]:
                     and len(stats["transactions"]) >= 3  # Multiple transactions
                     and len(stats["symbols"]) <= 5  # Focused on few tokens
                 ):
-                    candidates.append({
-                        "address": wallet,
-                        "estimated_volume": stats["total_volume"],
-                        "transaction_count": len(stats["transactions"]),
-                        "preferred_tokens": list(stats["symbols"])[:5],
-                        "confidence": min(0.9, 0.5 + len(stats["transactions"]) * 0.1),
-                    })
+                    candidates.append(
+                        {
+                            "address": wallet,
+                            "estimated_volume": stats["total_volume"],
+                            "transaction_count": len(stats["transactions"]),
+                            "preferred_tokens": list(stats["symbols"])[:5],
+                            "confidence": min(0.9, 0.5 + len(stats["transactions"]) * 0.1),
+                        }
+                    )
 
     except Exception as e:
         logger.error(f"Error scanning smart money: {e}")
@@ -399,9 +417,135 @@ async def scan_smart_money() -> List[Dict[str, Any]]:
     return candidates
 
 
+def _detect_behavioral_sequence(activities: List[Any]) -> PatternType:
+    """
+    Detect multi-step behavioral sequences using BFS.
+
+    Analyzes transaction sequences to detect complex patterns like:
+    - Accumulate → Wash → Manipulate
+    - Buy → Transfer → Sell (wallet hopping)
+
+    Args:
+        activities: List of whale activities
+
+    Returns:
+        PatternType: Detected behavioral pattern
+    """
+    if len(activities) < 10:
+        return PatternType.ACCUMULATOR
+
+    # Sort activities by time
+    activities_sorted = sorted(activities, key=lambda a: a.timestamp)
+
+    # Build activity graph for BFS
+    # Nodes: indices of activities
+    # Edges: temporal connections within threshold
+    graph = {}
+    time_threshold_hours = 24
+    time_threshold = timedelta(hours=time_threshold_hours)
+
+    for i, activity in enumerate(activities_sorted):
+        graph[i] = []
+        for j in range(i + 1, min(i + 5, len(activities_sorted))):
+            other_activity = activities_sorted[j]
+            time_diff = other_activity.timestamp - activity.timestamp
+
+            if time_diff <= time_threshold:
+                graph[i].append(j)
+
+    # BFS to find sequences
+    sequences = []
+
+    for start_node in range(len(activities_sorted)):
+        visited = set()
+        queue = [(start_node, [start_node])]
+
+        while queue:
+            current_node, path = queue.pop(0)
+
+            if current_node in visited:
+                continue
+
+            visited.add(current_node)
+
+            # Check if we found a sequence pattern
+            if len(path) >= 3:
+                sequence = _classify_sequence_pattern([activities_sorted[i] for i in path])
+                if sequence != PatternType.ACCUMULATOR:
+                    sequences.append(sequence)
+
+            # Explore neighbors
+            for neighbor in graph.get(current_node, []):
+                if neighbor not in visited and len(path) < 5:
+                    queue.append((neighbor, path + [neighbor]))
+
+    # Vote on most frequent pattern
+    if sequences:
+        from collections import Counter
+
+        counter = Counter(sequences)
+        return counter.most_common(1)[0][0]
+
+    return PatternType.ACCUMULATOR
+
+
+def _classify_sequence_pattern(activities: List[Any]) -> PatternType:
+    """
+    Classify a sequence of activities.
+
+    Args:
+        activities: List of activities in temporal order
+
+    Returns:
+        PatternType: Classified sequence pattern
+    """
+    actions = [a.action for a in activities]
+
+    # Pattern: Accumulate → Wash → Manipulate
+    # Buy → Sell → Buy (smaller) → Buy (larger)
+    buy_sell_buy_pattern = (
+        len(actions) >= 3
+        and actions[0] == WhaleAction.BOUGHT.value
+        and actions[1] == WhaleAction.SOLD.value
+        and actions[2] == WhaleAction.BOUGHT.value
+    )
+
+    # Check for wash trading pattern
+    if buy_sell_buy_pattern:
+        # Calculate sizes
+        first_buy = activities[0].amount_usd
+        sell = activities[1].amount_usd
+        second_buy = activities[2].amount_usd
+
+        # Wash trade: sell and buy back quickly at similar size
+        if second_buy >= first_buy * Decimal("0.9") and abs(first_buy - sell) < first_buy * Decimal(
+            "0.2"
+        ):
+            return PatternType.MANIPULATOR
+
+    # Pattern: Buy → Transfer → Sell (wallet hopping)
+    buy_transfer_sell_pattern = (
+        len(actions) >= 3
+        and actions[0] == WhaleAction.BOUGHT.value
+        and actions[1] == WhaleAction.TRANSFERRED.value
+        and actions[2] == WhaleAction.SOLD.value
+    )
+
+    if buy_transfer_sell_pattern:
+        return PatternType.MANIPULATOR
+
+    # Pattern: Multiple transfers between wallets
+    transfer_count = sum(1 for a in actions if a == WhaleAction.TRANSFERRED.value)
+    if transfer_count >= len(actions) * 0.6:
+        return PatternType.MANIPULATOR
+
+    return PatternType.ACCUMULATOR
+
+
 # ============================================================================
 # HELPER FUNCTIONS
 # ============================================================================
+
 
 def _generate_whale_label(address: str) -> str:
     """Generate a label for a whale based on address."""
@@ -417,6 +561,7 @@ def _detect_whale_holdings(address: str) -> float:
     if not ETHERSCAN_API_KEY:
         # Return demo data
         import random
+
         random.seed(hash(address))
         return random.uniform(100000, 10000000)  # $100K - $10M
 
@@ -441,6 +586,7 @@ async def _fetch_whale_transactions(
     # Simulate some recent activity
     if not ETHERSCAN_API_KEY:
         import random
+
         random.seed(address)
 
         num_activities = random.randint(0, 3)
@@ -485,9 +631,133 @@ def _get_demo_smart_money() -> List[Dict[str, Any]]:
     ]
 
 
+def _detect_behavioral_sequence(activities: List[Any]) -> PatternType:
+    """
+    Detect multi-step behavioral sequences using BFS.
+
+    Analyzes transaction sequences to detect complex patterns like:
+    - Accumulate → Wash → Manipulate
+    - Buy → Transfer → Sell (wallet hopping)
+
+    Args:
+        activities: List of whale activities
+
+    Returns:
+        PatternType: Detected behavioral pattern
+    """
+    if len(activities) < 10:
+        return PatternType.ACCUMULATOR
+
+    # Sort activities by time
+    activities_sorted = sorted(activities, key=lambda a: a.timestamp)
+
+    # Build activity graph for BFS
+    # Nodes: indices of activities
+    # Edges: temporal connections within threshold
+    graph = {}
+    time_threshold_hours = 24
+    time_threshold = timedelta(hours=time_threshold_hours)
+
+    for i, activity in enumerate(activities_sorted):
+        graph[i] = []
+        for j in range(i + 1, min(i + 5, len(activities_sorted))):
+            other_activity = activities_sorted[j]
+            time_diff = other_activity.timestamp - activity.timestamp
+
+            if time_diff <= time_threshold:
+                graph[i].append(j)
+
+    # BFS to find sequences
+    sequences = []
+
+    for start_node in range(len(activities_sorted)):
+        visited = set()
+        queue = [(start_node, [start_node])]
+
+        while queue:
+            current_node, path = queue.pop(0)
+
+            if current_node in visited:
+                continue
+
+            visited.add(current_node)
+
+            # Check if we found a sequence pattern
+            if len(path) >= 3:
+                sequence = _classify_sequence_pattern([activities_sorted[i] for i in path])
+                if sequence != PatternType.ACCUMULATOR:
+                    sequences.append(sequence)
+
+            # Explore neighbors
+            for neighbor in graph.get(current_node, []):
+                if neighbor not in visited and len(path) < 5:
+                    queue.append((neighbor, path + [neighbor]))
+
+    # Vote on most frequent pattern
+    if sequences:
+        counter = Counter(sequences)
+        return counter.most_common(1)[0][0]
+
+    return PatternType.ACCUMULATOR
+
+
+def _classify_sequence_pattern(activities: List[Any]) -> PatternType:
+    """
+    Classify a sequence of activities.
+
+    Args:
+        activities: List of activities in temporal order
+
+    Returns:
+        PatternType: Classified sequence pattern
+    """
+    actions = [a.action for a in activities]
+
+    # Pattern: Accumulate → Wash → Manipulate
+    # Buy → Sell → Buy (smaller) → Buy (larger)
+    buy_sell_buy_pattern = (
+        len(actions) >= 3
+        and actions[0] == WhaleAction.BOUGHT.value
+        and actions[1] == WhaleAction.SOLD.value
+        and actions[2] == WhaleAction.BOUGHT.value
+    )
+
+    # Check for wash trading pattern
+    if buy_sell_buy_pattern:
+        # Calculate sizes
+        first_buy = activities[0].amount_usd
+        sell = activities[1].amount_usd
+        second_buy = activities[2].amount_usd
+
+        # Wash trade: sell and buy back quickly at similar size
+        if second_buy >= first_buy * Decimal("0.9") and abs(first_buy - sell) < first_buy * Decimal(
+            "0.2"
+        ):
+            return PatternType.MANIPULATOR
+
+    # Pattern: Buy → Transfer → Sell (wallet hopping)
+    buy_transfer_sell_pattern = (
+        len(actions) >= 3
+        and actions[0] == WhaleAction.BOUGHT.value
+        and actions[1] == WhaleAction.TRANSFERRED.value
+        and actions[2] == WhaleAction.SOLD.value
+    )
+
+    if buy_transfer_sell_pattern:
+        return PatternType.MANIPULATOR
+
+    # Pattern: Multiple transfers between wallets
+    transfer_count = sum(1 for a in actions if a == WhaleAction.TRANSFERRED.value)
+    if transfer_count >= len(actions) * 0.6:
+        return PatternType.MANIPULATOR
+
+    return PatternType.ACCUMULATOR
+
+
 # ============================================================================
 # BATCH OPERATIONS
 # ============================================================================
+
 
 async def update_all_whale_classifications() -> Dict[str, PatternType]:
     """

@@ -20,7 +20,8 @@ from typing import Any, Optional
 
 import numpy as np
 
-from models import BacktestResult, Strategy
+from models.backtest import BacktestResult
+from models.strategy import Strategy
 from services.backtest_engine import (
     BacktestEngine,
     BacktestConfig,

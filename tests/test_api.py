@@ -54,8 +54,14 @@ class TestWebsocketInfo:
         data = response.json()
         channel_names = {c["name"] for c in data["channels"]}
         expected_channels = {
-            "signals", "portfolio", "whales", "ai-reasoning", "price-ticker",
-            "genetic-progress", "arbitrage", "liquidations"  # Shadow Protocol channels
+            "signals",
+            "portfolio",
+            "whales",
+            "ai-reasoning",
+            "price-ticker",
+            "genetic-progress",
+            "arbitrage",
+            "liquidations",  # Shadow Protocol channels
         }
         assert expected_channels.issubset(channel_names)
 
@@ -66,28 +72,29 @@ class TestAPIContract:
     def test_strategies_endpoint_exists(self, test_client):
         """Test strategies endpoint exists."""
         # Just test endpoint exists - will return empty list or error due to no DB
-        response = test_client.get("/api/strategies/")
+        # Note: API routes are mounted at /api/v1/
+        response = test_client.get("/api/v1/strategies/")
         # Should return either 200 (empty list) or 500 (no DB setup)
         assert response.status_code in [200, 500]
 
     def test_signals_endpoint_exists(self, test_client):
         """Test signals endpoint exists."""
-        response = test_client.get("/api/signals/")
+        response = test_client.get("/api/v1/signals/")
         assert response.status_code in [200, 500]
 
     def test_backtests_endpoint_exists(self, test_client):
         """Test backtests endpoint exists."""
-        response = test_client.get("/api/backtests/")
+        response = test_client.get("/api/v1/backtests/")
         assert response.status_code in [200, 500]
 
     def test_portfolio_endpoint_exists(self, test_client):
         """Test portfolio endpoint exists."""
-        response = test_client.get("/api/portfolio/")
+        response = test_client.get("/api/v1/portfolio/")
         assert response.status_code in [200, 500]
 
     def test_whales_endpoint_exists(self, test_client):
         """Test whales endpoint exists."""
-        response = test_client.get("/api/whales/")
+        response = test_client.get("/api/v1/whales/")
         assert response.status_code in [200, 500]
 
     def test_404_on_nonexistent(self, test_client):

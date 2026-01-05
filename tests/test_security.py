@@ -333,3 +333,131 @@ def mock_database_credentials(monkeypatch):
     monkeypatch.setenv("DB_PORT", "5432")
     monkeypatch.setenv("DB_NAME", "test_db")
     monkeypatch.setenv("DATABASE_URL", "postgresql://test_user:test_password@localhost:5432/test_db")
+
+
+# ============================================================================
+# SQL INJECTION VULNERABILITY TESTS
+# ============================================================================
+
+class TestSQLInjectionVulnerabilities:
+    """Test for SQL injection vulnerabilities in dynamic queries."""
+
+    def test_data_initializer_sql_injection(self):
+        """Test data_initializer doesn't have SQL injection in table name queries."""
+        from services.data_initializer import get_initialization_status
+
+        # This function should be safe from SQL injection
+        # Even if table names were dynamic, they should be validated
+        result = get_initialization_status()
+
+        # Should return a dict with status information
+        assert isinstance(result, dict)
+        assert "initialized" in result
+        assert "data_counts" in result
+
+    def test_migration_manager_sql_injection(self):
+        """Test migration manager uses parameterized queries."""
+        from database.migrate import DatabaseMigrator
+
+        manager = DatabaseMigrator()
+
+        # The migrations table name should be a constant, not user input
+        # If it were configurable, it should be validated
+        assert manager.migrations_table == "schema_migrations"
+
+        # Validate the table name is safe
+        assert manager.migrations_table.replace("_", "").isalnum()
+
+    def test_repository_uses_parameterized_queries(self):
+        """Test that repositories use SQLAlchemy's parameterized queries."""
+        from database.repositories.market import CoinRepository
+        from database.connection import get_db_context
+
+        with get_db_context() as session:
+            repo = CoinRepository(session)
+
+            # Test with malicious symbol
+            malicious_symbols = [
+                "BTC' OR '1'='1",
+                "BTC'; DROP TABLE coins; --",
+                "BTC' UNION SELECT * FROM users --",
+            ]
+
+            for symbol in malicious_symbols:
+                # These should safely return None or handle gracefully
+                # They should NOT execute the injected SQL
+                result = repo.get_by_symbol(symbol)
+                # The result should be None (coin not found) or a valid coin object
+                # It should NEVER affect other tables
+                assert result is None or hasattr(result, 'symbol')
+
+    def test_search_coins_sql_injection(self):
+        """Test search_coins method is safe from SQL injection."""
+        from database.repositories.market import CoinRepository
+        from database.connection import get_db_context
+
+        with get_db_context() as session:
+            repo = CoinRepository(session)
+
+            # Test with SQL injection attempts in search query
+            malicious_queries = [
+                "BTC' OR '1'='1",
+                "%'; DROP TABLE coins; --",
+                "BTC' UNION SELECT * FROM users --",
+                "<script>alert('xss')</script>",
+            ]
+
+            for query in malicious_queries:
+                # Should safely handle the input
+                result = repo.search_coins(query)
+                # Should return a list (possibly empty)
+                assert isinstance(result, list)
+
+    def test_admin_api_sql_injection(self):
+        """Test admin API endpoints are safe from SQL injection."""
+        # Skip this test for now - models.user module is missing
+        # This should be re-enabled once the admin routes are properly implemented
+        pytest.skip("Admin API requires models.user module - not yet implemented")
+
+    def test_raw_sql_f_string_detection(self):
+        """Detect any remaining unsafe f-string SQL queries."""
+        import re
+        import os
+
+        # Pattern to find unsafe SQL: f-strings with table names or WHERE clauses
+        unsafe_patterns = [
+            r'text\(f"[^"]*WHERE[^"]*\\{',
+            r'text\(f"[^"]*FROM[^"]*\\{',
+            r'execute\(f"[^"]*SELECT',
+        ]
+
+        # Check Python files for unsafe patterns
+        python_files = []
+        for root, dirs, files in os.walk("C:\\Users\\matt\\Dropbox\\projects\\STOCKTRADE"):
+            # Skip test files and virtual environments
+            if 'test' in root or '__pycache__' in root or '.venv' in root:
+                continue
+            for file in files:
+                if file.endswith('.py'):
+                    python_files.append(os.path.join(root, file))
+
+        vulnerabilities_found = []
+        for filepath in python_files:
+            try:
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                    for i, line in enumerate(content.split('\n'), 1):
+                        # Skip test files
+                        if 'test' in filepath.lower():
+                            continue
+                        for pattern in unsafe_patterns:
+                            if re.search(pattern, line):
+                                vulnerabilities_found.append(f"{filepath}:{i}: {line.strip()}")
+            except Exception:
+                continue
+
+        # This test will help identify remaining vulnerabilities
+        # In production, we'd want this to always be empty
+        # For now, we'll just report what we find
+        if vulnerabilities_found:
+            pytest.fail(f"Found potential SQL injection vulnerabilities:\n" + "\n".join(vulnerabilities_found[:10]))
