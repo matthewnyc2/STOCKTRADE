@@ -51,3 +51,7 @@ monitor.log
 # OS
 .DS_Store
 Thumbs.db
+
+.jules-orchestrator/
+__pycache__/
+*.pyc

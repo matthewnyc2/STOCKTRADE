@@ -252,8 +252,8 @@ class TestPortfolioEndpoints:
         position_data = {
             "symbol": "BTC/USD",
             "side": "long",
-            "quantity": 1.0,
-            "entry_price": 50000.0
+            "quantity": 0.1,
+            "price": 50000.0
         }
         response = client.post(
             "/api/v1/portfolio/positions",

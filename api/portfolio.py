@@ -159,10 +159,10 @@ async def get_position(position_id: str) -> Position:
         return model_to_position(position)
 
 
-@router.post("/trade", response_model=Position, status_code=status.HTTP_201_CREATED)
-async def execute_trade(trade: TradeRequest) -> Position:
+@router.post("/positions", response_model=Position, status_code=status.HTTP_201_CREATED)
+async def create_position(trade: TradeRequest) -> Position:
     """
-    Execute a paper trade.
+    Open a new paper trading position.
 
     Args:
         trade: The trade details.
@@ -221,6 +221,17 @@ async def execute_trade(trade: TradeRequest) -> Position:
         )
 
         return position_model
+
+
+@router.post("/trade", response_model=Position, status_code=status.HTTP_201_CREATED, include_in_schema=False)
+async def execute_trade(trade: TradeRequest) -> Position:
+    """
+    Execute a paper trade.
+
+    .. deprecated:: 0.1.0
+        Use `/positions` instead.
+    """
+    return await create_position(trade)
 
 
 @router.post("/positions/{position_id}/close", response_model=Position)
