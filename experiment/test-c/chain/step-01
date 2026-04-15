@@ -1,0 +1,3 @@
+Count the number of .py files in the repository root.
+If the count is EVEN, append "BRANCH-EVEN" to output.txt and read chain/step-02-even.
+If the count is ODD, append "BRANCH-ODD" to output.txt and read chain/step-02-odd.
